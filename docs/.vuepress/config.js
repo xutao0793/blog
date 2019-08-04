@@ -1,9 +1,15 @@
 module.exports = {
-    title: "Tom xu's blog",
+    title: "xutao's blog",
     description:
         '个人知识框架整理，便于查缺漏。前端 HTML CSS ES JS Webpack Test Git Vue React Node Express Koa',
+    locales: {
+        '/': {
+            lang: 'zh-CN'
+        }
+    },
+    head: [['link', { rel: 'icon', href: '/favicon.png' }]],
     themeConfig: {
-        lastUpdated: '更新时间：',
+        lastUpdated: '上次更新',
         nav: [
             { text: 'HTML', link: '/HTML/' },
             { text: 'CSS', link: '/CSS/' },
