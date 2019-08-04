@@ -10,6 +10,7 @@ module.exports = {
     head: [['link', { rel: 'icon', href: '/favicon.png' }]],
     themeConfig: {
         lastUpdated: '上次更新',
+        repo: 'xutao0793/blog',
         nav: [
             { text: 'HTML', link: '/HTML/' },
             { text: 'CSS', link: '/CSS/' },
@@ -74,8 +75,7 @@ module.exports = {
                     { text: 'Express', link: '/BE-Framework/Express/' },
                     { text: 'Koa', link: '/BE-Framework/Koa/' }
                 ]
-            },
-            { text: 'GitHub', link: 'https://wwww.baidu.com' }
+            }
         ],
 
         sidebar: {
