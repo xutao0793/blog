@@ -64,7 +64,8 @@ module.exports = {
                 text: 'Tools',
                 items: [
                     { text: 'Vscode', link: '/Tools/Vscode/' },
-                    { text: 'Vuepress', link: '/Tools/Vuepress/' }
+                    { text: 'Vuepress', link: '/Tools/Vuepress/' },
+                    { text: 'Markdown', link: '/Tools/Markdown/' }
                 ]
             },
             { text: 'Network', link: '/Network/' },
@@ -95,6 +96,11 @@ module.exports = {
                     title: '项目构建实践',
                     collapsable: false,
                     children: ['Html']
+                },
+                {
+                    title: '进阶深入源码',
+                    collapsable: false,
+                    children: ['ResourceCode']
                 }
             ]
         }
