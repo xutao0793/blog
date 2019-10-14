@@ -138,7 +138,15 @@ module.exports = {
 				{
 					title: '开发环境',
 					collapsable: false,
-					children: ['InitDevelopment']
+					children: ['InitDevEnv']
+				}
+			],
+			'/Node/': [
+				'',
+				{
+					title: 'NVM',
+					collapsable: false,
+					children: ['NVM']
 				}
 			]
 		}
