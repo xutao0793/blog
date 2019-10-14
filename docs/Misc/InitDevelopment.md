@@ -249,7 +249,12 @@ npm -v
 
 ## 解决 nvm 切换 node 版本后 npm 安装的全局包不能共用的问题
 
-查看`nvm`管理的每个`node`版本都维护在单独的文件目录下，所有每个版本安装的全局包都在其所属版本的目录下。必然获取不到。所以我们可以像以前单个`node`版本不想在 C 盘目录下安装全局包一样，将全局包安装目录指定出来。
+此时如果我们在当前node版本下安装了全局包，比如`cnpm` 及各类脚手架`vue-cli` `typescript` `create-react-app`等。
+然后切换另一个node版本运行时，没办法直接使用之前安装的全局包，会报错。一种办法是再全局重新安装一遍，但这不是最好的办法。
+
+查看`nvm`管理的每个`node`版本都维护在单独的文件目录下，所有每个版本安装的全局包也都是在其所属版本的目录下。必然获取不到。
+
+所以我们可以像以前单个`node`版本不想在 C 盘目录下安装全局包一样，将全局包安装目录提出来到指定目录。
 
 **1. 在 nvm 安装路径下新建两个文件夹**
 
@@ -270,7 +275,60 @@ npm config set cache "D:\program\nvm\node_cache"
 **3. 修改系统环境变量**
 
 -   在用户变量`path`中添加`D:\program\nvm\node_global`
+![path](./img/path.png)
+
 
 -   在系统变量中新增变量`NODE_PATH`，变量值为`D:\program\nvm\node_global\node_modules`
+![node-path](./img/node-path.png)
 
 **4. 验证**
+查看当前node版本号
+```bash
+nvm list
+```
+输出
+```bash
+C:\Users\Administrator>nvm list
+
+    10.16.3
+  * 10.14.0 (Currently using 64-bit executable)
+    10.13.0
+
+C:\Users\Administrator>
+```
+全局安装cnpm
+```bash
+npm i -g cnpm
+```
+查看是否安装成功
+```bash
+cnpm -v
+```
+如果输出版本号即cnpm全局安装成功
+此时打开文件目录`D:\ProgramFiles\nvm\node_global`可以正常看到cnpm包文件
+
+再切换node版本号
+```bash
+nvm use 10.16.3
+```
+查看是否切换成功
+```bash
+nvm list
+```
+输出
+```bash
+C:\Users\Administrator>nvm list
+
+  * 10.16.3 (Currently using 64-bit executable)
+    10.14.0 
+    10.13.0
+
+C:\Users\Administrator>
+```
+这个版本下，我们没有直接全局安装`cnpm`,但是我们使用以下命令仍然有效，不会报错
+```bash
+cnpm -v
+```
+至此，nvm环境下共用全局包解决了。
+
+开发所需的node环境配置完毕。
