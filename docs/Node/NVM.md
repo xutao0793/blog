@@ -1,12 +1,13 @@
 # nvm
 
-**1. nvm 是什么**
+## nvm 是什么
 
 所谓 `nvm` 就是 `Node Version Manager` 的缩写，即 `node`的版本管理工具，当我们需要在电脑中安装多个不同版本的`node`，时就要由 NVM 来实现。
 
 `node`管理工具主流两个`n` `nvm`，但实际上都不支持 windows 系统。所以出现了`gnvm`和`nvm-windows`可以运行在 windows 上运行的管理工具。我这边选择`nvm-windows`，因为`gnvm`安装了报错一直没成功就放弃了。
 
-**2. 下载**
+### 1. 下载
+
 nvm-windows 在 github 下载[链接](https://github.com/coreybutler/nvm-windows/releases)
 
 ![nvm下载](./img/nvm-download.png)
@@ -28,7 +29,7 @@ Source code(zip)：zip压缩的源码
 Sourc code(tar.gz)：tar.gz的源码，一般用于*nix系统
 ```
 
-**3. 安装之前操作**
+### 2. 安装之前操作
 
 如果电脑已经安装了`node`，最好卸载掉按下面步骤清理下文件目录，以免安装不成功。
 
@@ -37,7 +38,8 @@ Sourc code(tar.gz)：tar.gz的源码，一般用于*nix系统
 -   你需要卸载任何现有版本的`node.js`。并且需要删除现有的 nodejs 安装目录（例如："C:\Program Files\nodejs’）。因为，nvm 生成的 symlink（符号链接/超链接)不会覆盖现有的（甚至是空的）安装目录。
 -   你还需要删除现有的 npm 安装位置（例如“C:\Users\weiqinl\AppData\Roaming\npm”），以便正确使用 nvm 安装位置。
 
-**4. 安装**
+### 3. 安装
+
 将之前下载的文件解压，双击执行安装文件`nvm-setup.exe`，傻瓜式的下一步就行。
 这里注意的地方就是两个安装路径的问题：
 
@@ -54,7 +56,7 @@ Sourc code(tar.gz)：tar.gz的源码，一般用于*nix系统
 -   如果正确出现 nvm 版本号，则说明 nvm 安装成功。
 -   否则，可能会提示 nvm: command not found
 
-**5. 更改 nvm 的数据源**
+### 4. 更改 nvm 的数据源
 
 默认 nvm 下载 node 数据请求的是国外的数据源，因为网络问题很容易导致安装失败。所以我们使用国内的淘宝镜像的数据源。
 
@@ -84,7 +86,7 @@ npm_mirror: https://npm.taobao.org/mirrors/npm/
 root 和 path 为 nvm 之前安装设置的文件目录。
 node_mirror 和 npm_mirror 修改为对应的国内淘宝镜像目录。
 
-**6. nvm 的使用**
+### 5. nvm 的使用
 
 Windows 下 nvm 的常用命令：
 
@@ -106,7 +108,8 @@ nvm root [path]                  设置和查看root路径
 nvm version                      查看当前的版本
 ```
 
-**7. nvm 的卸载**
+### 6. 卸载
+
 因为 nvm 是一个程序，不是一个包，所以在开始菜单的`所有程序`中找到`NVM for Windows`目录中点击`Uninstall nvm`，像常规电脑软件一样卸载即可。
 
 卸载后，之前安装在 nvm 目录下的所有文件都会清空。
@@ -223,8 +226,8 @@ npm -v
 
 ## 解决 nvm 切换 node 版本后 npm 安装的全局包不能共用的问题
 
-此时如果我们在当前node版本下安装了全局包，比如`cnpm` 及各类脚手架`vue-cli` `typescript` `create-react-app`等。
-然后切换另一个node版本运行时，没办法直接使用之前安装的全局包，会报错。一种办法是再全局重新安装一遍，但这不是最好的办法。
+此时如果我们在当前 node 版本下安装了全局包，比如`cnpm` 及各类脚手架`vue-cli` `typescript` `create-react-app`等。
+然后切换另一个 node 版本运行时，没办法直接使用之前安装的全局包，会报错。一种办法是再全局重新安装一遍，但这不是最好的办法。
 
 查看`nvm`管理的每个`node`版本都维护在单独的文件目录下，所有每个版本安装的全局包也都是在其所属版本的目录下。必然获取不到。
 
@@ -236,6 +239,7 @@ npm -v
 -   node_cache node 缓存
 
 **2. 修改 npm 配置文件**
+
 在 cmd 命令行窗口输入以下两条命令
 
 ```bash
@@ -249,18 +253,21 @@ npm config set cache "D:\program\nvm\node_cache"
 **3. 修改系统环境变量**
 
 -   在用户变量`path`中添加`D:\program\nvm\node_global`
-![path](./img/path.png)
+    ![path](./img/path.png)
 
-
--   在系统变量中新增变量`NODE_PATH`，变量值为`D:\program\nvm\node_global\node_modules`
-![node-path](./img/node-path.png)
+*   在系统变量中新增变量`NODE_PATH`，变量值为`D:\program\nvm\node_global\node_modules`
+    ![node-path](./img/node-path.png)
 
 **4. 验证**
-查看当前node版本号
+
+查看当前 node 版本号
+
 ```bash
 nvm list
 ```
+
 输出
+
 ```bash
 C:\Users\Administrator>nvm list
 
@@ -270,39 +277,52 @@ C:\Users\Administrator>nvm list
 
 C:\Users\Administrator>
 ```
-全局安装cnpm
+
+全局安装 cnpm
+
 ```bash
 npm i -g cnpm
 ```
+
 查看是否安装成功
+
 ```bash
 cnpm -v
 ```
-如果输出版本号即cnpm全局安装成功
-此时打开文件目录`D:\ProgramFiles\nvm\node_global`可以正常看到cnpm包文件
 
-再切换node版本号
+如果输出版本号即 cnpm 全局安装成功
+此时打开文件目录`D:\ProgramFiles\nvm\node_global`可以正常看到 cnpm 包文件
+
+再切换 node 版本号
+
 ```bash
 nvm use 10.16.3
 ```
+
 查看是否切换成功
+
 ```bash
 nvm list
 ```
+
 输出
+
 ```bash
 C:\Users\Administrator>nvm list
 
   * 10.16.3 (Currently using 64-bit executable)
-    10.14.0 
+    10.14.0
     10.13.0
 
 C:\Users\Administrator>
 ```
+
 这个版本下，我们没有直接全局安装`cnpm`,但是我们使用以下命令仍然有效，不会报错
+
 ```bash
 cnpm -v
 ```
-至此，nvm环境下共用全局包解决了。
 
-开发所需的node环境配置完毕。
+至此，nvm 环境下共用全局包解决了。
+
+开发所需的 node 环境配置完毕。
