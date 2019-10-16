@@ -144,7 +144,7 @@ module.exports = {
 			'/Node/': [
 				'',
 				{
-					title: 'NVM',
+					title: '',
 					collapsable: false,
 					children: ['NVM']
 				}
@@ -152,9 +152,26 @@ module.exports = {
 			'/Build/Git/': [
 				'',
 				{
-					title: 'Git',
+					title: '',
 					collapsable: false,
 					children: ['InitGit', 'UseGit']
+				}
+			],
+			'/Build/Typescript/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: [
+						'WhatAndWhy',
+						'InstallTS',
+						'BaseType',
+						'AdvancedType',
+						'Interface',
+						'ClassAndInterface',
+						'Generics',
+						'Declaration'
+					]
 				}
 			]
 		}
