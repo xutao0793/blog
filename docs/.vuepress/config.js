@@ -148,6 +148,14 @@ module.exports = {
 					collapsable: false,
 					children: ['NVM']
 				}
+			],
+			'/Build/Git/': [
+				'',
+				{
+					title: 'Git',
+					collapsable: false,
+					children: ['InitGit', 'UseGit']
+				}
 			]
 		}
 	}

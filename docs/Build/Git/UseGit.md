@@ -1,0 +1,242 @@
+# Git 日常操作命令
+
+Git 的操作指令非常多，此处仅选一些简单的日常操作。
+
+安利一篇非常好的教程,特别是图解 Git 命令部分。[文档链接](https://github.com/geeeeeeeeek/git-recipes/wiki) [图解 Git 命令](https://github.com/geeeeeeeeek/git-recipes/wiki/4.1-%E5%9B%BE%E8%A7%A3-Git-%E5%91%BD%E4%BB%A4)
+
+## 创建代码仓库
+
+一般两种方式：
+
+-   本地初始化仓库，然后再关联到远程仓库
+-   直接克隆远程仓库
+
+先讲简单的：
+
+### `git clone` 克隆远程仓库
+
+```bash
+git clone https://github.com/geeeeeeeeek/git-recipes.git
+```
+
+克隆的项目会自动与远程仓库关联。这样我们编辑修改提交后可以直接推送远程仓库。
+
+### `git init` 初始化本地仓库
+
+```bash
+# 新建一个项目目录
+mkdir git-projecct
+# 进入项目
+cd git-project
+# 初始化本地git仓库
+git init
+```
+
+`git init`操作后会在当前的目录下增加了一个 .git 目录，现在在仓库的任何操作就可以正常使用 git 相关命令记录了。
+
+如果需要拉取远程代码仓库的代码来工作，则需要先关联远程仓库。
+
+```bash
+# 添加一个远程仓库跟踪
+git remote add 远程仓库名（一般写为origin）url
+```
+
+```bash
+# 查看本也仓库已关联的所有远程仓库
+git remote -v
+
+# 查看所有指定远程仓库的详细信息
+git remote show 仓库名
+```
+
+关联完成之后就可以拉取远程仓库代码对应主分支到本地仓库进行编辑了，并且自动建立本地仓库分支与该远程仓库分支的追踪关系。
+
+```bash
+git pull <远程主机名> <远程分支名>:<本地分支名>
+```
+
+## `git remote` 远程仓库管理
+
+```bash
+# 添加一个远程仓库跟踪：
+git remote add <远程主机名 (默认origin)> url
+
+# 查看本地已跟踪的所有远程仓库：
+# 只显示远程仓库名
+git remote //
+# 需要显示url信息
+git remote -v
+
+# 查看所有指定远程仓库的详细信息,包括所有分支
+git remote show <仓库名>
+
+# 重命名本地已跟踪的远程仓库：
+git remote rename <old_name> <new_name>
+
+# 删除一个已跟踪的远程仓库：
+git remote rm <仓库名>
+
+# 远程仓库的url改变后需要在本地更换
+# （常见的情形是远程仓库变更了项目所有者时，url会改变，此时本地需要重新更改url）
+git remote set-url <仓库名> <new_url>
+# 查看远程仓库的url
+git remote get-url <仓库名>
+```
+
+## `git branch` 分支管理
+
+### 分支创建
+
+有两种方式：
+
+-   基于本地分支新建
+-   基于远程分支新建
+
+**基于本地分支创建新分支**
+
+```bash
+# 基于当前分支新建本地分支
+git branch <branch_name>
+# 切换到新分支
+git checkout <branch_name>
+
+# 或者一步到位，新建并切换到新分支
+git checkout -b <branch_name>
+```
+
+此种方式新建的分支如果需要关联到远程仓库对应的分支时，还需要建立新分支与远程对应分支的跟踪关系
+
+```bash
+# 本地分支与远程分支建立跟踪关系track
+git branch --set-upstream-to origin/<origin_branch_name> <local_branch_name></local_branch_name>
+
+# 解除本地分支与远程分支的跟踪关系，这样之后可以与其它远程分支建立追踪关系
+git branch --unset-upstream
+```
+
+**基于远程分支创建新分支**
+
+这种方式创建的新分支自动与远程分支建立追踪关系
+
+```bash
+# 基于远程分支新建本地分支
+git fetch origin <origin_branch_name> : <local_branch_name>
+# 切换到新分支
+git checkout <local_branch_name>
+
+# 或者一步到位，新建并切换
+git checkout -b <local_branch_name> <origin/origin_branch_name>
+```
+
+### 分支常用操作命令
+
+```bash
+# 查看本地分支情况：
+git branch -v
+
+#查看远程分支情况：
+git branch -r
+
+#查看所有本地分支和远程分支：
+git branch -a
+
+#查看本地分支与远程分支的跟踪关系：
+git branch -vv
+
+# 删除本地分支：
+git branch -d <branch_name>
+
+# 删除远程分支：
+git push origin -d <branch_name>
+
+# 修剪远程已删除的分支：
+git remote prune origin
+```
+
+## `git status` `git add` `git commit` 文件编辑
+
+```bash
+git status
+```
+
+```
+git status 展示信息的三种分类：
+1、Untracked files: (没有tracked过的文件, 即从没有add过的文件)
+2、Changes not staged for commit: (有修改, 但是没有被添加到stage区的文件)
+3、Changes to be committed: (已经在stage区, 等待添加到git本地仓库中的文件)
+```
+
+```bash
+git add
+```
+
+```
+# 将所有修改添加到暂存区
+git add .
+
+# 把<path>中所有跟踪文件中被修改过或已删除文件的信息添加到索引库。它不会处理那些不被跟踪的文件。省略<path>表示 . ,即当前目录。
+git add -u [<path>]
+
+# 表示把中所有跟踪文件中被修改过或已删除文件和所有未跟踪的文件信息添加到索引库。省略<path>表示 . ,即当前目录。
+git add -A: [<path>]
+
+# 我们可以通过git add -i 命令查看中被所有修改过或已删除文件但没有提交的文件，并通过其revert子命令可以查看<path>中所有未跟踪的文件，同时进入一个子命令系统。
+git add -i [<path>]
+```
+
+```bash
+git commit
+```
+
+```bash
+# 信息备注最好符合一定约定，能变更的类型，影响范围，备注说明
+git commit -m "fix<all> the commit message"
+
+# 会先把所有已经track的文件的改动`git add`进来，然后提交(有点像svn的一次提交,不用先暂存)。对于没有track的文件,还是需要执行`git add <file>` 命令。
+git commit -a
+
+# 增补提交，会使用与当前提交节点相同的父节点进行一次新的提交，旧的提交将会被取消。
+git commit --amend
+```
+
+## `git rm` 文件删除
+
+```bash
+# 物理删除电脑文件，shell命令： rm
+rm file_name
+rm -r dir_name
+
+# 删除git本地仓库的文件
+git rm file_name
+
+# 删除文件夹
+git rm -r dir_name
+
+# 查看要删除的文件信息，并没有执行删除
+git rm -n file_name
+
+# 删除暂存区文件
+git rm --cache
+
+# 将删除文件信息提交git commit才算完整删除
+git commit
+
+# 使用 git rm 删除文件了但还没补git commit 时,想恢复可以使用git add -i 选择revert, 再git checkout -- filename
+```
+
+**删除远程仓库的文件或目录，几个步骤:**
+
+```bash
+# 1、先执行拉取最新代码
+git pull
+
+#2、在本地git仓库执行删除，如果是目录添加 -r
+rm name
+git rm name
+
+# 3、提交删除操作
+git commit -m 'delete name'
+
+# 4、推送到远程仓库才能将远程仓库文件夹删除
+git push
+```
