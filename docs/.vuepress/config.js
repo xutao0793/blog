@@ -110,6 +110,14 @@ module.exports = {
 		],
 
 		sidebar: {
+			'/ES/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: ['DefineProperty']
+				}
+			],
 			'/Build/Webpack/': [
 				'',
 				{
