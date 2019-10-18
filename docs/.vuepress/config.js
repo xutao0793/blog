@@ -118,6 +118,14 @@ module.exports = {
 					children: ['DefineProperty']
 				}
 			],
+			'/FE-Framework/Vue/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: ['reactive-vue2']
+				}
+			],
 			'/Build/Webpack/': [
 				'',
 				{
@@ -154,7 +162,7 @@ module.exports = {
 				{
 					title: '',
 					collapsable: false,
-					children: ['NVM']
+					children: ['NVM', 'classifyModule']
 				}
 			],
 			'/Build/Git/': [
