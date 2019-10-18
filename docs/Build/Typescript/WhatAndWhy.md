@@ -3,8 +3,11 @@
 本文主要参考以下文档内容，特别是最一个文档教程借鉴最多，特别感谢[xcatliu](https://github.com/xcatliu/)。
 
 [Typescript 官网-英文](http://www.typescriptlang.org/)
+
 [Typescript 官网-中文](https://www.tslang.cn/index.html)
+
 [Typescript Handbook（中文版）](https://zhongsp.gitbooks.io/typescript-handbook/content/index.html)
+
 [Typescript 入门教程](https://ts.xcatliu.com/)
 
 正如[Typescript 入门教程](https://ts.xcatliu.com/)作者[xcatliu](https://github.com/xcatliu/)所说的一样，官网教程各个知识点间穿插太多，不便于初学者循序渐进的理解，经常需要多次阅读才能将知识点串联起来。
