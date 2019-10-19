@@ -110,6 +110,22 @@ module.exports = {
 		],
 
 		sidebar: {
+			'/ES/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: ['DefineProperty']
+				}
+			],
+			'/FE-Framework/Vue/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: ['reactive-vue2']
+				}
+			],
 			'/Build/Webpack/': [
 				'',
 				{
@@ -144,9 +160,34 @@ module.exports = {
 			'/Node/': [
 				'',
 				{
-					title: 'NVM',
+					title: '',
 					collapsable: false,
-					children: ['NVM']
+					children: ['NVM', 'classifyModule']
+				}
+			],
+			'/Build/Git/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: ['InitGit', 'UseGit']
+				}
+			],
+			'/Build/Typescript/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: [
+						'WhatAndWhy',
+						'InstallTS',
+						'BaseType',
+						'AdvancedType',
+						'Interface',
+						'ClassAndInterface',
+						'Generics',
+						'Declaration'
+					]
 				}
 			]
 		}
