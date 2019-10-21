@@ -1,4 +1,6 @@
-# Vue2 数据响应原理实现
+# Vue 数据响应式原理
+
+## Vue2 数据响应原理简单实现 `Object.defineProperty`
 
 ![vue2 reactive](./imgs/vue2Reactive.png)
 
@@ -93,4 +95,74 @@ let data = {
 	arr: [1, 2]
 }
 observer(data)
+```
+
+## Vue 3 数据响应式原理的简单实现 `Proxy`
+
+```js
+function isObject(value) {
+	return typeof value === 'object' && value !== null
+}
+
+function hasOwn(obj, key) {
+	return obj.hasOwnProperty(key)
+}
+
+function get(target, key, receiver) {
+	let ret = Reflect.get(target, key, receiver)
+	console.log('get...')
+	return isObject(ret) ? reactive(ret) : ret
+}
+
+function set(target, key, receiver) {
+	let hasKey = hasOwn(target, key)
+	let oldValue = target[key]
+	let ret = Reflect.set(target, key, receiver)
+
+	if (!hasKey) {
+		//TODO: 触发新增属性响应、
+		console.log(`ob触发新增属性触发响应 ${key}`)
+	} else if (ret !== oldValue) {
+		//TODO: 触发更新响应
+		console.log(`属性值更新触发响应 ${key}=${ret}`)
+	}
+}
+
+function deleteProperty(target, key, receiver) {
+	let hasKey = hasOwn(target, key)
+
+	if (hasKey) {
+		Reflect.defineProperty(target, key)
+		console.log(`删除属性触发响应 ${key}`)
+	}
+}
+
+const handler = {
+	get,
+	set,
+	deleteProperty
+}
+
+function createReactiveObject(target) {
+	//TODO: 是否已存在代理对象
+	//TODO: 是否本身就是proxy对象
+	let observed = new Proxy(target, handler)
+	//TODO: observed <=> target 映射关系存起业
+	return observed
+}
+
+function reactive(target) {
+	//TODO: 只读对象或只读Proxy对象的判断
+	return createReactiveObject(target)
+}
+
+let data = {
+	a: 1
+}
+
+let p = reactive(data)
+
+console.log(p.a)
+p.b = { name: 'tom' }
+p.b.name = 'jerry'
 ```
