@@ -18,13 +18,12 @@
 -   nvm - node 版本管理工具
 -   npm - node 自带的包管理工具
 -   yarn - node 新一代包管理工具
--   node 命令行选项
 
 **基础概念**
 
--   module - 模块(Commonjs)
 -   events - 事件及事件环(Event Loop)
 -   global - 全局变量
+-   module - 模块(Commonjs)
 
 **进程管理**
 
@@ -33,14 +32,14 @@
 -   cluster - 集群
 -   worker_threads - 工作线程
 
-**文件操作**
+**文件和数据操作**
 
--   fs - 文件操作
 -   Buffer - 缓冲器
--   string_decoder - 将 Buffer 对象解码为字符串
 -   stream - 流
 -   readline - 逐行读取
+-   fs - 文件操作
 -   path - 文件路径
+-   string_decoder - 将 Buffer 对象解码为字符串
 
 **网络管理**
 
@@ -92,3 +91,13 @@
 
 -   punycode - 域名代码
 -   domain - 域
+
+
+参考资料
+
+[node官网指南](https://nodejs.org/zh-cn/docs/guides/)
+[从源码解读 Node 事件循环](https://juejin.im/post/5d439f016fb9a06b29752d5a#heading-5)
+[浏览器与Node的事件循环(Event Loop)有何区别?](https://juejin.im/post/5c337ae06fb9a049bc4cd218#heading-22)
+[所有你需要知道的关于完全理解 Node.js 事件循环及其度量](https://juejin.im/post/5984816a518825265674c8f6#heading-0)
+[一道面试题引发的node事件循环深入思考](https://juejin.im/post/5cf25a19f265da1bba58ec43#heading-2)
+[libuv中文教程](http://luohaha.github.io/Chinese-uvbook/index.html)

@@ -1,0 +1,203 @@
+# module 模块
+- 模块的发展
+- 模块分类
+- 模块封装机制
+- 模块导出 modules.exports 和 exports
+- 模块引入require
+- 模块路径的查找
+- 模块的缓存
+- 模块引用死循环的避免
+
+## 模块概述
+模块主要是为了解决代码逻辑的封装和变量的隔离。主要发展先后经历过：
+
+- IFFE，自执行函数
+- 全局命名空间，如jQuery的$全局变量
+- eval(string)
+- new Function(string)
+- Commonjs (CMD)
+- AMD / UMD
+- ES module
+
+## node模块类型
+Node.js使用基于模块系统的文件。每个文件就是可以是一个模块。
+- 内置模块
+    node也将一些基础功能通过模块暴露给外部引用。这些就是内置模块。如http、path等。
+- 文件模块
+    自定义的逻辑或都业务代码
+- 第三方模块（包）
+    npm下载引入的第三方模块（包）
+
+## node模块封装器
+在使用require()导入，在执行模块代码之前，Node.js 会使用一个如下的函数封装器将其封装：
+```js
+(function(module, exports, require,  __filename, __dirname) {
+// 模块的代码实际上在这里
+});
+```
+一段`require()`实现的伪代码，它与require实现非常类似：
+```js
+function require(path) {
+    const module = { exports: {} };
+    const __filename = path
+    const __dirname = '/'
+
+    (funciton(module, exports, require, __filename, __dirname){
+        // 模块代码在这
+    })(module, module.exports, require, __filename, __dirname);
+
+    // 最终需要返回module.exports
+    return module.exports;
+}
+```
+通过这样做，Node.js 实现了以下几点：
+
+它保持了顶层的变量（用 var、 const 或 let 定义）作用在模块范围内（函数作用域内），而不是全局对象。
+
+可以看到这里，封装函数会提供五个参数传入，所以这些看似全局的但实际上是模块提供的特定变量，其中exports不过是module.exports的别名，初始化时两都指向同一个地址。
+
+## 模块的导出 module.exports
+
+module对象持有当前模块的信息
+```
+// module对象
+module.id          // 模块的标识符，通常是完全解析后的文件名
+module.filename    // 模块的完全解析后的文件名
+module.path        // 模块的完全解析后的目录
+module.paths      // node_module文件夹的搜索路径，是一个数组。
+module.children   // 被该模块引用的模块对象。
+module.parent     // 最先引用该模块的模块。
+module.exports    // 导出模块，将期望导出的对象赋值给它
+```
+**module.expots 与 exports**
+从上面模块封装机制可以看到，exports只是module.exports的一个别名，在初始化的时候形成了弱绑定关系（指向同一个对象的地址引用而已）。如果任意一方被重新赋值，这种绑定关系就会被解除。
+require()最终返回的是module.exports的值。
+
+看一下简单的示例来理解这层关系：
+```js
+var a = {name: 1};
+var b = a;
+
+console.log(a); // {name:1}
+console.log(b); // {name:1}
+
+b.name = 2;
+console.log(a); // {name:2}
+console.log(b); // {name:2}
+
+var b = {name: 3};  // 此时重新赋值，ab的绑定关系已被切断
+console.log(a); // {name:2}
+console.log(b); // {name:3}
+```
+## 模块的引入 require
+
+```js
+// 引入本地模块：
+const myLocalModule = require('./path/myLocalModule');
+
+// 原生模块：
+const jsonData = require('http');
+
+// 引入 node_modules 目录下安装的第三方包
+const _ = require('lodash');
+```
+
+### 模块路径查找规则
+
+
+
+按模块类型执行不同的规则
+
+通过require(moudule_id)传入的模块标识符moudule_id来判断是路径还是名称，如果是路径形式则按文件模块规则查找，如果是名称则按核心模块和第三方模块规则查找。
+
+- 以 '/' 为开头的是绝对路径，以'./' 或 '../' 开头为当前文件为准的相对路径
+- 如果没有以'/' './' '../'开头，直接以字符串作为标识符则为核心模块或第三方模块。
+
+#### 文件模块路径查找
+路径结尾区分是文件名还是目录
+第一步：从文件模块缓存中查找
+文件名：
+1. 按最后文件名在当前目录下查找，如果没有则尝试带上默认或设置的文件名扩展名查找，如.js .json等。
+
+如果没有则报错：`MODULE_NOT_FOUND`
+
+目录
+1. 如果最后结尾是目录，则在目录中查找package.json文件，如果有则查找package.json文件中的main字段值。
+1. 如果package.json文件不存在，或存在package.json但main字段没有或解析出错，则会试图加载目录下的index.js文件。
+
+如果仍没有报告整个模块的缺失:`Error: Cannot find module 'dirname'`
+
+#### 核心模块和第三方模块路径查找
+如果module_id不是路径，则按以下规则查找
+1. 首先按module_id从原生模块中查找（缓存->原生模块加载）
+1. 如果不是原生模块，按第三方模块加载
+
+module.paths存放着当前目录往上各node_module文件夹存放的路径，如果在环境变量中设置了NODE_PATH的话，整个路径还包含NODE_PATH中的node_modules路径。
+
+```
+1、从module path数组中取出第一个目录作为查找基准。 
+2、直接从目录中查找该文件，如果存在，则结束查找。如果不存在，则进行下一条查找。 
+3、尝试添加.js、.json、.node后缀后查找，如果存在文件，则结束查找。如果不存在，则进行下一条。
+
+4、尝试将require的参数作为一个包来进行查找，读取目录下的package.json文件，取得main参数指定的文件。 
+5、尝试查找该文件，如果存在，则结束查找。如果不存在，则查找index文件。 
+6、如果继续失败，则取出module path数组中的下一个目录作为基准查找，循环第1至5个步骤。 
+7、依次module path中取值执行1-6步骤，直到最后一个值。
+8、如果仍然失败，则抛出异常 
+```
+- 原生模块优先级大于第三方模：当第三方的模块和内置模块同名时，内置模- 块将覆盖第三方同名模块。因此命名时需要注意不要和内置模块同名。
+- 缓存区优先加载：文件模块和原生模块各有一个缓存区，优先从缓存区加载。如果缓存区没有被加载过，则调用加载模块，执行并缓存。
+
+### 模块的缓存
+require.cache: 被引入的模块将被缓存在这个对象中。
+模块在第一次加载后会被缓存。 这也意味着:
+- 每次调用 require('foo') 都解析到同一文件，则返回相同的对象。
+- 多次调用 require(foo) 不会导致模块的代码被执行多次
+
+注意一点：模块是基于其解析的文件名进行缓存的，即module.id跟filename是同一个绝对路径。所以引用不同存放位置的同一个模块，当做两个不同的模块缓存和使用。
+
+### 循环引用
+当循环调用 require() 时，一个模块可能在未完成执行时被返回。为了防止无限的循环，会返回**临时先返回一个未完成的副本**。
+
+一个官网的例子：
+```js
+// a.js
+console.log('a 开始');
+exports.done = false;
+const b = require('./b.js');
+console.log('在 a 中，b.done = %j', b.done);
+exports.done = true;
+console.log('a 结束');
+```
+```js
+// b.js
+console.log('b 开始');
+exports.done = false;
+const a = require('./a.js');
+console.log('在 b 中，a.done = %j', a.done);
+exports.done = true;
+console.log('b 结束');
+```
+此时a.js和b.js形成循环引用
+```js
+// main.js
+console.log('main 开始');
+const a = require('./a.js');
+const b = require('./b.js');
+console.log('在 main 中，a.done=%j，b.done=%j', a.done, b.done);
+```
+当 main.js 加载 a.js 时， a.js 又加载 b.js。 此时， b.js 会尝试去加载 a.js。 为了防止无限的循环，会返回一个 a.js 的 exports 对象的 未完成的副本 给 b.js 模块。 然后 b.js 完成加载，并将 exports 对象提供给 a.js 模块。
+
+输出结果，并不会陷入死循环：
+```
+main 开始
+a 开始
+b 开始
+在 b 中，a.done = false
+b 结束
+在 a 中，b.done = true
+a 结束
+在 main 中，a.done=true，b.done=true
+```
+
+## 模块和包
