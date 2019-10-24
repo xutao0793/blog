@@ -63,6 +63,8 @@ const arr: number[] = [1, 2, 3]
 
 ### 4. 用接口定义类
 
+关于类的基本知识请查看上节 [TS 中的类]()
+
 或者更准确说法是： **用类去实现接口**。因为接口只是对类结构的一个描述规则，而类和类的实例是对这个规则的实现。
 
 ```ts
@@ -420,4 +422,45 @@ interface Point3d extends Point {
 }
 
 let point3d: Point3d = { x: 1, y: 2, z: 3 }
+```
+
+## 接口定义混合类型
+
+上面说过，可以使用接口的方式来定义一个函数需要符合的形状：
+
+```ts
+interface SearchFunc {
+	(source: string, subString: string): boolean
+}
+
+let mySearch: SearchFunc
+mySearch = function(source: string, subString: string) {
+	return source.search(subString) !== -1
+}
+```
+
+函数也是对象，所有有时候，一个函数还可以有自己的属性和方法：
+
+```ts
+interface Counter {
+	(start: number): string
+	interval: number
+	reset(): void
+}
+
+function getCounter(): Counter {
+	let counter = <Counter>function(start: number) {
+		return start.toString()
+	}
+	counter.interval = 123
+	counter.reset = function() {
+		this.interval = 0
+	}
+	return counter
+}
+
+let c = getCounter()
+c(10)
+c.reset()
+c.interval = 5.0
 ```
