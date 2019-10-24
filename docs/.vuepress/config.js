@@ -183,10 +183,13 @@ module.exports = {
 						'InstallTS',
 						'BaseType',
 						'AdvancedType',
-						'Interface',
-						'ClassAndInterface',
 						'Generics',
-						'Declaration'
+						'Interface',
+						'Class',
+						'Module',
+						'Declaration',
+						'Tsconfig',
+						'EnumPractice'
 					]
 				}
 			]
