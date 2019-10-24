@@ -605,7 +605,7 @@ Argument of type 'ITriangle' is not assignable to parameter of type 'never'
 
 这种方式需要你定义一个额外的函数，但是在你忘记某个 case 的时候也更加明显。
 
-## 索引类型
+## 五、索引类型
 
 先看下面这个例子的需求：
 
@@ -675,7 +675,7 @@ let personProps: presonPropTypes
 
 使用`T[K]`来动态表示`person[key]`的值的类型。比如此时 key 为 name，则`person['name']`的值的类型是 string，即此时`T[K]`表示 string。
 
-## 映射类型
+## 六、映射类型
 
 我们可能会遇到这么一些需求：将一个现有类型的每个属性都变为可选的，或者将每个属性变为只读的。
 
@@ -796,7 +796,7 @@ ReturnType < T > --获取函数返回值类型
 InstanceType < T > --获取构造函数类型的实例类型
 ```
 
-## 总结
+## 七、总结
 
 -   解决**单例类型**单一使用问题，可以使用 **联合类型** 或 **交叉类型**
 -   解决联合类型 或 交叉类型中共有属性的访问报错问题，可以使用 **类型断言** 或 **类型保护**
