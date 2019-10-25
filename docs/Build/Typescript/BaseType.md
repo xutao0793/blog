@@ -5,6 +5,12 @@
 -   基本数据类型：`Null` `Undefined` `Boolean` `Number` `String`，以及 ES6 新增的`symbol`
 -   引用数据类型：`Object` (`Array` `Function` )
 
+TS 中新增了以下几中类型：
+
+-   元组: `Tuple`
+-   枚举: `Enum`
+-   描述类型：`Any` `Void` `Never`
+
 那我们看看在`TS`中如何对这些数据类型进行类型注解的。
 
 ## 基本类型

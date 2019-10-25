@@ -1,4 +1,4 @@
-# 声明文件 declare
+# 声明文件 Declaration
 
 当我们使用外部第三方库时，由于外部 JavaScript 库不是使用 TypeScript 所编写，所以也就不具有类型，那么我们又该如何在 TypeScript 里结合两者呢？
 
