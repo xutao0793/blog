@@ -201,3 +201,40 @@ a 结束
 ```
 
 ## 模块和包
+
+
+模块是Node.js应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个Node.js文件就是一个模块，这个文件可能是JavaScript代码、JSON或者编译过的C/C++扩展。
+
+包是在模块基础上更深一步的抽象，Node.js的包类似于C/C++的函数库或者Java/.Net的类库。它将某个独立的功能封装起来，用于发布、更新、依赖管理和版本控制。所以Node.js的包是一个目录，其中包含了一个JSON格式的包说明文件package.json。
+
+Node.js根据CommonJS规范实现了包机制，开发了npm来解决包的发布和获取需求。
+
+严格符合CommonJS规范的包应该具备以下特征：
+
+- package.json必须在包的顶层目录下；
+- 二进制文件应该在bin ；
+- JavaScript代码应该在lib目录下；
+- 文档应该在doc目录下；
+- 单元测试应该在test目录下。
+
+**package.json**
+package.json是CommonJS规定的用来描述包的文件，Node.js在调用某个包时，会首先检查包中package.json文件的main字段，将其值作为包的入口模块，如果package.json活main字段不存在，会尝试寻找index.js或index.node作为包的入口。
+
+完全符合规范的package.json文件应该含有以下字段：
+
+- name: 包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格。
+- description：包的简要说明。
+- version：符合语义化版本识别规范的版本
+- keywords：关键字数组，通常用于搜索。
+- maintainers：维护者数组，每个元素包含name、email（可选）、web（可选）字段。
+- contributors：贡献者数组，格式与maintainers相同。包的作者应该是贡献者数组的第一个元素。
+- licenses：许可证数组，每个元素要包含type（许可证的名称）和url（链接到许可证文本的地址）字段。
+- repositories：仓库托管地址数组，每个元素要包含type（仓库的类型，如git）、url（仓库的地址）和path（相对于仓库的路径，可选）字段。
+- dependencies：包的依赖，一个关联数组，由包名称和版本号组成。
+
+package.json文件可以使用`npm init`来初始化。
+
+总结：
+
+- **模块（module）**是任何可以由Node.js的require()加载的文件或目录（目录中引用index文件)。
+- **包（package）**是一个由package.json定义的文件目录。

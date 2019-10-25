@@ -25,13 +25,6 @@
 -   global - 全局变量
 -   module - 模块(Commonjs)
 
-**进程管理**
-
--   process - 进程
--   child-process - 子进程
--   cluster - 集群
--   worker_threads - 工作线程
-
 **文件和数据操作**
 
 -   Buffer - 缓冲器
@@ -50,13 +43,23 @@
 -   dgram - socket 的实现
 -   dns
 -   tls - 对安全传输层（TLS）及安全套接层（SSL）协议的实现，建立在 OpenSSL 的基础上
-
-**网络处理工具**
-
 -   url - 处理与解析 URL
 -   querystring - 解析和格式化查询字符串
+
+**进程管理**
+
+-   process - 进程
+-   child-process - 子进程
+-   cluster - 集群
+-   worker_threads - 工作线程
+
+**工具**
+
+-   util
+-   timer
 -   crypto - 加密
 -   zlib - 压缩
+
 
 **调试**
 
@@ -68,11 +71,6 @@
 **测试**
 
 -   assert - 断言
-
-**工具**
-
--   util
--   timer
 
 **系统**
 
