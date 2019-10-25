@@ -13,6 +13,6 @@ TypeScript 可以在任何浏览器、任何计算机和任何操作系统上运
 -   接口 Interfaces
 -   类 Class
 -   模块 Module
--   声明文件 Declare
+-   声明文件 Declaration
 -   配置文件 tsconfig.json
 -   前端状态量使用枚举的思考

@@ -3,7 +3,7 @@
 [Typescript 学习记录：高级类型](https://www.ruphi.cn/archives/266/#anchor8)<br>
 [Typescript 高级特性之交叉类型，联合类型，类型保护](https://blog.csdn.net/baidu_28196435/article/details/89707673)
 
-前面学的类型注解都是单一的。在实际开发中，变量类型会非常复杂，仅仅只是单一类型无法描述，就像 JS 中函数即是 Function 的实例也可以是 Object 的实例。所以在 TS 中了也就有了下面这些混合的高级类型。
+前面学的类型注解都是单一的，称为单例类型。在实际开发中，变量类型会非常复杂，仅仅只是单一类型无法描述，就像 JS 中函数即是 Function 的实例也可以是 Object 的实例。所以在 TS 中了也就有了下面这些混合的高级类型。
 
 ## 一、交叉类型
 
