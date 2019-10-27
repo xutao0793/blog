@@ -29,9 +29,9 @@
 
 -   Buffer - 缓冲器
 -   stream - 流
--   readline - 逐行读取
 -   fs - 文件操作
 -   path - 文件路径
+-   readline - 逐行读取
 -   string_decoder - 将 Buffer 对象解码为字符串
 
 **网络管理**
