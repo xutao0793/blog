@@ -38,7 +38,7 @@ tsconfig.json 所包含的属性并不多，只有 6 个：
 
 **1. extends**
 
-可用于大项目中配置文件的组织，类似 webpack.config.js 文件拆分 base/dev/prod/test 等。
+拆分 tsconfig.json 文件，使用`extends`引用。可用于大项目中配置文件的组织，类似 webpack.config.js 文件拆分 base/dev/prod/test 等。
 
 **2. files include exclude**
 
@@ -86,6 +86,31 @@ tsconfig.json 所包含的属性并不多，只有 6 个：
 
 -   **target**选项：指定了 TS 编译后输出文件代码的类型，比如`"target":"es5"`编译输出文件的代码是 es5 语法。
 -   **lib**选项： 指定了编译过程中需要引入的库文件列表。一般有默认值：如果编译目标是 ES5：`"target":"es5"`，则默认引入`DOM`,`ES5`,`ScriptHost`库文件。如果编译目标是 ES6：`"target":"es6"`，则默认引入`DOM`,`ES6`,`DOM.Iterable`,`ScriptHost`。具体包含哪些库文件，见官网[编译选项 --库文件列表](https://www.tslang.cn/docs/handbook/compiler-options.html)
+-   **rootDir**选项：就是我们的源代码目录
+-   **outDir**选项：就是我们的编译后代码的目录
+-   **esModuleInterop** 和 **allowSyntheticDefaultImports**选项： 暂时也还没明白，你可以看这两篇自己理解下：[esModuleInterop 和 allowSyntheticDefaultImports 探究](http://www.xunart.com/h820729.html) [Typescript 2.7 版本记录 - 添加 --esModuleInterop 对 ES 模块和老式代码更好的互通](https://segmentfault.com/a/1190000014913104#articleHeader6)
+
+**参考 tsconfig.json**
+
+```json
+{
+	"compilerOptions": {
+		"strict": true,
+		"outDir": "./dist/",
+		"rootDir": "./src/",
+		"target": "ES6",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"noEmitOnError": true,
+		"noImplicitAny": true,
+		"sourceMap": true, // 生产中去掉
+		"strictNullChecks": true
+	},
+	"include": ["scr/**/**"],
+	"exclude": ["node_modules", "./test"]
+}
+```
 
 **官网参考内容：**
 

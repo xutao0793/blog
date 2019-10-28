@@ -3,21 +3,23 @@
 ## 概述
 
 在 NodeJS 中，所有与文件和文件夹（目录）的操作都是通过 fs 核心模块来实现的，包括：
-- 文件目录的创建、删除、查询；
-- 文件的打开、读取、裁取、写入，追加、拷贝、删除、关闭；
+
+-   文件目录的创建、删除、查询；
+-   文件的打开、读取、裁取、写入，追加、拷贝、删除、关闭；
 
 在 fs 模块中，所有的方法都分为**同步**和**异步**两种实现，具有 sync 后缀的方法为同步方法，不具有 sync 后缀的方法为异步方法，建议使用异步方法，不会阻塞主进程代码的执行。
 
-在了解文件操作的API之前有一些关于系统和文件的前置知识，我们需要先了解：
-- 文件的权限位 mode
-- 标识位 flag
-- 文件描述符 fd
+在了解文件操作的 API 之前有一些关于系统和文件的前置知识，我们需要先了解：
+
+-   文件的权限位 mode
+-   标识位 flag
+-   文件描述符 fd
 
 ## 文件权限位 mode
 
-因为 fs 模块需要对文件进行操作，会涉及到操作权限的问题，即你有没有权限操作该目录或文件， 其中mode的值通常用八进制表示。
+因为 fs 模块需要对文件进行操作，会涉及到操作权限的问题，即你有没有权限操作该目录或文件， 其中 mode 的值通常用八进制表示。
 
-先清楚文件权限是什么，都有哪些权限，权限位mode数字怎么定义？
+先清楚文件权限是什么，都有哪些权限，权限位 mode 数字怎么定义？
 
 系统对文件权限按用户角色划分为：文件所有者，文件所属组（如家庭组）、其它用户。每种角色都有三种操作权限（对应的数字表示）：读`r`(4)、写`w`(2)、执行`x`(1)、不具备权限(0)
 
@@ -66,9 +68,10 @@
     </tr>
 </table>
 
-Window系统下文件的权限默认是可读、可写、不可执行，所以权限位数字表示为 `0o666`。
+Window 系统下文件的权限默认是可读、可写、不可执行，所以权限位数字表示为 `0o666`。
 
-但在node中`fs.access`API中mode参数使用node已定义的常量来表示，其它都选择默认，如`fs.open`中
+但在 node 中`fs.access`API 中 mode 参数使用 node 已定义的常量来表示，其它都选择默认，如`fs.open`中
+
 ```js
 F_OK //表明文件对调用进程可见。 这对于判断文件是否存在很有用，但对 rwx 权限没有任何说明。 如果未指定模式，则默认值为该值。
 R_OK //表明调用进程可以读取文件。
@@ -131,26 +134,26 @@ X_OK // 表明调用进程可以执行文件。 在 Windows 上无效（表现�
 
 当你对文件有权限操作时，具体对应执行哪些操作动作：读取、写入、还是即读又写呢？这些动作需要用符号标识：
 
-- r：读取
-- w：写入
-- s：同步
-- +：增加相反操作
-- x：排他方式
+-   r：读取
+-   w：写入
+-   s：同步
+-   +：增加相反操作
+-   x：排他方式
 
 具体组合后的意义如下：常用的就`r+` `w+`
 符号 | 含义
 :-|-
-r	| 读取文件，如果文件不存在则抛出异常。
-r+	| 读取并写入文件，如果文件不存在则抛出异常。
-rs	| 读取并写入文件，指示操作系统绕开本地文件系统缓存。
-w	| 写入文件，文件不存在会被创建，存在则清空后写入。
-wx	| 写入文件，排它方式打开。
-w+	| 读取并写入文件，文件不存在则创建文件，存在则清空后写入。
-wx+	| 和 w+ 类似，排他方式打开。
-a	| 追加写入，文件不存在则创建文件。
-ax	| 与 a 类似，排他方式打开。
-a+	| 读取并追加写入，不存在则创建。
-ax+	| 与 a+ 类似，排他方式打开。
+r | 读取文件，如果文件不存在则抛出异常。
+r+ | 读取并写入文件，如果文件不存在则抛出异常。
+rs | 读取并写入文件，指示操作系统绕开本地文件系统缓存。
+w | 写入文件，文件不存在会被创建，存在则清空后写入。
+wx | 写入文件，排它方式打开。
+w+ | 读取并写入文件，文件不存在则创建文件，存在则清空后写入。
+wx+ | 和 w+ 类似，排他方式打开。
+a | 追加写入，文件不存在则创建文件。
+ax | 与 a 类似，排他方式打开。
+a+ | 读取并追加写入，不存在则创建。
+ax+ | 与 a+ 类似，排他方式打开。
 
 ## 文件描述符 fd
 
@@ -162,7 +165,7 @@ ax+	| 与 a+ 类似，排他方式打开。
 
 在 NodeJS 中，每操作一个文件，文件描述符是递增的，文件描述符一般从 3 开始，因为前面有 0、1、2 三个比较特殊的描述符，分别代表 process.stdin（标准输入）、process.stdout（标准输出）和 process.stderr（错误输出）。
 
-示例：
+使用`open`打开一个文件就会产生对应的`fd`
 
 ```js
 fs.open(path[, flags[, mode]], callback)
@@ -170,54 +173,63 @@ fs.open(path[, flags[, mode]], callback)
 // mode <integer> 默认值: 0o666（可读写）
 ```
 
+示例：
+
 ```js
 // 异步写法
-const fs = require('fs');
-fs.open(__dirname + '/fs_open.txt', 'r+', (err,fd) => {
-    if (err) {
-        return console.error(err)
-    }
-    console.log(`文件打开成功，文件描述符fd：${fd}`);
+const fs = require('fs')
+fs.open(__dirname + '/fs_open.txt', 'r+', (err, fd) => {
+	if (err) {
+		return console.error(err)
+	}
+	console.log(`文件打开成功，文件描述符fd：${fd}`)
 })
 // 文件打开成功，文件描述符fd：3
 ```
+
 ```js
 // 同步写法
-const fs = require('fs');
+const fs = require('fs')
 try {
-    let fd = fs.openSync(__dirname + '/fs_open.txt', 'r+')
-    console.log(`文件打开成功，文件描述符fd：${fd}`);
+	let fd = fs.openSync(__dirname + '/fs_open.txt', 'r+')
+	console.log(`文件打开成功，文件描述符fd：${fd}`)
 } catch (err) {
-    return console.error(err)
+	return console.error(err)
 }
 ```
 
-## 文件系统操作API
+## 文件系统操作 API
 
-fs的API主要分为四大部分：
+fs 的 API 主要分为四大部分：
 
-- 文件信息的查询和访问权限： `fs.stats` `fs.access`
-- 文件的操作：打开、读取、裁取、写入，追加、拷贝、删除、关闭；
-- 文件目录的操作：创建、删除、查询；
-- fs 操作的 Promise API
-
+-   文件信息的查询和访问权限： `fs.stats` `fs.access`
+-   文件的操作：打开、读取、裁取、写入，追加、拷贝、删除、关闭；
+-   文件目录的操作：创建、删除、查询；
+-   fs 操作的 Promise API
 
 ### 文件信息的查询 `fs.stats`
+
+语法：
 
 ```js
 fs.stat(path[, options], callback)
 ```
+
+示例：
+
 ```js
-fs.stat(__dirname + '/fs_open.txt',(err,stats) => {
-    if (err) {
-        return console.error(err)
-    }
-    console.log(stats.isFile());
-    console.log(stats);
+fs.stat(__dirname + '/fs_open.txt', (err, stats) => {
+	if (err) {
+		return console.error(err)
+	}
+	console.log(stats.isFile())
+	console.log(stats)
 })
 ```
+
+输出：
+
 ```js
-// 输出
 true
 Stats {
     dev: 3023868257, // 包含该文件的设备的数字标识符。
@@ -241,92 +253,104 @@ Stats {
     birthtime: 2019-10-27T16:01:21.342Z // 表示此文件的创建时间的时间戳。
 }
 ```
-平常有用的信息基本就文件大小size和时间相关。返回的实例stats也有一些常用方法：
+
+平常有用的信息基本就文件大小 size 和时间相关。返回的实例 stats 也有一些常用方法：
+
 ```js
 stats.isDirectory() // 布尔值，是否是目录
 stats.isFile() // 布尔值，是否是文件
 // 其它的见官网
 ```
+
 但是要检查文件是否存在，但随后并不对其进行操作，则建议使用 fs.access()。
+
 ```js
 // 检查当前目录中是否存在该文件。
-fs.access(file, fs.constants.F_OK, (err) => {
-    console.log(`${file} ${err ? '不存在' : '存在'}`);
-});
+fs.access(file, fs.constants.F_OK, err => {
+	console.log(`${file} ${err ? '不存在' : '存在'}`)
+})
 ```
 
 ### 文件访问权限查询 `fs.access`
 
 测试用户对 path 指定的文件或目录的权限。如果可访问性检查失败，则错误参数将是 Error 对象。
+
 ```js
 fs.access(path[, mode], callback)
 ```
-其中mode使用node已定义的`fs.constants`中的常量来表示：
+
+其中 mode 使用 node 已定义的`fs.constants`中的常量来表示：
+
 ```js
 F_OK //表明文件对调用进程可见。 这对于判断文件是否存在很有用，但对 rwx 权限没有任何说明。 如果未指定模式，则默认值为该值。
 R_OK //表明调用进程可以读取文件。
 W_OK // 表明调用进程可以写入文件。
 X_OK // 表明调用进程可以执行文件。 在 Windows 上无效（表现得像 fs.constants.F_OK）。
 ```
+
 ```js
-const file = 'package.json';
+const file = 'package.json'
 
 // 检查当前目录中是否存在该文件。
-fs.access(file, fs.constants.F_OK, (err) => {
-  console.log(`${file} ${err ? '不存在' : '存在'}`);
-});
+fs.access(file, fs.constants.F_OK, err => {
+	console.log(`${file} ${err ? '不存在' : '存在'}`)
+})
 
 // 检查文件是否可读。
-fs.access(file, fs.constants.R_OK, (err) => {
-  console.log(`${file} ${err ? '不可读' : '可读'}`);
-});
+fs.access(file, fs.constants.R_OK, err => {
+	console.log(`${file} ${err ? '不可读' : '可读'}`)
+})
 
 // 检查文件是否可写。
-fs.access(file, fs.constants.W_OK, (err) => {
-  console.log(`${file} ${err ? '不可写' : '可写'}`);
-});
+fs.access(file, fs.constants.W_OK, err => {
+	console.log(`${file} ${err ? '不可写' : '可写'}`)
+})
 
 // 检查当前目录中是否存在该文件，以及该文件是否可写。
-fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
-  if (err) {
-    console.error(
-      `${file} ${err.code === 'ENOENT' ? '不存在' : '只可读'}`);
-  } else {
-    console.log(`${file} 存在，且它是可写的`);
-  }
-});
+fs.access(file, fs.constants.F_OK | fs.constants.W_OK, err => {
+	if (err) {
+		console.error(`${file} ${err.code === 'ENOENT' ? '不存在' : '只可读'}`)
+	} else {
+		console.log(`${file} 存在，且它是可写的`)
+	}
+})
 ```
-但一般如果是文件打开、读取、写入之前检查文件是否存在或是否有对应操作权限，不建议使用fs.access去判断，而是应该直接打开、读取或写入文件时去捕获回调的error，如果文件无法访问则处理引发的错误，此error有对应的错误编码。因为异步操作当你调用access检查文件时，可能其它进程更改了文件状态，导致access返回的信息并不准确。
+
+但一般如果是文件打开、读取、写入之前检查文件是否存在或是否有对应操作权限，不建议使用 fs.access 去判断，而是应该直接打开、读取或写入文件时去捕获回调的 error，如果文件无法访问则处理引发的错误，此 error 有对应的错误编码。因为异步操作当你调用 access 检查文件时，可能其它进程更改了文件状态，导致 access 返回的信息并不准确。
+
 ```js
 // 不推荐的写法
-fs.access('myfile', (err) => {
-  if (!err) {
-    console.error('myfile 已存在');
-    return;
-  }
+fs.access('myfile', err => {
+	if (!err) {
+		console.error('myfile 已存在')
+		return
+	}
 
-  fs.open('myfile', 'wx', (err, fd) => {
-    if (err) throw err;
-    // do something;
-  });
-});
+	fs.open('myfile', 'wx', (err, fd) => {
+		if (err) throw err
+		// do something;
+	})
+})
 
 // 推荐不使用access，直接捕获err错误码
 fs.open('myfile', 'wx', (err, fd) => {
-  if (err) {
-    if (err.code === 'EEXIST') { // err.code === 'ENOENT' 是不存在
-      console.error('myfile 已存在');
-      return;
-    }
+	if (err) {
+		if (err.code === 'EEXIST') {
+			// err.code === 'ENOENT' 是不存在
+			console.error('myfile 已存在')
+			return
+		}
 
-    throw err;
-  }
+		throw err
+	}
 
-  // do something
-});
+	// do something
+})
 ```
 
 ### 目录的操作
+
+语法：
 
 ```js
 // 创建目录
@@ -336,50 +360,57 @@ fs.readdir(path[, options], callback)
 // 删除目录，删除非空目录报错 Error: ENOTEMPTY
 fs.rmdir(path[, options], callback)
 ```
+
 示例：
+
 ```js
 // 创建
-fs.mkdir(__dirname + '/fs', (err) => {
-    if (err) {
-        return console.error(err)
-    }
-    console.log('目录创建成功');
+fs.mkdir(__dirname + '/fs', err => {
+	if (err) {
+		return console.error(err)
+	}
+	console.log('目录创建成功')
 })
 
 // 读取
 fs.readdir(__dirname + '/fs', (err, files) => {
-    if (err) {
-        return console.error(err)
-    }
-    console.log(files) // [ 'dir.txt', 'fs.txt' ]
+	if (err) {
+		return console.error(err)
+	}
+	console.log(files) // [ 'dir.txt', 'fs.txt' ]
 })
 
 // 删除，如果目录不为空，则报错Error: ENOTEMPTY
-fs.rmdir(__dirname + '/fs',(err) => {
-    if (err) {
-        return console.error(err)
-    }
-    console.log('删除成功');
+fs.rmdir(__dirname + '/fs', err => {
+	if (err) {
+		return console.error(err)
+	}
+	console.log('删除成功')
 })
 ```
+
 ### 文件的操作
 
 常见的文件操作包括：
-- 打开 open
-- 读取 read readFile
-- 裁取 truncate
-- 写入 write writeFile
-- 追加 append
-- 拷贝 copy
-- 删除 unlink
-- 关闭 close
-- 重命名 rename 
-- 观察文件 watch
-- 更改文件所有权 chown
-- 更改文件权限 chmod
+
+-   打开 open
+-   读取 read readFile
+-   裁取 truncate
+-   写入 write writeFile
+-   追加 append
+-   拷贝 copy
+-   删除 unlink
+-   关闭 close
+-   重命名 rename
+-   观察文件 watch
+-   更改文件所有权 chown
+-   更改文件权限 chmod
 
 以下方法都有同步方法，即添加`Sync`
-部分方法还有针对fd的方法，方法名前加`f`,如上面的`fstat` `fchown` `fchmod` `ftruncate`，这类方法需要传入`fd`作为参数。
+部分方法还有针对 fd 的方法，方法名前加`f`,如上面的`fstat` `fchown` `fchmod` `ftruncate`，这类方法需要传入`fd`作为参数。
+
+语法：
+
 ```js
 // 打开，返回fd唯一的途径
 fs.open(path[, flags[, mode]], callback)

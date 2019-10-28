@@ -1,6 +1,6 @@
 # 前端状态量使用枚举的思考
 
-文章摘自以下[链接](https://www.ruphi.cn/archives/348/),推断访问原文。
+文章摘自以下[链接](https://www.ruphi.cn/archives/348/)，推荐访问原文。
 
 ## 前端常见的状态量描述
 
@@ -125,7 +125,7 @@ TS 代码实现
  *
  * Created by hzliurufei on 2018-12-17 21:23:28
  * @Last Modified by: tom.xu
- * @Last Modified time: 2019-10-24 18:01:57
+ * @Last Modified time: 2019-10-28 11:37:05
  */
 
 interface IEnumDefinition {

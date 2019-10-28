@@ -152,9 +152,9 @@ module.exports = {
 			'/Misc/': [
 				'',
 				{
-					title: '开发环境',
+					title: '',
 					collapsable: false,
-					children: ['InitDevEnv']
+					children: ['InitDevEnv', 'tree-node-cli']
 				}
 			],
 			'/Node/': [
@@ -162,7 +162,7 @@ module.exports = {
 				{
 					title: '认识Node',
 					collapsable: false,
-					children: ['introduce', 'NVM', 'npm-yarn']
+					children: ['introduce', 'nvm', 'npm-yarn', 'npx']
 				},
 				{
 					title: '核心概念',
@@ -172,13 +172,13 @@ module.exports = {
 				{
 					title: '文件和数据操作',
 					collapsable: false,
-					children: ['buffer', 'stream']
+					children: ['buffer', 'stream', 'path', 'fs']
 				},
-				// {
-				// 	title: '网络管理',
-				// 	collapsable: false,
-				// 	children: ['http', 'url', 'querystring']
-				// },
+				{
+					title: '网络管理',
+					collapsable: false,
+					children: ['http', 'url', 'querystring']
+				}
 				// {
 				// 	title: '进程管理',
 				// 	collapsable: false,
@@ -199,7 +199,6 @@ module.exports = {
 				// 	collapsable: false,
 				// 	children: ['os', 'v8', 'vm']
 				// },
-
 			],
 			'/Build/Git/': [
 				'',
@@ -212,7 +211,7 @@ module.exports = {
 			'/Build/Typescript/': [
 				'',
 				{
-					title: '',
+					title: '基础',
 					collapsable: false,
 					children: [
 						'WhatAndWhy',
@@ -224,9 +223,13 @@ module.exports = {
 						'Class',
 						'Module',
 						'Declaration',
-						'Tsconfig',
-						'EnumPractice'
+						'Tsconfig'
 					]
+				},
+				{
+					title: '实践',
+					collapsable: false,
+					children: ['EnumPractice', 'TsNodeEnvConf', 'TsVueEnvConf']
 				}
 			]
 		}

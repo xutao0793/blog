@@ -15,4 +15,9 @@ TypeScript 可以在任何浏览器、任何计算机和任何操作系统上运
 -   模块 Module
 -   声明文件 Declaration
 -   配置文件 tsconfig.json
+
+**实践**
+
 -   前端状态量使用枚举的思考
+-   TS + Node 项目环境初始化
+-   TS + Vue + Vuex 项目环境初始化
