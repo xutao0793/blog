@@ -28,7 +28,7 @@ URL 字符串是结构化的字符串，包含多个含义不同的组成部分�
 └─新版本的 URL类实例，实现WHATWG标准───────────────────────────────────────────────────────────────┘
 ```
 
-## API
+## new URL() 和 url.parse()
 
 url 模块提供了两套 API 来处理 URL：一个是旧版本遗留的 API，一个是实现了 WHATWG 标准的新 API。
 
@@ -38,11 +38,21 @@ url 模块提供了两套 API 来处理 URL：一个是旧版本遗留的 API，
 
 新的 API 中 URL 为全局变量，不需要引入可直接使用。
 
+语法：
+
+```js
+new URL(input[, base])
+```
+
+示例：
+
 ```js
 const newURL = new URL('https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash')
 console.log(newURL)
 console.log(newURL.searchParams.get('query'))
 ```
+
+输出：
 
 ```js
 // 输出
@@ -65,12 +75,21 @@ string
 
 旧 API 需要引入`url`模块
 
+引入：
+
 ```js
 const url = require('url')
+```
+
+示例：
+
+```js
 const oldURL = url.parse('https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash', true)
 console.log(oldURL)
 console.log(oldURL.query.query)
 ```
+
+输出：
 
 ```js
 // 输出
@@ -113,6 +132,31 @@ url.query // 旧API，且 url(url,true)第二个参数为true才返回对象形�
 url.searchParams // 新API，URLSearchParams类的实例对象
 ```
 
+## 注意区别：
+
+使用`new URL(input[,baseurl])`时：
+
+-   如果 input 是相对路径，则需要 base。 如果 input 是绝对路径，则忽略 base。
+-   如果 input 是相对路径，又没有提供 base，则视为无效 URL，则将会抛出 TypeError。
+
+即一句话，new URL()解析的必须是绝对 URL。
+
+但是旧`url = require('url')`则无此限制，见如下示例：
+
+```js
+const url = require('url')
+let BASE_URL = 'http://localhost:3000'
+let str = '/users?uid=123'
+
+// 直接解析url, new URL()方法将报错，但url不会
+console.log(url.parse(str, true)) // 正常返回对象
+console.log(new URL(str)) // 报错
+
+// 加上BASE_URL,不会报错
+console.log(url.parse(BASE_URL + str, true))
+console.log(new URL(BASE_URL + str))
+```
+
 ## URLSearchParams 类的方法：
 
 ```js
@@ -142,6 +186,8 @@ urlSearchParams.sort()
 ```
 
 示例：
+
+#### 创建 URLSearchParams
 
 ```js
 // 创建：
@@ -187,6 +233,8 @@ console.log('generator >>', paramsObj7.toString())
 new URLSearchParams([['user', 'abc', 'error']])
 // 抛出 TypeError [ERR_INVALID_TUPLE]: Each query pair must be an iterable [name, value] tuple
 ```
+
+#### 操作 URLSearchParams
 
 ```js
 // 操作：
