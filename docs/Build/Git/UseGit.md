@@ -151,6 +151,9 @@ git push origin -d <branch_name>
 
 # 修剪远程已删除的分支：
 git remote prune origin
+
+# 新分支首次推送，并建立跟踪关系 -u
+git push -u origin <branch_name>
 ```
 
 ## `git status` `git add` `git commit` 文件编辑
