@@ -45,24 +45,24 @@ W3C 也就是万维网联盟（World Wide Web Consortium），又称 W3C 理事�
 
 WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Application Technology Working Group）。
 
-创立：由Web 浏览器生产厂商（主要是Opera、Mozilla基金会和苹果，后期Google也加入）和一些相关团体形成的一个的协作组织。
-职责：WHATWG 的标志性规范是 HTML5规范的制定。
-缘由：W3C对HTML的发展方向出现调整，大力推动XHMTL的发展，与浏览器厂商的方向不同，所以另起炉灶形成了WHATWG组织，推出HTML5规范。最终W3C回过来承认HTML5作为HTML的最新规范，W3C将与WHATWG一起合作制定最新HTML和DOM规范。
+- 创立：由Web 浏览器生产厂商（主要是Opera、Mozilla基金会和苹果，后期Google也加入）和一些相关团体形成的一个的协作组织。
+- 职责：WHATWG 的标志性规范是 HTML5规范的制定。
+- 缘由：W3C对HTML的发展方向出现调整，大力推动XHMTL的发展，与浏览器厂商的方向不同，所以另起炉灶形成了WHATWG组织，推出HTML5规范。最终W3C回过来承认HTML5作为HTML的最新规范，W3C将与WHATWG一起合作制定最新HTML和DOM规范。
 
 [W3C将与WHATWG合作制定最新HTML和DOM规范 ](http://www.sohu.com/a/317425124_394375)<br>
 [HTML5的政治斗争：还要闹十年？](http://news.mydrivers.com/1/239/239149.htm)
 
 ## ECMA ECMA-262 TC39 ECMAScript Javascript
 
-ECMA 全称 European Computer Manufacturers Association（欧洲计算机制造商协会），是一个制定计算机各种标准的非营利性国际组织，维护各种计算机相关的标准。
+- ECMA 全称 European Computer Manufacturers Association（欧洲计算机制造商协会），是一个制定计算机各种标准的非营利性国际组织，维护各种计算机相关的标准。
 
-ECMA-262是ECMA各种标准中的第262号标准，这个标准就是ECMAScript语法标准。
+- ECMA-262是ECMA各种标准中的第262号标准，这个标准就是ECMAScript语法标准。
 
-TC39是ECMA下属的一个第39个技术委员会，也是由各个主流浏览器厂商的代表构成，负责制定ECMAScript标准，标准生成的流程，并推动浏览器实现。
+- TC39是ECMA下属的一个第39个技术委员会，也是由各个主流浏览器厂商的代表构成，负责制定ECMAScript标准，标准生成的流程，并推动浏览器实现。
 
-ECMAScript：由Netscape网景公司（Mozilla的前身）将应用在Netscape浏览器上的脚本语言Javascript推荐到ECMA，并确定为标准，ECMA将其改名为ECMAScript。
+- ECMAScript：由Netscape网景公司（Mozilla的前身）将应用在Netscape浏览器上的脚本语言Javascript推荐到ECMA，并确定为标准，ECMA将其改名为ECMAScript。
 
-Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAScript语言在浏览器端的实现，通过浏览器提供的DOM/BOM等web API实现网页交互。
+- Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAScript语言在浏览器端的实现，通过浏览器提供的DOM/BOM等web API实现网页交互。
 
 [TC39,ECMA-262,ECMAScript,Javascript,它们之间是什么关系?](https://www.zhihu.com/question/63085873)
 
@@ -98,10 +98,22 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 - 面向对象编程
 - 异步编程
 - 函数式编程
-- 强类型语言 TypeScript
 - ES6 module
     - [前端模块化简史：浅谈 JavaScript 模块化](https://www.cnblogs.com/Leo_wl/p/4869090.html)
     - [ES modules 基本用法、模块继承、跨模块常量、import()](https://www.cnblogs.com/ChenChunChang/p/8296373.html)
+
+# TypeScript
+
+-   `Typescript`是什么以及为什么用它:heavy_check_mark:
+-   安装 `Typescript`:heavy_check_mark:
+-   基本类型注解:heavy_check_mark:
+-   高级类型:heavy_check_mark:
+-   泛型 Generics:heavy_check_mark:
+-   接口 Interfaces:heavy_check_mark:
+-   类 Class:heavy_check_mark:
+-   模块 Module:heavy_check_mark:
+-   声明文件 Declaration:heavy_check_mark:
+-   配置文件 tsconfig.json:heavy_check_mark:
 
 # Web Browser 浏览器
 
@@ -155,14 +167,15 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 - [CSS-API(CSS 编程接口),CSSOM(css 对象模型)](https://blog.csdn.net/u014711690/article/details/82346584)
 - [CSSOM w3c 官方规范](https://www.w3.org/html/ig/zh/wiki/Cssom)
 
-#### AST
+#### AST：Abstract Syntax Tree，AST（抽象语法树）
 
 # FE-Framework 前端框架
-- web端： Vue  React:heavy_check_mark:
+- web端： Vue:heavy_check_mark:  React:heavy_check_mark:
 - 移动端：H5 React-Native Hybird混合开发
 - 桌面端：PWA Electron
 - 程序端附加应用： 小程序
 - 跨端应用：uni-app  Taro  Flutter
+
 [Vue 接口管理](https://www.jianshu.com/p/89ca6428a4b5)
 
 # Build 前端工程构建
@@ -170,6 +183,7 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 #### 构建工具
 - Gulp
 - Webpack:heavy_check_mark:
+
 [Joyco webpack 学习笔记](https://www.cnblogs.com/joyco773/tag/webpack/)
 
 #### 版本管理工具
@@ -187,7 +201,6 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 #### 类型检查工具
 - Eslint
-- Typescript:heavy_check_mark:
 
 #### 文档工具
 - JsDoc / EsDoc
@@ -215,6 +228,6 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 # 前端分支方向
 
-- 图形化：img -> SVG -> canvas -> webGL
+- 图形可视化：img -> SVG -> canvas -> webGL
 - Web RTC
 - Web VR

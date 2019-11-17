@@ -29,3 +29,13 @@ catalog 目录
     1. tapable 框架
     1. 编写 loader
     1. 编写 plugin
+
+```
+/****** output *******/
+path: 表示打包文件输出到的**绝对路径**，即bundle.js放在哪里
+publicPath: 表示打包生成的index.html中引用静态资源的前缀，即放置的文件夹。
+
+/****** devServer ****/
+contentBase: 表示启动本地服务器devServer时访问内容index.html的路径。不设置的话，默认是当前执行的目录，一般是项目根目录 '/'。会在项目根目录查找index.html文件。
+publicPath: 表示启动本地服务器devServer时，引用静态文件资源的路径，如果没有默认output中设置的publicPath目录。
+```

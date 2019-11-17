@@ -2,7 +2,10 @@
 
 <img src="../../image/vue.svg" style="width:100px;height:100px" />
 
-按传统 web 页面架构`HTML` `CSS` `JS`的路径来归纳`Vue`的学习路径
+Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。
+![vue渐进式](./image/vue.png)
+
+>按传统 web 页面架构`HTML` `CSS` `JS`的架构来归纳`Vue`的学习路径
 
 **认识 Vue**
 
@@ -31,17 +34,24 @@
 -   组件间通信方式
 -   vue 内置组件
 
+**Vue 技术栈**
+
+1. 构建项目脚手架`Vue-CLI`
+1. 路由`Vue-Router`
+1. 状态管理`Vuex`
+1. 网络请求`Axios`
+1. 项目构建`Webpack`
+1. 测试`Jest`
+1. 同构`Vue-SSR`
+1. 强类型`Typescript + vue-property-decorator`
+
 **Vue 原理深入**
 
 -   vue2 响应式数据绑定的原理`Object.defineProperty`
 -   Vnode 虚拟 DOM 和 DOMdiff 算法
 
-## Vue 全家桶
+**延伸扩展**
 
-![vue渐进式](./imgs/vue.png)
-
-Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。
-
-特点: 易用，灵活，高效 渐进式。
-
-Vue 的全家桶工具：`Vue` `Vue-Router` `Vuex` `Vue-CLI` `Webpack` `Axios` `Vue-SSR`
+1. HTML5的`<template>`内容模板元素
+1. 区分：`outerHTML`-`innerTHML`-`outerText`-`innerText`-`textContent`
+1. JS异步编程实践理解

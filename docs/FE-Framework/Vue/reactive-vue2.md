@@ -1,8 +1,10 @@
 # Vue 数据响应式原理
 
+[[toc]]
+
 ## Vue2 数据响应原理简单实现 `Object.defineProperty`
 
-![vue2 reactive](./imgs/vue2Reactive.png)
+![vue2 reactive](./image/vue2Reactive.png)
 
 **主要两层逻辑：**
 

@@ -167,10 +167,79 @@ module.exports = {
 			'/FE-Framework/Vue/': [
 				'',
 				{
-					title: '',
+					title: 'Vue 基础',
 					collapsable: false,
-					children: ['reactive-vue2']
-				}
+					children: [
+						'vue-1-whyusevue-vue-jquery',
+						'vue-2-template-directive',
+						'vue-3-template-{{}}-and-v-html',
+						'vue-4-template-v-if-and-v-show',
+						'vue-5-template-v-for',
+						'vue-6-template-v-bind',
+						'vue-7-template-v-bind-with-class-and-style',
+						'vue-8-template-v-on-and-modifier',
+						'vue-9-template-v-model',
+						'vue-10-template-ref',
+						'vue-11-vue-scope',
+						'vue-12-js-nextTick',
+						'vue-13-template-render-JSX',
+						'vue-14-js-vue-options',
+						'vue-15-js-data',
+						'vue-16-js-computed',
+						'vue-17-js-methods',
+						'vue-18-js-watch',
+						'vue-19-js-filters',
+						'vue-20-js-data-computed-watch-methods-filters',
+						'vue-21-js-mixins',
+						'vue-22-js-directive',
+						'vue-23-js-lifeCycle_hooks',
+					]
+				},
+				{
+					title: 'Vue 组件',
+					collapsable: false,
+					children: [
+						'vue-24-component',
+						'vue-25-component-introduce',
+						'vue-26-component-prop',
+						'vue-27-component-event',
+						'vue-28-component-.native-.sync-model',
+						'vue-29-component-slot',
+						'vue-30-component-组件实例的引用',
+						'vue-31-component-组件间通信6种方法',
+						'vue-32-component-异步组件-工厂函数',
+						'vue-33-component-内置组件transition',
+						'vue-34-component-内置组件keep-alive',
+						'vue-35-component-动态组件component',
+					]
+				},
+				{
+					title: 'Vue 技术栈',
+					collapsable: false,
+					children: [
+						'vue-37-router-index',
+						'vue-38-router-前端路由历史',
+						'vue-39-router-基本使用',
+						'vue-40-vuex',
+						'vue-41-vuex-state-getter-mutation-action',
+					]
+				},
+				{
+					title: 'Vue 原理深入',
+					collapsable: false,
+					children: [
+						'reactive-vue2'
+					]
+				},
+				{
+					title: '其它',
+					collapsable: false,
+					children: [
+						'HTML5_template',
+						'outerHTML-innerTHML-outerText-innerText-textContent',
+						'JS-callback-Promise-Generator-Async'
+					]
+				},
 			],
 			'/FE-Framework/React/': [
 				'',
