@@ -7,6 +7,7 @@
 - 模块路径的查找
 - 模块的缓存
 - 模块引用死循环的避免
+- 各种模块方式的使用
 
 ## 模块概述
 模块主要是为了解决代码逻辑的封装和变量的隔离。主要发展先后经历过：
@@ -238,3 +239,51 @@ package.json文件可以使用`npm init`来初始化。
 
 - **模块（module）**是任何可以由Node.js的require()加载的文件或目录（目录中引用index文件)。
 - **包（package）**是一个由package.json定义的文件目录。
+
+## 各类型模块方案的调用
+
+-   [commonJs 和 ES Module 规范](http://es6.ruanyifeng.com/#docs/module-loader#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8A%A0%E8%BD%BD)
+
+```
+/******** CommonJs *********/
+语法：
+导出： module.exports = {}    exports = {}
+导入： require()
+特点： 一句话总结：值的浅拷贝，运行时加载
+      模块内隐含`module`对象，记录该模块相关信息，包括id，name，exports，loaded等
+      模块隐式声明一个简写语句：var exports = module.exports
+      因为模块导出是一个对象，对象只有运行时生成，所以commonJs模块是动态运行时确定模块内容的。
+      因为模块导出是一个对象，所以导出模块是一个值的浅拷贝。
+      （用对象的内存模式理解，基本类型是值的完全复制，引用类型是内存地址的引用）
+      该规范使用导入模块会缓存模块，只会在第一次完全运行模块内代码，第二次开始都是从缓存内取值。
+      导入require时会建一个缓存对象存放模块
+使用：是Node的默认规范，基本使用在node环境。
+      如果在浏览器环境使用需要使用工具转换，比如Browserify
+```
+```
+/******* ES Module ********/
+语法：
+导出： 默认导出：export default {}          命名导出：export {}
+导入： import anyname from 'path'          import { } from 'path'   名称一一对应，或使用`as`重命名
+特点： 一句话总结：值的引用，编译时链接
+      ES module默认使用严格模式。
+      是在静态编译时确定模块关系的。可以把ES Module理解为只是建立了两个模块间的一种连接关系或者叫值的映射关系。
+      当使用默认导出时，相当于导出对象default，此时表现相同于commonjs，对基本类型变量导入，在导出模块内值改变并不会表现在导入的使用模块内。
+      引用类型可以实时更新。
+      （也是可以用对象内存模式理解，因为基本类型赋值给变量属性时都是值的拷贝，而引用类型是内存地址的引用）
+      ES module的映射特征在命名导出时体现最为突出，此时不管是基本类型还是引用类型值，在导入和导出模块，值都是一种映射关系，实时更新。
+      当在导出模块内变化，导入模块使用时也是最新的值。
+使用：在浏览器中直接使用，需要`script`标签声明`type="module"`后才可以使用`import`引入模块。如`<srcipt type="module"></script>`
+      在node环境因为commonJs的历史原因，暂未完成支持，只有部分实验性的方法。
+      如采用ES module规范的模块使用`.mjs`后缀命名，可以使用cli命令`node --experimental-modules module_name.mjs`
+
+```
+```
+/********* AMD ***********/
+语法：
+导出： define('module_name', ['other_module_depend'], function() {/*return 出相关代码*/})
+导入： require(['module_name'], function(module_name) {/*导入成功执行的回调*/})
+特点： 通过AMD形式定义的模块加载是非阻塞的，适合在浏览器中使用。
+      但采用回调的方法和浏览器异步回调会出现回调地狱问题一样，在实现应用中越来越少，逐步被标准化的ES module形式替代
+
+```

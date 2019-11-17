@@ -55,33 +55,6 @@ git remote show 仓库名
 git pull <远程主机名> <远程分支名>:<本地分支名>
 ```
 
-## `git remote` 远程仓库管理
-
-```bash
-# 添加一个远程仓库跟踪：
-git remote add <远程主机名 (默认origin)> url
-
-# 查看本地已跟踪的所有远程仓库：
-# 只显示远程仓库名
-git remote //
-# 需要显示url信息
-git remote -v
-
-# 查看所有指定远程仓库的详细信息,包括所有分支
-git remote show <仓库名>
-
-# 重命名本地已跟踪的远程仓库：
-git remote rename <old_name> <new_name>
-
-# 删除一个已跟踪的远程仓库：
-git remote rm <仓库名>
-
-# 远程仓库的url改变后需要在本地更换
-# （常见的情形是远程仓库变更了项目所有者时，url会改变，此时本地需要重新更改url）
-git remote set-url <仓库名> <new_url>
-# 查看远程仓库的url
-git remote get-url <仓库名>
-```
 
 ## `git branch` 分支管理
 
@@ -227,7 +200,36 @@ git commit
 # 使用 git rm 删除文件了但还没补git commit 时,想恢复可以使用git add -i 选择revert, 再git checkout -- filename
 ```
 
-**删除远程仓库的文件或目录，几个步骤:**
+## `git remote` 远程仓库管理
+
+```bash
+# 添加一个远程仓库跟踪：
+git remote add <远程主机名 (默认origin)> url
+
+# 查看本地已跟踪的所有远程仓库：
+# 只显示远程仓库名
+git remote
+# 需要显示url信息
+git remote -v
+
+# 查看所有指定远程仓库的详细信息,包括所有分支
+git remote show <仓库名>
+
+# 重命名本地已跟踪的远程仓库：
+git remote rename <old_name> <new_name>
+
+# 删除一个已跟踪的远程仓库：
+git remote rm <仓库名>
+
+# 远程仓库的url改变后需要在本地更换
+# （常见的情形是远程仓库变更了项目所有者时，url会改变，此时本地需要重新更改url）
+git remote set-url <仓库名> <new_url>
+# 查看远程仓库的url
+git remote get-url <仓库名>
+```
+### 实践案例
+
+**实践1：删除远程仓库的文件或目录，几个步骤:**
 
 ```bash
 # 1、先执行拉取最新代码
@@ -243,3 +245,26 @@ git commit -m 'delete name'
 # 4、推送到远程仓库才能将远程仓库文件夹删除
 git push
 ```
+
+**实践2：远程仓库的 url 变更，需要重新绑定**
+
+有两种方法：
+```
+1. 直接修改 url 命令： git remote set-url origin new_url 此时分支的远程跟踪关系会自动更新追踪关系
+
+2. 先直接删除跟踪的远程仓库，再重新绑定一个新 url： 
+    git remote rm origin git remote add origin new_url 此时引用分支的关系需要重新绑定跟踪关系 
+    git branch --set-upstream-to=origin/origin_branch_name
+```
+**实践 3：将远程仓库 old_origin 的分支单独拆出来，到一个新的远程仓库 new_origin**
+
+1. 远程新建一个仓库，并初始化 master 分支
+1. 本地新建一文件夹，并初始化为新的本地仓库： git init
+1. 将 old_origin 的目标分支 target 检出到本地仓库作为 master 分支：git fetch old_origin target 然后 git merge target
+1. git add . 然后 git commit -m 'fetch target' 提交本次拉取和全并的修改，git status 查看保证清空暂区
+1. git remote set-url origin new_url 将远程仓库重新绑定到新仓库的 url
+1. git fetch origin master
+1. git merge --allow-unrelated-histories origin/master 此时 merge 因为旧仓库的 commit 记录与新仓库的 commit 来源不同，所以需要带上--allow-unrelated-histories 参数允许合并两者的提交记录。
+1. git push -u origin master 首次提交到远程仓库。如果 merge 步骤有冲突需要手动解决冲突后推送。此步骤也可以分为两步：先绑定分支跟踪关系：git branch --set-upstream-to=origin/master 然后 git push
+
+
