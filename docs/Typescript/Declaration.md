@@ -1,5 +1,7 @@
 # 声明文件 Declaration
 
+[[toc]]
+
 当我们使用外部第三方库时，由于外部 JavaScript 库不是使用 TypeScript 所编写，所以也就不具有类型，那么我们又该如何在 TypeScript 里结合两者呢？
 
 1. 现在大部分库都已经支持 TS，即库本身就带有`d.ts`文件，此类库我们直接使用即可

@@ -1,4 +1,7 @@
 module.exports = {
+	markdown:{
+		toc:{ includeLevel: [2, 3] }
+	},
 	title: "xutao's blog",
 	description: '个人知识框架整理，便于查缺漏。前端 HTML CSS ES JS Webpack Test Git Vue React Node Express Koa',
 	locales: {
@@ -14,6 +17,7 @@ module.exports = {
 			{ text: 'HTML', link: '/HTML/' },
 			{ text: 'CSS', link: '/CSS/' },
 			{ text: 'ES', link: '/ES/' },
+			{ text: 'TS', link: '/Typescript/' },
 			{ text: 'Browser', link: '/Browser/' },
 			{
 				text: 'FE-Framework',
@@ -70,7 +74,6 @@ module.exports = {
 						text: 'Linter',
 						items: [
 							{ text: 'Eslint', link: '/Build/ESLint/' },
-							{ text: 'Typescript', link: '/Build/Typescript/' }
 						]
 					},
 					{
@@ -117,6 +120,48 @@ module.exports = {
 					title: '',
 					collapsable: false,
 					children: ['DefineProperty']
+				}
+			],
+			'/Typescript/': [
+				'',
+				{
+					title: '基础',
+					collapsable: false,
+					children: [
+						'WhatAndWhy',
+						'InstallTS',
+						'BaseType',
+						'AdvancedType',
+						'Generics',
+						'Interface',
+						'Class',
+						'Module',
+						'Declaration',
+						'Tsconfig'
+					]
+				},
+				{
+					title: '实践',
+					collapsable: false,
+					children: ['EnumPractice', 'TsNodeEnvConf', 'TsVueEnvConf']
+				}
+			],
+			'/Browser/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: [
+						'01_devlopment',
+						'02_structure',
+						'03_request',
+						'04_web_cache',
+						'05_render',
+						'06_v8',
+						'07_js_execute',
+						'08_stack_heap',
+						'Blob-File-ArrayBuffer-URL'
+					]
 				}
 			],
 			'/FE-Framework/Vue/': [
@@ -193,12 +238,20 @@ module.exports = {
 					children: ['ResourceCode']
 				}
 			],
-			'/Misc/': [
+			'/Build/Git/': [
 				'',
 				{
 					title: '',
 					collapsable: false,
-					children: ['InitDevEnv', 'tree-node-cli']
+					children: ['InitGit', 'UseGit']
+				}
+			],
+			'/Network/HTTP/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: ['introduce','URI_MIME','session_connect_message','httpCache','httpCookie','httpCORS','httpAuth']
 				}
 			],
 			'/Node/': [
@@ -216,7 +269,7 @@ module.exports = {
 				{
 					title: '文件和数据操作',
 					collapsable: false,
-					children: ['buffer', 'stream', 'path', 'fs']
+					children: ['buffer', 'stream', 'path', 'fs','bit-byte-stream-buffer']
 				},
 				{
 					title: '网络管理',
@@ -244,62 +297,12 @@ module.exports = {
 				// 	children: ['os', 'v8', 'vm']
 				// },
 			],
-			'/Build/Git/': [
+			'/Misc/': [
 				'',
 				{
 					title: '',
 					collapsable: false,
-					children: ['InitGit', 'UseGit']
-				}
-			],
-			'/Build/Typescript/': [
-				'',
-				{
-					title: '基础',
-					collapsable: false,
-					children: [
-						'WhatAndWhy',
-						'InstallTS',
-						'BaseType',
-						'AdvancedType',
-						'Generics',
-						'Interface',
-						'Class',
-						'Module',
-						'Declaration',
-						'Tsconfig'
-					]
-				},
-				{
-					title: '实践',
-					collapsable: false,
-					children: ['EnumPractice', 'TsNodeEnvConf', 'TsVueEnvConf']
-				}
-			],
-			'/Browser/': [
-				'',
-				{
-					title: '',
-					collapsable: false,
-					children: [
-						'01_devlopment',
-						'02_structure',
-						'03_request',
-						'04_web_cache',
-						'05_render',
-						'06_v8',
-						'07_js_execute',
-						'08_stack_heap',
-						'Blob-File-ArrayBuffer-URL'
-					]
-				}
-			],
-			'/Network/HTTP/': [
-				'',
-				{
-					title: '',
-					collapsable: false,
-					children: ['introduce','URI_MIME','session_connect_message','httpCache','httpCookie','httpCORS','httpAuth']
+					children: ['InitDevEnv', 'tree-node-cli']
 				}
 			],
 			

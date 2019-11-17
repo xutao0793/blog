@@ -556,7 +556,7 @@ git push -f git@github.com:xutao0793/xutao0793.github.io.git master
 ```
 
 ### 运行发布命令
-
+直接用Git Bash运行以下命令。如果用windows的CMD会报错，因为CMD不能运行bash命令。
 ```
 npm run deploy
 ```
@@ -580,12 +580,38 @@ npm run deploy
 ```sh
 # 在VuepressDemo下面根目录下，右键打开Git命令工具，输入
 sh deploy.sh
+
+# 或者直接在Git Bash 中输入部署命令
+npm run deploy
 ```
 
 #### 提示不能读取远程仓库的错误
 
 实际上第一次执行`sh deploy.sh`并没有成功，但是从窗口结果看，该命令确实能执行`.sh`文件里的命令。但是在最后推送时又报了下面错误。又是一顿查找爬坑的方法
 结果是自己仓库的公钥不知道为什么没用，还是过期了，既然没用，就照着方法重新生成一个吧。
+
+```bash
+# 看看本地电脑是不是有.ssh目录
+$ cd ~/.ssh
+# 如果有该目录，查看是否有id_rsa 和 id_rsa.pub文件
+$ ls
+id_rsa  id_rsa.pub  known_hosts
+```
+我们需要寻找一对以 id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名，这两个就是SSH Key的秘钥对。 .pub 文件是你的公钥，可以放心地告诉任何人，比如我们要告诉github。另一个则是私钥，不能泄露出去。 
+
+如果找不到这样的文件（或者根本没有 .ssh 目录），你可以通过运行 ssh-keygen 程序来创建它们。
+- 第1步：生成 SSH Key 的秘钥对
+```bash
+# 你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可。
+$ ssh-keygen -t rsa -C "youremail@example.com"
+
+# 查看id_rsa.pub文件内容
+cat id_rsa.pub
+```
+- 第2步：登陆GitHub，点击个人头像 -> Settings -> SSH and GPG Keys -> New SSH key。
+填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容，点“Add Key”，你就应该看到已经添加的Key
+
+- 第3步：重新在项目目录中打开Git Bash，执行部署命令`npm run deploy`，大功告成。
 
 错误类型：[vuepress 构建静态页面，部署到 github pages 报错](https://segmentfault.com/q/1010000019705888)<br>
 解决方案：[github 提示 Permission denied (publickey)，如何才能解决？](https://my.oschina.net/u/1377923/blog/1822038)<br>

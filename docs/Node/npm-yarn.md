@@ -1,5 +1,7 @@
 # npm 和 yarn
 
+[[toc]]
+
 [yarn 中文官网](https://yarn.bootcss.com/docs/usage/)
 ## npm 的问题
 - npm install的速度缓慢

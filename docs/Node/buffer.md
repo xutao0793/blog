@@ -1,5 +1,7 @@
 # Buffer 缓冲器
 
+[[toc]]
+
 具体Buffer的概念见上一节，这节主要讲Buffer操作的主要API
 
 ## 创建

@@ -1,5 +1,7 @@
 # 查询字符串解析 querystring
 
+[[toc]]
+
 `querystring` 模块是用于解析和格式化 URL 查询字符串的实用工具。
 
 [MDN 参考链接](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI)

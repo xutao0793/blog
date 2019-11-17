@@ -1,5 +1,7 @@
 # 类型注解
 
+[[toc]]
+
 我们先回顾下 ES 中七种数据类型分类：
 
 -   基本数据类型：`Null` `Undefined` `Boolean` `Number` `String`，以及 ES6 新增的`symbol`

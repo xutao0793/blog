@@ -1,5 +1,7 @@
 # nvm
 
+[[toc]]
+
 ## nvm 是什么
 
 所谓 `nvm` 就是 `Node Version Manager` 的缩写，即 `node`的版本管理工具，当我们需要在电脑中安装多个不同版本的`node`，时就要由 NVM 来实现。

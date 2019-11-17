@@ -1,5 +1,7 @@
 # 模块 Module
 
+[[toc]]
+
 TS 中模块语法基本遵循 ES Module 语法。更详细的 ES Module 语法请查看[阮一峰：ECMAScript 6 入门 - Module 的语法](http://es6.ruanyifeng.com/#docs/module)
 
 TS 中的模块导入导出支持声明（变量、函数、类、类型别名、接口）

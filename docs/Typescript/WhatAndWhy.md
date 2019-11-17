@@ -1,5 +1,7 @@
 # 前言
 
+[[toc]]
+
 本文主要参考以下文档内容，特别是最一个文档教程借鉴最多，特别感谢[xcatliu](https://github.com/xcatliu/)。
 
 [Typescript 官网-英文](http://www.typescriptlang.org/)

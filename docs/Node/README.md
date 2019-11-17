@@ -91,9 +91,9 @@
 
 参考资料
 
-[node 官网指南](https://nodejs.org/zh-cn/docs/guides/)
-[从源码解读 Node 事件循环](https://juejin.im/post/5d439f016fb9a06b29752d5a#heading-5)
-[浏览器与 Node 的事件循环(Event Loop)有何区别?](https://juejin.im/post/5c337ae06fb9a049bc4cd218#heading-22)
-[所有你需要知道的关于完全理解 Node.js 事件循环及其度量](https://juejin.im/post/5984816a518825265674c8f6#heading-0)
-[一道面试题引发的 node 事件循环深入思考](https://juejin.im/post/5cf25a19f265da1bba58ec43#heading-2)
-[libuv 中文教程](http://luohaha.github.io/Chinese-uvbook/index.html)
+[node 官网指南](https://nodejs.org/zh-cn/docs/guides/)<br>
+[从源码解读 Node 事件循环](https://juejin.im/post/5d439f016fb9a06b29752d5a#heading-5)<br>
+[浏览器与 Node 的事件循环(Event Loop)有何区别?](https://juejin.im/post/5c337ae06fb9a049bc4cd218#heading-22)<br>
+[所有你需要知道的关于完全理解 Node.js 事件循环及其度量](https://juejin.im/post/5984816a518825265674c8f6#heading-0)<br>
+[一道面试题引发的 node 事件循环深入思考](https://juejin.im/post/5cf25a19f265da1bba58ec43#heading-2)<br>
+[libuv 中文教程](http://luohaha.github.io/Chinese-uvbook/index.html)<br>

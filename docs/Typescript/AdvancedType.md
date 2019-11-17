@@ -1,5 +1,7 @@
 # 高级类型
 
+[[toc]]
+
 [Typescript 学习记录：高级类型](https://www.ruphi.cn/archives/266/#anchor8)<br>
 [Typescript 高级特性之交叉类型，联合类型，类型保护](https://blog.csdn.net/baidu_28196435/article/details/89707673)
 

@@ -1,5 +1,7 @@
 # 事件循环机制
 
+[[toc]]
+
 参考资料[官网文档](https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/)
 
 ## 什么是事件循环

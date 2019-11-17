@@ -105,16 +105,16 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 # Web Browser 浏览器
 
-- 浏览器历史
-- 浏览器的多进程多线程架构:
-- 浏览器网络请求：IP UDP TCP HTTP、web Socket
+- 浏览器历史:heavy_check_mark:
+- 浏览器的多进程多线程架构:heavy_check_mark:
+- 浏览器网络请求：IP UDP TCP HTTP、web Socket:heavy_check_mark:
 - Web 缓存：浏览器缓存
-    - 页面资源缓存（三级缓存机制）
-    - 本地数据缓存：cookie、web storage、indexedDB
+    - 页面资源缓存（三级缓存机制）:heavy_check_mark:
+    - 本地数据缓存：cookie、web storage、indexedDB:heavy_check_mark:
 - 浏览器页面渲染过程
-    - 页面渲染：如何显示页面
-    - V8 引擎：如何解析一段JS代码
-    - JS 运行机制：如何运行一段代码
+    - 页面渲染：如何显示页面:heavy_check_mark:
+    - V8 引擎：如何解析一段JS代码:heavy_check_mark:
+    - JS 运行机制：如何运行一段代码:heavy_check_mark:
     - JS内存机制：如何进行数据存储
     - 浏览器的事件循环机制：
     [JavaScript 浏览器事件解析](https://zhuanlan.zhihu.com/p/22718822)
@@ -158,7 +158,7 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 #### AST
 
 # FE-Framework 前端框架
-- web端： Vue  React
+- web端： Vue  React:heavy_check_mark:
 - 移动端：H5 React-Native Hybird混合开发
 - 桌面端：PWA Electron
 - 程序端附加应用： 小程序
@@ -169,11 +169,15 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 #### 构建工具
 - Gulp
-- Webpack
+- Webpack:heavy_check_mark:
 [Joyco webpack 学习笔记](https://www.cnblogs.com/joyco773/tag/webpack/)
 
 #### 版本管理工具
-- Git
+- Git:heavy_check_mark:
+
+[Pro git 简体中文版](https://iissnan.com/progit/)<br>
+[易百 git 教程](https://www.yiibai.com/git/)<br>
+[图解 git 命令](https://github.com/geeeeeeeeek/git-recipes/wiki/4.1-%E5%9B%BE%E8%A7%A3-Git-%E5%91%BD%E4%BB%A4)
 
 #### 测试工具
 - Jest
@@ -183,7 +187,7 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 #### 类型检查工具
 - Eslint
-- Typescript
+- Typescript:heavy_check_mark:
 
 #### 文档工具
 - JsDoc / EsDoc
@@ -191,8 +195,8 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 # network 网络服务
 
-- HTTP 
-- Ajax 和 XMLHttpRequest(XHR)
+- HTTP:heavy_check_mark:
+- Ajax 和 XMLHttpRequest(XHR):heavy_check_mark:
 - Fetch
 - web scoket
 
@@ -202,19 +206,12 @@ Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAS
 
 # Node Server 服务器
 
-- Node
+- Node:heavy_check_mark:
 - 框架：express -> koa -> egg
 
 [深入浅出 Nodejs 迷你书](https://www.infoq.cn/article/nodejs)<br>
 [正向代理和反向代理](https://uule.iteye.com/blog/2436289)<br>
 [一个形象的比喻：谈谈正向代理与反向代理](https://cloud.tencent.com/developer/news/198489)
-
-# 版本管理 git
-
-[Pro git 简体中文版](https://iissnan.com/progit/)<br>
-[易百 git 教程](https://www.yiibai.com/git/)<br>
-[图解 git 命令](https://github.com/geeeeeeeeek/git-recipes/wiki/4.1-%E5%9B%BE%E8%A7%A3-Git-%E5%91%BD%E4%BB%A4)
-
 
 # 前端分支方向
 

@@ -1,5 +1,6 @@
 # 浏览器发展历史
 
+[[toc]]
 
 >“在Web的第一世代，蒂姆·伯纳斯-李创建了统一资源定位符（URL），超文本传输协议（HTTP）和HTML标准以及Unix为基础的服务器和浏览器原型WorldWideWeb（后更名为Nexus），一些人意识到Web可能比[Gopher](https://baike.baidu.com/item/gopher/611108)更好。。<br>在第二世代，马克·安德森和埃里克·比纳在伊利诺伊大学开发了NCSA Mosaic浏览器。几百万人突然发现Web可能比性爱还要棒。<br>在第三世代，安德森和比纳离开NCSA，成立了网景通信公司，开始了现代意义上的浏览器Netscape Navigator”<br>
 — 鲍勃·梅特卡夫（Bob Metcalfe），《InfoWorld》，1995年8月21日，17卷，34期。

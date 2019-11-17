@@ -1,5 +1,7 @@
 # 类 class
 
+[[toc]]
+
 这节是对 ES6 中类相关概念的一个简要概括。内容大多是摘于以下资料：
 
 [Typescript 入门教程 - 类](https://ts.xcatliu.com/advanced/class)<br>

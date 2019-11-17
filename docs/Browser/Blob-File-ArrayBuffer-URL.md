@@ -1,7 +1,6 @@
 # 理解 Blob、File、FileReader、ArrayBuffer、ArrayBufferView、DataURL、URL 对象
 
-[详解 Blob、File、FileReader、ArrayBuffer、ArrayBufferView、DataURL、URL 对象](https://blog.csdn.net/a460550542/article/details/86646696)
-[js 中 arraybuffer 与 blob 的区别](http://www.zhuyuntao.cn/js%e4%b8%adarraybuffer%e4%b8%8eblob%e7%9a%84%e5%8c%ba%e5%88%ab/)
+[[toc]]
 
 ## ArrayBuffer
 
@@ -106,3 +105,7 @@ objectURL = URL.createObjectURL(object)
 这个 URL 的生命周期和创建它的窗口中的 document 绑定。浏览器会在文档退出的时候自动释放它们。
 
 但是为了获得最佳性能和内存使用状况，你应该在安全的时机主动释放掉它们。因为在每次调用 createObjectURL() 方法时，都会创建一个新的 URL 对象，即使你已经用相同的对象作为参数创建过。当不再需要这些 URL 对象时，每个对象必须通过调用 `URL.revokeObjectURL()` 方法来释放。
+
+## 参考链接
+[详解 Blob、File、FileReader、ArrayBuffer、ArrayBufferView、DataURL、URL 对象](https://blog.csdn.net/a460550542/article/details/86646696)
+[js 中 arraybuffer 与 blob 的区别](http://www.zhuyuntao.cn/js%e4%b8%adarraybuffer%e4%b8%8eblob%e7%9a%84%e5%8c%ba%e5%88%ab/)

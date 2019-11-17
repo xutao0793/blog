@@ -1,5 +1,8 @@
 # TS + Node 环境初始化
 
+[[toc]]
+
+依赖：
 -   typescript
 -   @types/node
 -   tsconfig.json

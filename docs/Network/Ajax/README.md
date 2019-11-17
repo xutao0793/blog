@@ -1,5 +1,7 @@
 # Ajax
 
+[[toc]]
+
 Ajax: Asynchronous JavaScript and XML，异步JavaScript和XML。
 
 尽管X在Ajax中代表XML，因为最初使用XML进行打包数据，但由于JSON的许多优势，前后端数据传输基本已由JSON替代XML。

@@ -1,5 +1,7 @@
 # 配置文件 tsconfig.josn
 
+[[toc]]
+
 首先明确一点：命令行直接输入的选项权重最大：
 
 比如如果命令行中指定了编译的文件，则会忽略 tsconfig.json 文件：`bash tsc file.ts`
