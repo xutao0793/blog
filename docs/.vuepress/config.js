@@ -172,7 +172,7 @@ module.exports = {
 					children: [
 						'vue-1-whyusevue-vue-jquery',
 						'vue-2-template-directive',
-						'vue-3-template-{{}}-and-v-html',
+						'vue-3-template-插值-v-html',
 						'vue-4-template-v-if-and-v-show',
 						'vue-5-template-v-for',
 						'vue-6-template-v-bind',

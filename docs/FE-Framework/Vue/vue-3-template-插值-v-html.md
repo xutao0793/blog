@@ -1,4 +1,4 @@
-# 3 插值`{{ }}`和 `v-html` 
+# 3 插值 和 v-html
 
 本节开始，我们按如下顺序学习vue模板API-指令。点击各部分的`DEMO`可在线查看代码
 
@@ -11,15 +11,15 @@
 - 实现表单元素值双向绑定的指令：`v-model`
 
 
-## 内容 => `{{}}`
+## 内容 => 插值
 
 `{{ }}`插值，即Mustache语法，严格来说不纳入vue指令系统中。但自己方便知识归纳的统一性，估且算作指令一部分。所以插值的`{{}}`双括号写法只适用于元素内容的部分，不能用作元素特性中。
 
-Mustache插值包裹的值可以是具体的值，也可以是简单运算的表达式。依赖的值发生了改变，插值处的内容都会更新。`{{ value OR expression }}`
+Mustache插值包裹的值可以是具体的值，也可以是简单运算的表达式。依赖的值发生了改变，插值处的内容都会更新。
 
-[DEMO 插值{{}}和v-html](https://jsrun.net/rEXKp/edit)
+[DEMO 插值`{{}}`和v-html](https://jsrun.net/rEXKp/edit)
 
-```html
+```hbs
 <div id="app">
     <p>{{ str }}</p>
     <p>{{ number }}</p>
@@ -60,7 +60,7 @@ abc
 6
 true
 ```
-## `v-html` 指令
+## v-html 指令
 
 `{{ }}`插值只会将数据渲染输出为普通文本字符，而非 HTML 代码。为了输出真正的 HTML，你需要使用 `v-html` 指令。
 ```html
@@ -78,6 +78,6 @@ new Vue({
 })
 ```
 ```
- <span>example</span>
- example
- ```
+<span>example</span>
+example
+```
