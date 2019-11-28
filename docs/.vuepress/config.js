@@ -114,6 +114,27 @@ module.exports = {
 		],
 
 		sidebar: {
+			'/HTML/': [
+				'',
+				{
+					title: 'HTML基础',
+					collapsable: false,
+					children: [
+						'1-intro-grammar',
+						'3-doc-structure',
+						'4-doctype',
+						'5-html',
+						'6-head',
+						'2-element-content-model',
+					]
+				},
+				{
+					title: 'HTML5',
+					collapsable: false,
+					children: []
+				},
+
+			],
 			'/ES/': [
 				'',
 				{
