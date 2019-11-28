@@ -16,7 +16,7 @@
 
 ## Node安装
 
-[点击查看具体安装详情]()
+[nvm具体安装详情](/Node/nvm)
 
 1. 下载nvm
 下载链接：[nvm-windows](https://github.com/coreybutler/nvm-windows/releases)
@@ -51,6 +51,10 @@
     2. 系统变量中新增变量 NODE_PATH 变量值为 D:\program\nvm\node_global\node_modules
     ```
     开发所需的node环境配置完毕。
+
+> powershell默认限制脚本运行，所以在powershell中运行全局安装包会报错。此时需要解除限制：以管理员身份运行powershell，输入set-ExecutionPolicy RemoteSigned
+
+> 可能还会遇到nvm 安装node成功，但是附带的npm失败，不可用。此时需要手动安装node，再把文件夹移入nvm目录下，修改为nvm可识别的以node版本号命名。
 
 ## Git安装
 

@@ -327,4 +327,9 @@ cnpm -v
 
 至此，nvm 环境下共用全局包解决了。
 
+
+> powershell默认限制脚本运行，所以在powershell中运行全局安装包会报错。此时需要解除限制：以管理员身份运行powershell，输入set-ExecutionPolicy RemoteSigned
+
+> 可能还会遇到nvm 安装node成功，但是附带的npm失败，不可用。此时需要手动安装node，再把文件夹移入nvm目录下，修改为nvm可识别的以node版本号命名。
+
 开发所需的 node 环境配置完毕。
