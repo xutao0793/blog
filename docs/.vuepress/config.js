@@ -121,11 +121,19 @@ module.exports = {
 					collapsable: false,
 					children: [
 						'1-intro-grammar',
+						'2-element-content-model',
 						'3-doc-structure',
 						'4-doctype',
 						'5-html',
 						'6-head',
-						'2-element-content-model',
+						'7-body',
+						'8-layout-structural-semantics',
+						'9-text-structural-semantics',
+						'10-text-content-semantics',
+						'11-a',
+						'12-img',
+						'13-table',
+						'14-form'
 					]
 				},
 				{
