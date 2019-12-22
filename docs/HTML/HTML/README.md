@@ -1,7 +1,5 @@
 # HTML
 
-## HTML是什么
-
 - HTML 全称：HyperText Markup Language（超文本标记语言）。
 - HTML 是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>，而不是一门编程语言。
 - HTML 由一系列的元素（elements）组成，这些元素可以用来包围不同部分的内容，使其以某种方式在页面上呈现。
@@ -10,14 +8,13 @@
 
 [W3C HTML Standard](https://html.spec.whatwg.org/multipage/indices.html)
 
-## 目录
+**目录**
 
 1. HTML基础
     1. HTML是什么？
     1. HTML语法：元素Element 标签Tag 特性Attribute
     1. HTML全局特性
-    1. HTML注释
-    1. HTML规范（最佳实践）
+    1. HTML代码规范（最佳实践）
 1. HTML文档结构（骨架）
     1. 文档内容模型
     1. 文档声明

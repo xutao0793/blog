@@ -14,17 +14,64 @@ module.exports = {
 		lastUpdated: '上次更新',
 		repo: 'xutao0793/blog',
 		nav: [
-			{ text: 'HTML', link: '/HTML/' },
-			{ text: 'CSS', link: '/CSS/' },
-			{ text: 'ES', link: '/ES/' },
-			{ text: 'TS', link: '/Typescript/' },
-			{ text: 'Browser', link: '/Browser/' },
+			{
+				text: 'Design',link: '/Design/'
+			},
+			{ 
+				text: 'Browser',
+				items: [
+					{text: 'Render', link: '/Browser/Render/'},
+					{text: 'BOM', link: '/Browser/BOM/'},
+					{text: 'DOM', link: '/Browser/DOM/'},
+					{text: 'CSSOM', link: '/Browser/CSSOM/'},
+					{text: 'Stroage', link: '/Browser/Stroage/'},
+					{text: 'Thread', link: '/Browser/Thread/'},
+					{text: 'MISC', link: '/Browser/MISC/'}
+				]
+			},
+			{
+				text: 'Front-End',
+				items: [
+					{ 
+						text: 'HTML',
+						items: [
+							{text: 'HTML', link: '/HTML/HTML/'},
+							{text: 'HTML5', link: '/HTML/HTML5/'},
+							{text: 'HTML_Template', link: '/HTML/HTML_template/'},
+							{text: 'HTML_JSX', link: '/HTML/HTML_JSX/'},
+						]
+					},
+					{ 
+						text: 'CSS',
+						items: [
+							{text: 'CSS', link: '/CSS/CSS/'},
+							{text: 'Bootstrap', link: '/CSS/Bootstrap/'},
+							{text: 'LESS', link: '/CSS/LESS/'},
+							{text: 'Postcss', link: '/CSS/Postcss/'},
+							{text: 'CSS_IN_JS', link: '/CSS/CSS_IN_JS/'},
+						]
+					},
+					{ 
+						text: 'ES',
+						items: [
+							{text: 'EcmaScript', link: '/ES/'},
+						]
+					},
+					{ 
+						text: 'TS',
+						items: [
+							{text: 'TypeSript', link: '/Typescript/'},
+						]
+					},
+				]
+			},
 			{
 				text: 'FE-Framework',
 				items: [
 					{
 						text: 'Web',
 						items: [
+							{ text: 'jQuery', link: '/FE-Framework/jQuery/' },
 							{ text: 'Vue', link: '/FE-Framework/Vue/' },
 							{ text: 'React', link: '/FE-Framework/React/' }
 						]
@@ -83,17 +130,9 @@ module.exports = {
 				]
 			},
 			{
-				text: 'Tools',
-				items: [
-					{ text: 'Vscode', link: '/Tools/Vscode/' },
-					{ text: 'Vuepress', link: '/Tools/Vuepress/' },
-					{ text: 'Markdown', link: '/Tools/Markdown/' },
-					{ text: 'Powershell', link: '/Tools/Powershell/' }
-				]
-			},
-			{
 				text: 'Network',
 				items: [
+					{ text: 'Protocol', link: '/Network/Protocol/' },
 					{ text: 'HTTP', link: '/Network/HTTP/' },
 					{ text: 'Ajax', link: '/Network/Ajax/' },
 					{ text: 'Axios', link: '/Network/Axios/' },
@@ -110,14 +149,23 @@ module.exports = {
 					{ text: 'Koa', link: '/BE-Framework/Koa/' }
 				]
 			},
+			{
+				text: 'Tools',
+				items: [
+					{ text: 'Vscode', link: '/Tools/Vscode/' },
+					{ text: 'Vuepress', link: '/Tools/Vuepress/' },
+					{ text: 'Markdown', link: '/Tools/Markdown/' },
+					{ text: 'Powershell', link: '/Tools/Powershell/' }
+				]
+			},
 			{ text: 'Misc', link: '/Misc/' }
 		],
 
 		sidebar: {
-			'/HTML/': [
+			'/HTML/HTML/': [
 				'',
 				{
-					title: 'HTML基础',
+					title: '',
 					collapsable: false,
 					children: [
 						'1-intro-grammar',
@@ -136,12 +184,6 @@ module.exports = {
 						'14-form'
 					]
 				},
-				{
-					title: 'HTML5',
-					collapsable: false,
-					children: []
-				},
-
 			],
 			'/ES/': [
 				'',
@@ -175,20 +217,28 @@ module.exports = {
 					children: ['EnumPractice', 'TsNodeEnvConf', 'TsVueEnvConf']
 				}
 			],
-			'/Browser/': [
+			'/Browser/Render/': [
 				'',
 				{
 					title: '',
 					collapsable: false,
 					children: [
-						'01_devlopment',
-						'02_structure',
-						'03_request',
-						'04_web_cache',
-						'05_render',
-						'06_v8',
-						'07_js_execute',
-						'08_stack_heap',
+						'intro',
+						'structure',
+						'cache',
+						'render',
+						'v8',
+						'js_execute',
+						'stack_heap_GC',
+					]
+				}
+			],
+			'/Browser/MISC/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: [
 						'Blob-File-ArrayBuffer-URL'
 					]
 				}

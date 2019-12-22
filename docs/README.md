@@ -71,36 +71,36 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 
 # HTML
 
-- html
-- html5 新标签
-- 语义化
-- ARIA
-- microdata
+- HTML
+- HTML5
+- H5
+- HTML规范
 - 模板引擎：
     - handlebars
     - art-template
 - html in js
-    -JSX
+    - JSX
 
 # CSS
 
-- css
-- css3
-- css 预处理器: scss / less / stylus / postcss
-- css 框架：bootstrap
-- css 架构：BEM / OOCSS / SMACSS
+- CSS
+- CSS3
+- CSS 预处理器: scss / less / stylus / postcss
+- CSS 框架：bootstrap
+- CSS 规范：BEM / OOCSS / SMACSS
 - Css in Js：css modules / styled components
 
 # EcmaScript
 
 - ES
 - ES next: 6/7/8/9
-- 面向对象编程
 - 异步编程
+- 面向对象编程
 - 函数式编程
-- ES6 module
-    - [前端模块化简史：浅谈 JavaScript 模块化](https://www.cnblogs.com/Leo_wl/p/4869090.html)
-    - [ES modules 基本用法、模块继承、跨模块常量、import()](https://www.cnblogs.com/ChenChunChang/p/8296373.html)
+- AST：Abstract Syntax Tree，AST（抽象语法树）
+
+[前端模块化简史：浅谈 JavaScript 模块化](https://www.cnblogs.com/Leo_wl/p/4869090.html)<br>
+[ES modules 基本用法、模块继承、跨模块常量、import()](https://www.cnblogs.com/ChenChunChang/p/8296373.html)
 
 # TypeScript
 
@@ -117,12 +117,10 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 
 # Web Browser 浏览器
 
-- 浏览器历史:heavy_check_mark:
-- 浏览器的多进程多线程架构:heavy_check_mark:
-- 浏览器网络请求：IP UDP TCP HTTP、web Socket:heavy_check_mark:
-- Web 缓存：浏览器缓存
-    - 页面资源缓存（三级缓存机制）:heavy_check_mark:
-    - 本地数据缓存：cookie、web storage、indexedDB:heavy_check_mark:
+- 认识浏览器
+    - 浏览器界面
+    - 浏览器历史:heavy_check_mark:
+    - 浏览器的多进程多线程架构:heavy_check_mark:
 - 浏览器页面渲染过程
     - 页面渲染：如何显示页面:heavy_check_mark:
     - V8 引擎：如何解析一段JS代码:heavy_check_mark:
@@ -131,15 +129,30 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
     - 浏览器的事件循环机制：
     [JavaScript 浏览器事件解析](https://zhuanlan.zhihu.com/p/22718822)
     [任务，微任务，队列和日程安排](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
+- Web Cache缓存：浏览器缓存
+    - 页面资源缓存（三级缓存机制）:heavy_check_mark:
+    - 本地数据缓存：cookie、web storage、indexedDB
 - web 多线程：web worker、server worker(离线应用)
 - 浏览器安全
     - 同源策略
     - 安全沙箱
     - 跨站脚本攻击（XSS：Cross Site Scripting）
     - 跨站请求伪造（CSRF: Cross Site Request Forgery）
-
-
-
+- BOM
+    - windows
+    - navigator
+    - location 
+    - history
+    - screen
+    - frames
+- DOM
+    - DOM0 / DOM1 / DOM3
+- CSSOM
+    - CSSStyleSheet
+    - styleSheet
+    - CSSRule
+    - CSSStyleRule
+    - CSSStyleDeclaration
 
 [从浏览器多进程到 JS 单线程，JS 运行机制最全面的一次梳理](http://www.dailichun.com/2018/01/21/js_singlethread_eventloop.html)<br>
 [浏览器内核、JS 引擎、页面呈现原理及其优化](https://www.zybuluo.com/yangfch3/note/671516)<br>
@@ -148,29 +161,8 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 [关键渲染路径-刘博文](https://github.com/berwin/Blog/issues/29)<br>
 [浏览器性能优化】优化关键渲染路径——各种对象模型（DOM，CSSOM 等）---重点是 devtools 面板使用](https://www.jianshu.com/p/dcc416bfa9c9)
 
-#### BOM
-
-- windows
-- navigator
-- location 
-- history
-- screen
-- frames
-
-#### DOM
-
-- DOM0 / DOM1 / DOM3
-- 框架: jQuery
-
-#### CSSOM
-
-- [CSS-API(CSS 编程接口),CSSOM(css 对象模型)](https://blog.csdn.net/u014711690/article/details/82346584)
-- [CSSOM w3c 官方规范](https://www.w3.org/html/ig/zh/wiki/Cssom)
-
-#### AST：Abstract Syntax Tree，AST（抽象语法树）
-
 # FE-Framework 前端框架
-- web端： Vue:heavy_check_mark:  React:heavy_check_mark:
+- web端： jQuery  Vue:heavy_check_mark:  React:heavy_check_mark:
 - 移动端：H5 React-Native Hybird混合开发
 - 桌面端：PWA Electron
 - 程序端附加应用： 小程序
@@ -182,7 +174,7 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 
 #### 构建工具
 - Gulp
-- Webpack:heavy_check_mark:
+- Webpack: heavy_check_mark:
 
 [Joyco webpack 学习笔记](https://www.cnblogs.com/joyco773/tag/webpack/)
 
@@ -205,9 +197,11 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 #### 文档工具
 - JsDoc / EsDoc
 - TsDoc
+- apiDoc 用于node服务端
 
 # network 网络服务
 
+- 网络协议：IP UDP TCP HTTP、web Socket:heavy_check_mark:
 - HTTP:heavy_check_mark:
 - Ajax 和 XMLHttpRequest(XHR):heavy_check_mark:
 - Fetch

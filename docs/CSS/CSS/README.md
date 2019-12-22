@@ -33,8 +33,9 @@ CSS Level 2 经历了 9 年的时间（从 2002 年 8 月到 2011 年 6 月）�
 所以从版本来讲，已经不存在CSS4了，W3C会按模块级别数（level）发布标准，在每个时间点上为 CSS 标准定义一个 snapshots（快照），列出各个成熟的模块的级别。W3C 会定期按年份发布这些 snapshots，如 2007, 2010, 2015 或 2017。
 ![css standard](./imgs/css_standard.jpg)
 
-有一张图可以更加直观的表示当前 CSS3 Modules 的分类和状态：
-![CSS3 Modules](./imgs/css3_modules.jpg)
+有一张图可以更加直观的表示当前 CSS3 Modules 的分类和状态：<br>
+<img src="./imgs/css3_modules.jpg" width=500 height=500>
+<!-- ![CSS3 Modules](./imgs/css3_modules.jpg) -->
 
 
 > 补充：W3C 规范制定流程
