@@ -185,6 +185,21 @@ module.exports = {
 					]
 				},
 			],
+			'/Browser/DOM/': [
+				'',
+				{
+					title: '',
+					collapsable: false,
+					children: [
+						'Node',
+						'Document',
+						'Element',
+						'Text',
+						'Dom_Style',
+						'Dom_Event'
+					]
+				}
+			],
 			'/ES/': [
 				'',
 				{
