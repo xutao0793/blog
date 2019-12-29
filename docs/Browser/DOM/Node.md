@@ -1,4 +1,4 @@
-# Node 基节点
+# Node 节点基类
 
 [[toc]]
 
@@ -10,61 +10,6 @@ typeof Node  // 'function'
 Node instanceof Object // true
 Object.isProtoTypeOf(Node) // true
 ```
-
-## 节点类型
-通过以下方式可以在控制台输出所有的节点类型编码
-```js
-for (let key in Node) {
-  console.log(key, ' = '+Node[key])
-}
-```
-```js
-ELEMENT_NODE  = 1
-ATTRIBUTE_NODE  = 2
-TEXT_NODE  = 3
-CDATA_SECTION_NODE  = 4
-ENTITY_REFERENCE_NODE  = 5
-ENTITY_NODE  = 6
-PROCESSING_INSTRUCTION_NODE  = 7
-COMMENT_NODE  = 8
-DOCUMENT_NODE  = 9
-DOCUMENT_TYPE_NODE  = 10
-DOCUMENT_FRAGMENT_NODE  = 11
-NOTATION_NODE  = 12
-// Node.compareDocumentPosition(otherNode)返回节点位置的常量
-DOCUMENT_POSITION_DISCONNECTED  = 1 // 不在同一文档中
-DOCUMENT_POSITION_PRECEDING  = 2 // otherNode在node之前
-DOCUMENT_POSITION_FOLLOWING  = 4 // otherNode在node之后
-DOCUMENT_POSITION_CONTAINS  = 8 // otherNode包含node
-DOCUMENT_POSITION_CONTAINED_BY  = 16 // otherNode被node包含
-DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC  = 32 // 待定
-```
-对应HTML文档节点类型，我们需要关注的是：
-```js
-ELEMENT_NODE  = 1  // 元素节点
-ATTRIBUTE_NODE  = 2  // 特性节点
-TEXT_NODE  = 3      //  文本节点
-COMMENT_NODE  = 8   // 注释节点
-DOCUMENT_NODE  = 9  // 文档节点
-```
-其中我们最频繁接触的节点类型就三类：
-```js
-ELEMENT_NODE  = 1  // 元素节点
-TEXT_NODE  = 3      //  文本节点
-DOCUMENT_NODE  = 9  // 文档节点
-```
-这三类节点类型对应的接口分别是
-- Element
-- Text
-- Document
-
-在HTML文档形成DOM树中，上述三类接口在浏览器的JS中继承关系如下（<-表示从左侧继承）
-- Object <- Node <- Document <- HTMLDocument
-- Object <- Node <- Element <- HTMLElement
-- Object <- Node <- Text
-
-> HTML文档中的所有元素节点都继承至HTMLElement，如 HTMLBodyElement / HTMLFormElement等。
-
 ## 属性和方法
 
 
@@ -110,6 +55,10 @@ normalize() | 合并该元素下的所有文本节点为一个文本节点
 
 ## NodeList 类数组
 
-## 例子
+NodeList是一个节点集合的类数组，有点类似函数中的arguments对象。有长度值length属性。
+
+对于NodeList最重要是的要理解一点：当查询得到一个NodeList集合，它里的节点对象都是动态的，也就是说每当文档结构有变化，已经获取到NodeList集合内的节点对象也是会更新的。因此它始终都会保存着最新的、最准确的节点信息。
+
+在JS中引用NodeList对象都会实时进行一次文档查询，所以在实际中会考虑到这段代码运行性能问题和会导致死循环的问题。正常操作应该尽量减少访问NodeList的次数，或者获取的集合对象用变量缓存起来。
 
 

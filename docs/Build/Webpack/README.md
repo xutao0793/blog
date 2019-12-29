@@ -39,3 +39,7 @@ publicPath: 表示打包生成的index.html中引用静态资源的前缀，即�
 contentBase: 表示启动本地服务器devServer时访问内容index.html的路径。不设置的话，默认是当前执行的目录，一般是项目根目录 '/'。会在项目根目录查找index.html文件。
 publicPath: 表示启动本地服务器devServer时，引用静态文件资源的路径，如果没有默认output中设置的publicPath目录。
 ```
+
+参考书籍：
+
+-  [webpack 中 output 的`path` `publicPath` devServer 的 `contentBase` `publicPath`区别](https://juejin.im/post/5bb085dd6fb9a05cd24da5cf)

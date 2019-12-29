@@ -205,7 +205,20 @@ module.exports = {
 				{
 					title: '',
 					collapsable: false,
-					children: ['DefineProperty']
+					children: [
+						'Intro',
+						'DataType',
+						'ExprAndOperators',
+						'Statement',
+						'Collection',
+						'Function',
+						'Object',
+						'AsyncProgram',
+						'ESModule',
+						'ProgranStandard',
+						'ESNextApi',
+						'DefineProperty'
+					]
 				}
 			],
 			'/Typescript/': [
