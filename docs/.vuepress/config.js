@@ -203,18 +203,68 @@ module.exports = {
 			'/ES/': [
 				'',
 				{
-					title: '',
+					title: '前言',
 					collapsable: false,
 					children: [
-						'Intro',
+						'Software',
+						'ES_history',
+					]
+				},
+				{
+					title: '基本语法',
+					collapsable: false,
+					children: [
+						'BasicGrammar',
 						'DataType',
 						'ExprAndOperators',
 						'Statement',
-						'Collection',
-						'Function',
+						'StrictMode',
+					]
+				},
+				{
+					title: '面向对象',
+					collapsable: false,
+					children: [
+						'ObjectOriented',
 						'Object',
+						'ObjectCategory',
+					]
+				},
+				{
+					title: '类 Class',
+					collapsable: false,
+					children: [
+						'Class',
+					]
+				},
+				{
+					title: '函数 Function',
+					collapsable: false,
+					children: [
+						'Function',
+					]
+				},
+				{
+					title: '数据集合',
+					collapsable: false,
+					children: [
+						'Array',
+						'Map',
+						'Set',
+					]
+				},
+				{
+					title: '异步编程',
+					collapsable: false,
+					children: [
 						'AsyncProgram',
 						'ESModule',
+					]
+				},
+				{
+					title: '其它',
+					collapsable: false,
+					children: [
 						'ProgranStandard',
 						'ESNextApi',
 						'DefineProperty'

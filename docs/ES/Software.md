@@ -1,4 +1,4 @@
-# 软件基本概念及ES介绍
+# 软件基本概念
 
 [[toc]]
 
@@ -72,7 +72,7 @@
 
 
 
-## 总结
+## 高级编程语言通用语法
 
 总体来说，构成程序最重要的三个部分分别是：
 1. 变量： 表示一段内存空间，用来存储数据，以便程序中使用
@@ -90,20 +90,7 @@
 1. 数组： 数据容器，对大量数据进行封装存储，便于操作
 1. 对象：只要基于对象或面向对象的编程语言才有对象的概念，对象就是一个封装体，通常封装了数据和操作数据的方法
 
-## EcmaScript
 
-EcmaScript（ES）是一种语言规范，定义了语言的基本语法规则和实现规则。由Netscape网景公司（Mozilla的前身）将应用在Netscape浏览器上的脚本语言Javascript推荐到ECMA，并确定为标准，ECMA将其改名为ECMAScript。
-
-因为历史原因，应用在浏览器的脚本语言一般统称为Javascript（JS），实际上在微软的IE浏览器上的脚本语言叫JScript。另外ES的分支发展还有CoffeScript 和 TypeScript。
-
-一些组织的概念：
-- ECMA 全称 European Computer Manufacturers Association（欧洲计算机制造商协会），是一个制定计算机各种标准的非营利性国际组织，维护各种计算机相关的标准。
-- ECMA-262是ECMA各种标准中的第262号标准，这个标准就是ECMAScript语法标准。
-- TC39是ECMA下属的第39个技术委员会，由各个主流浏览器厂商的代表构成，负责制定ECMAScript标准，并推动浏览器实现。
-- ECMAScript：由Netscape网景公司（Mozilla的前身）将应用在Netscape浏览器上的脚本语言Javascript推荐到ECMA，并确定为标准，ECMA将其改名为ECMAScript。
-- Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAScript语言在浏览器端的实现，通过浏览器提供的DOM/BOM等web API实现网页交互。
-
-[TC39,ECMA-262,ECMAScript,Javascript,它们之间是什么关系?](https://www.zhihu.com/question/63085873)
 
 
 
