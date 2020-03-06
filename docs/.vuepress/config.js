@@ -222,6 +222,22 @@ module.exports = {
 					]
 				},
 				{
+					title: '数据类型',
+					collapsable: false,
+					children: [
+						'type-0-index',
+						'type-7-checking',
+						'type-8-primitive-wrapper',
+						'type-9-conversion',
+						'type-1-null-undefined-boolean',
+						'type-2-number',
+						'type-3-string',
+						'type-4-symbol',
+						'type-5-bigInt',
+						'type-6-object',
+					]
+				},
+				{
 					title: '面向对象',
 					collapsable: false,
 					children: [
