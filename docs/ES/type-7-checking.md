@@ -540,6 +540,8 @@ Array.isArray(obj) // false
 
 参考链接：[MDN Array.isArray](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)
 
+## Object.is()
+
 
 
 
