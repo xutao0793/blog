@@ -23,7 +23,7 @@
   1. Math
 - ES next 新增的对象类型
   1. Set
-  1. Weakset 
+  1. WeakSet 
   1. Map
   1. WeakMap
   1. Pormise
@@ -76,7 +76,7 @@ let s = new Set()
 typeof s                    // object
 let p = Promise.resolve()
 typeof p                    // object
-typeof document             // 浏览器环境下objectd，node环境下undefined
+typeof document             // 浏览器环境下object，node环境下undefined
 ```
 
 从结果来看，`typeof`检测类型有两个结果：
@@ -131,43 +131,47 @@ console.log(123 instanceof Number)                  // false
 console.log(123n instanceof BigInt)                 // false
 console.log(Symbol() instanceof Symbol)             // false
 
-console.log(new Boolean(true) instanceof Boolean);    // true
-console.log(new String('abc') instanceof String);     // true
-console.log(new Number(123) instanceof Number);       // true
-// 函数也是对象，可以定义特殊的内部属性来调用实现特定的功能。BigInt 和 Symbol 函数对象没有实现内部属性[[constructor]]，
-//所以不能当做构造函数使用new调用来生成包装对象。只能使用函数对象基本的内部属性[[call]]来实现纯函数调用的功能。
+console.log(new Boolean(true) instanceof Boolean);  // true
+console.log(new String('abc') instanceof String);   // true
+console.log(new Number(123) instanceof Number);     // true
+/* 
+ *  new BigInt() / new Symbol()  会报错
+ *  函数也是对象，可以定义特殊的内部属性来实现特定的功能。BigInt 和 Symbol 函数对象没有实现内部属性[[constructor]]，
+ *  所以不能当做构造函数使用new调用来生成包装对象。只能使用函数对象基本的内部属性[[call]]来实现纯函数调用的功能。
+*/
 
 // 对象类型
-console.log({} instanceof Object)         // true
-console.log([] instanceof Array)         // true
+console.log({} instanceof Object)                   // true
+console.log([] instanceof Array)                    // true
 let fn = function (){}
-console.log(fn instanceof Function)     // true
-console.log(fn instanceof Object)      // true
-console.log(/\d+/g instanceof RegExp)  // true
-console.log(/\d+/g instanceof Object)  // true
+console.log(fn instanceof Function)                 // true
+console.log(fn instanceof Object)                   // true
+console.log(/\d+/g instanceof RegExp)               // true
+console.log(/\d+/g instanceof Object)               // true
 let date = new Date
-console.log(date instanceof Date);     // true
-console.log(date instanceof Object);  // true
+console.log(date instanceof Date);                  // true
+console.log(date instanceof Object);                // true
 let s = new Set()
-console.log(s instanceof Set);        // true
-console.log(s instanceof Object);     // true
+console.log(s instanceof Set);                      // true
+console.log(s instanceof Object);                   // true
 let p = Promise.resolve(12)
-console.log(p instanceof Promise);   // true
-console.log(p instanceof Object);   // true
+console.log(p instanceof Promise);                  // true
+console.log(p instanceof Object);                   // true
 
 // DOM对象
 let oDiv = document.createElement('div')
-console.log(oDiv instanceof HTMLElement)          // true
-console.log(oDiv instanceof Object)               // true
-console.log(document instanceof HTMLDocument)    // true
-console.log(document instanceof Object)          // true
+console.log(oDiv instanceof HTMLElement)            // true
+console.log(oDiv instanceof Object)                 // true
+console.log(document instanceof HTMLDocument)       // true
+console.log(document instanceof Object)             // true
 ```
 
-可以看出，`instanceof`对原始值的检测都是返回`false`，对对象类型，包括原始值的包装对象检测都是`true`。
+可以看出，`instanceof`运算符检测结果：
+- 对原始值的检测都是返回`false`
+- 对对象类型，包括原始值的包装对象检测都是`true`。
+- 表达式`leftValue instanceof Object`，只要`leftValue`是对象类型就会返回`true`。
 
 但`instanceof`检测有个弊端：就是需要提前确切地知道对象为哪个类型。
-
-另外从上例可以看到，左侧检测值只要是对象类型，`leftValue instanceof Object`表达式就会返回`true`的结果。所以下面我们看下内部原理。
 
 ### instanceof 检测原理
 
@@ -186,10 +190,10 @@ console.log(document instanceof Object)          // true
  The production RelationalExpression: 
         **RelationalExpression instanceof ShiftExpression** is evaluated as follows: 
 
- 1. Evaluate RelationalExpression.  // 计算左侧表达式的值 Result(1)
- 2. Call GetValue(Result(1)).      // 调用 GetValue 方法得到 Result(1) 的值，设为 Result(2) 
- 3. Evaluate ShiftExpression.      // 计算右侧表达式的值 Result(3)
- 4. Call GetValue(Result(3)).     // 同理，这里设为 Result(4) 
+ 1. Evaluate RelationalExpression.      // 计算左侧表达式的值 Result(1)
+ 2. Call GetValue(Result(1)).           // 调用 GetValue 方法得到 Result(1) 的值，设为 Result(2) 
+ 3. Evaluate ShiftExpression.           // 计算右侧表达式的值 Result(3)
+ 4. Call GetValue(Result(3)).           // 同理，这里设为 Result(4) 
  5. If Result(4) is not an object, throw a TypeError exception.                          // 如果右侧结果 Result(4) 不是 object，抛出类型错误的异常
  6. If Result(4) does not have a `[[HasInstance]]` method, throw a TypeError exception.  // 如果右侧结果 Result(4) 对象中没有 `[[HasInstance]]` 方法，抛出异常。
   /* 规范中的所有 `[[...]]` 方法或者属性都是内部的，
@@ -203,18 +207,19 @@ console.log(document instanceof Object)          // true
  关于 `[[HasInstance]]` 方法定义
  ```js
  15.3.5.3 [[HasInstance]] (V) 
- Assume F is a Function object.                                     // 假设 F 是一个函数类型的对象，可以把 F看作上面的 Result(4)，V 是 Result(2) 
+ Assume F is a Function object.                                       // 假设 F 是一个函数类型的对象，可以把 F看作上面的 Result(4)，V 是 Result(2) 
  When the [[HasInstance]] method of F is called with value V, 
      the following steps are taken: 
 
- 1. If V is not an object, return false.                              // 如果 V 不是 object，直接返回 false 
- 2. Call the [[Get]] method of F with property name "prototype".      // 用 [[Get]] 方法获取 F 的 prototype 属性
+ 1. If V is not an object, return false.                              // 如果 V 不是 object，直接返回 false ，所以原始值类型检测结果都是false
+ 2. Call the [[Get]] method of F with property name "prototype".      // 用 [[Get]] 方法获取 F 的 prototype 属性，在ES中只有函数对象才有prototype属性
  3. Let O be Result(2).                                               // O = F.[[Get]]("prototype") 构造函数的原型对象
  4. If O is not an object, throw a TypeError exception.               // 如果 O不是object，抛出类型错误
  5. Let V be the value of the [[Prototype]] property of V.            // 让V等于 V.[[Prototype]]，即 V = V.__proto__ 。
   /*
-    [[Prototype]]是内部属性，外部无法调用，所以部分浏览器厂商实现了__proto__私有属性来获取[[prototype]]值的引用。__proto__不是语言规范的内容.
-    现代ES语言规范实现同样功能的Object.getPrototypeOf()方法。
+   * 区分对象的内部属性[[Prototype]]和函数对象的prototype属性。但函数对象同时也是对象类型，所以函数对象同时拥有这两个属性。
+   * [[Prototype]]是内部属性，外部无法调用，所以部分浏览器厂商实现了__proto__私有属性来获取[[prototype]]值的引用。__proto__不是语言规范的内容.
+   * 现代ES语言规范实现同样功能的Object.getPrototypeOf()方法。
   */
  6. If V is null, return false.                                       // 如果 V 是null，则返回false。null是对象原始链的终点。即到原始链终点都没有匹配上，则返回false.                        
  7. If O and V refer to the same object or if they refer to objects joined to each other (section 13.1.2), return true. // 这里是关键，如果 O 和 V 引用的是同一个对象，则返回 true；否则，到 Step 8 返回 Step 5 继续循环
@@ -232,6 +237,7 @@ function myInstanceof(L, R) {
     throw new TypeError(`${R} is not a constructor`)
   }
 
+  // 左侧是原始值类型，直接返回 false
   if (L === null || ['undefined','boolean','string','number','bigint','symbol'].includes(typeof L)) {
     return false
   }
@@ -240,10 +246,8 @@ function myInstanceof(L, R) {
   L = Object.getPrototypeOf(L)
 
   while (true) { 
-    if (L === null) 
-      return false
-    if (O === L)
-      return true
+    if (L === null) return false
+    if (O === L) return true
     L = Object.getPrototypeOf(L)
   } 
 }
@@ -302,6 +306,33 @@ console.log(p instanceof String) // true
 [MDN Symbol.hasInstance](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol/hasInstance)
 [JavaScript instanceof 运算符深入剖析](https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/)
 
+## constructor
+
+instanceof运算是通过原型对象来判断。而同理constructor方法是通构造函数来判断。
+
+```js
+console.log([].constructor === Array)      // true
+console.log({}.constructor === Object)     // true
+let fn = function(){}
+console.log(fn.constructor === Function)   // true
+
+function F(){}
+let o = new F()
+console.log(o.constructor === F)            // true
+```
+这里同样涉及到ES面向对象的知识，在ES中创建对象的其中一种方法就是通过 `new + Function`方式。其中函数对象都有一个prototype属性指向原型对象，而原型对象都有一个constructor属性指回其构造函数。
+
+因为原型对象的consstructor属性可以被其实例对象继承，所以对象.constructor实际上是调用其原型对象上的constructor属性。
+
+```js
+o.constructor === F
+// 相当于
+o.__proto__.constructor === F
+// 或者用最新ES语法
+Object.getPrototypeOf(o).constructor === F
+```
+
+所以constructor的局限性同instanceof一样，只针对对象类型，且必须明确知道对象的构造函数，并不常用。
 
 ## Object.prototype.toString()
 
@@ -309,24 +340,26 @@ console.log(p instanceof String) // true
 
 ```js
 // 使用方式：使用函数对象的call方法，来借调原生对象原型的toString()方法
-Object.prototype.toString.call(undefined)  // "[object Undefined]"
-Object.prototype.toString.call(null)  // "[object Null]"
-Object.prototype.toString.call(false) // "[object Boolean]"
-Object.prototype.toString.call(123) // "[object Number]"
-Object.prototype.toString.call(123n) // "[object BigInt]"
-Object.prototype.toString.call(Symbol()) // "[object Symbol]"
-Object.prototype.toString.call('abc') // "[object String]"
-Object.prototype.toString.call(new String()); // [object String]
-Object.prototype.toString.call({}) // "[object Object]"
-Object.prototype.toString.call([]) // "[object Array]"
-Object.prototype.toString.call(new Date()); // [object Date]
-Object.prototype.toString.call(/\d/g); // [object RegExp]
-Object.prototype.toString.call(Math); // [object Math]
-Object.prototype.toString.call(new Set); // [object Set]
-Object.prototype.toString.call(Promise.resolve()); // [object Promise]
-Object.prototype.toString.call(window); // [object Window]
-Object.prototype.toString.call(document); // [object HTMLDocument]
-Object.prototype.toString.call(history); // [object History]
+Object.prototype.toString.call(undefined)               // "[object Undefined]"
+Object.prototype.toString.call(null)                    // "[object Null]"
+Object.prototype.toString.call(false)                   // "[object Boolean]"
+Object.prototype.toString.call(123)                     // "[object Number]"
+Object.prototype.toString.call(123n)                    // "[object BigInt]"
+Object.prototype.toString.call(Symbol())                // "[object Symbol]"
+Object.prototype.toString.call('abc')                   // "[object String]"
+
+Object.prototype.toString.call(new String());           // [object String]
+Object.prototype.toString.call({})                      // "[object Object]"
+Object.prototype.toString.call([])                      // "[object Array]"
+Object.prototype.toString.call(new Date());             // [object Date]
+Object.prototype.toString.call(/\d/g);                  // [object RegExp]
+Object.prototype.toString.call(Math);                   // [object Math]
+Object.prototype.toString.call(new Set);                // [object Set]
+Object.prototype.toString.call(Promise.resolve());      // [object Promise]
+
+Object.prototype.toString.call(window);                 // [object Window]
+Object.prototype.toString.call(document);               // [object HTMLDocument]
+Object.prototype.toString.call(history);                // [object History]
 ```
 
 可以看出`Object.prototype.toString`用来检测数据类型，不管是原始值类型还是各种对象类型，都能通过返回值准确识别。
@@ -354,49 +387,49 @@ function getType(target, type) {
 
 ### Object.prototype.toString()调用原理
 
-在ES5语言中规范中，各种内置对象（buildin)都有一个内部属性`[[class]]`来标识对象类型，值为一个类型字符串。
-> 本规范的每种内置对象都定义了 `[[Class]]` 内部属性的值。宿主对象的 `[[Class]]` 内部属性的值可以是除了 "Arguments", "Array", "Boolean", "Date", "Error", "Function", "JSON", "Math", "Number", "Object", "RegExp", "String" 的任何字符串。`[[Class]]` 内部属性的值用于内部区分对象的种类。注，本规范中除了通过 Object.prototype.toString ( 见 15.2.4.2) 没有提供任何手段使程序访问此值。
+在ES5语言中规范中，各种内置对象（build-in)都有一个内部属性`[[class]]`来标识对象类型，值为一个类型字符串。
+> 本规范的每种内置对象都定义了 `[[Class]]` 内部属性的值。宿主对象的 `[[Class]]` 内部属性的值可以是除了 "Arguments", "Array", "Boolean", "Date", "Error", "Function", "JSON", "Math", "Number", "Object", "RegExp", "String" 的任何字符串。`[[Class]]` 内部属性的值用于内部区分对象的种类。本规范中除了通过 Object.prototype.toString ( 见 15.2.4.2) 没有提供任何手段使程序访问此值。
 
 在ECMAScript 5中，`Object.prototype.toString()`被调用时，会进行如下步骤：
-
+```js
 1. 如果 this是undefined ，返回 [object Undefined] ；
-1. 如果 this是null ， 返回 [object Null] ；
-1. 令 O 为以 this 作为参数调用 ToObject 的结果; // 即如果是number、string、boolean类型则转为对应的包装对象。类似调用Object(this)
-1. 令 class 为 O 的内部属性 `[[Class]]` 的值；
-1. 返回三个字符串 "[object" +  class + "]" 拼接而成的字符串。
-
-在ES6里，由于添加了class语法，之前的 `[[Class]]` 不再使用，取而代之的是一系列的 internal slot (内槽)。新语言规范中调用 Object.prototype.toString 时，会进行如下步骤：
-
+2. 如果 this是null ， 返回 [object Null] ；
+3. 令 O 为以 `this` 作为参数调用 ToObject 的结果;     // 即如果是number、string、boolean类型则转为对应的包装对象。类似调用Object(this)
+4. 令 `class` 为 O 的内部属性 `[[Class]]` 的值；
+5. 返回三个字符串 "[object" +  `class` + "]" 拼接而成的字符串。
+```
+在ES6里，由于添加了class语法，之前的 `[[Class]]` 不再使用，取而代之的是一系列的 internal slot (内部插槽)。新语言规范中调用 Object.prototype.toString 时，会进行如下步骤：
+```js
 1. 如果 this 是 undefined ，返回 '[object Undefined]' ;
-1. 如果 this 是 null , 返回 '[object Null]' ；
-1. 令 O 为以 this 作为参数调用 ToObject 的结果；
-1. 令 isArray 为 IsArray(O) ；
-1. ReturnIfAbrupt(isArray) （如果 isArray 不是一个正常值，比如抛出一个错误，中断执行）；
-1. 如果 isArray 为 true ， 令 builtinTag 为 'Array' ;
-1. else ，如果 O is an exotic String object ， 令 builtinTag 为 'String' ；
-1. else ，如果 O 含有 `[[ParameterMap]]` internal slot, ， 令 builtinTag 为 'Arguments' ；
-1. else ，如果 O 含有 `[[Call]]` internal method ， 令 builtinTag 为 Function ；
-1. else ，如果 O 含有 `[[ErrorData]]` internal slot ， 令 builtinTag 为 Error ；
-1. else ，如果 O 含有 `[[BooleanData]]` internal slot ， 令 builtinTag 为 Boolean ；
-1. else ，如果 O 含有 `[`[NumberData]]` internal slot ， 令 builtinTag 为 Number ；
-1. else ，如果 O 含有 `[[DateValue]]` internal slot ， 令 builtinTag 为 Date ；
-1. else ，如果 O 含有 `[[RegExpMatcher]]` internal slot ， 令 builtinTag 为 RegExp ；
-1. else ， 令 builtinTag 为 Object ；
-1. 令 tag 为 Get(O, @@toStringTag) 的返回值（ Get(O, @@toStringTag) 方法，既是在 O 是一个对象，并且具有 @@toStringTag 属性时，返回 O`[Symbol.toStringTag]` ）；
-ReturnIfAbrupt(tag) ，如果 tag 是正常值，继续执行下一步；
-1. 如果 Type(tag) 不是一个字符串，let tag be builtinTag ；
-1. 返回由三个字符串 "[object" + tag + "]" 拼接而成的一个字符串。
+2. 如果 this 是 null , 返回 '[object Null]' ；
+3. 令 O 为以 this 作为参数调用 ToObject 的结果；
+4. 令 isArray 为 IsArray(O) ；
+5. ReturnIfAbrupt(isArray) （如果 isArray 不是一个正常值，比如抛出一个错误，中断执行）；
+6. 如果 isArray 为 true ， 令 builtinTag 为 'Array' ;
+7. else ，如果 O is an exotic String object ， 令 builtinTag 为 'String' ；
+8. else ，如果 O 含有 `[[ParameterMap]]` internal slot, ， 令 builtinTag 为 'Arguments' ；
+9. else ，如果 O 含有 `[[Call]]` internal method ， 令 builtinTag 为 Function ；
+10. else ，如果 O 含有 `[[ErrorData]]` internal slot ， 令 builtinTag 为 Error ；
+11. else ，如果 O 含有 `[[BooleanData]]` internal slot ， 令 builtinTag 为 Boolean ；
+12. else ，如果 O 含有 `[[NumberData]]` internal slot ， 令 builtinTag 为 Number ；
+13. else ，如果 O 含有 `[[DateValue]]` internal slot ， 令 builtinTag 为 Date ；
+14. else ，如果 O 含有 `[[RegExpMatcher]]` internal slot ， 令 builtinTag 为 RegExp ；
+15. else ， 令 builtinTag 为 Object ；
+16. 令 tag 为 Get(O, @@toStringTag) 的返回值 //  @@toStringTag 是Symbol属性的一种写法，相当于 O[Symbol.toStringTag]
+17. ReturnIfAbrupt(tag) ，如果 tag 是正常值，继续执行下一步；
+18. 如果 Type(tag) 不是一个字符串，让tag 等于 builtinTag ；
+19. 返回由三个字符串 "[object" + tag + "]" 拼接而成的一个字符串。
+```
+以上可以理解为，新规范将旧有的一些内置对象的内部 `[[Class]]`属性替代为`internal slot` (内部插槽)，新增的内置对象使用`Symbol.toStringTag`属性设置类型标签。
 
-以上可以理解为，新规范将原有的一些内置对象 `[[Class]]`内部替代为internal slot (内槽)，新增的内置对象使用`Symbol.toStringTag`属性设置类型标签。
-
-> Symbol.toStringTag 是一个内置 symbol，它通常作为对象的属性键使用，对应的属性值应该为字符串类型，这个字符串用来表示该对象的自定义类型标签，通常只有内置的 Object.prototype.toString() 方法会去读取这个标签并把它包含在自己的返回值里。
+> Symbol.toStringTag 是一个内置 symbol，它通常作为对象的属性键使用，对应的属性值应该为字符串类型，这个字符串用来表示该对象的自定义类型标签，通常只有内置的 Object.prototype.toString() 方法会去读取这个标签并把它包含在自己的返回值里。 --MDN
 
 ```js
-Object.prototype.toString.call(new Map());       // "[object Map]"
-Object.prototype.toString.call(function* () {}); // "[object GeneratorFunction]"
-Object.prototype.toString.call(Promise.resolve()); // "[object Promise]"
+Object.prototype.toString.call(new Map());            // "[object Map]"
+Object.prototype.toString.call(function* () {});      // "[object GeneratorFunction]"
+Object.prototype.toString.call(Promise.resolve());    // "[object Promise]"
 ```
-所以同样的，通过定义`Symbol.toStringTag`属性，我们自己创建的类也可以自定义的类型标签：
+所以同样的，通过定义`Symbol.toStringTag`属性，我们自己创建的类也可以自定义类型标签：
 
 ```js
 // 未自定义前，返回Object类型标签
@@ -426,8 +459,8 @@ Object.prototype.toString.call(new ValidatorClass()); // "[object Validator]"
 
 两者含义并不相同，使用时取决于我们真正的检测目的：
 
-- 如果只是为了单纯为了判断是不是Number类型中的NaN值时，使用`Number.isNaN()`，类似上面自实现的`_isNaN()`
-- 如果是为了验证某个数会不会转化为NaN值及其本身，则使用全局方法`isNaN()`
+- 如果只是为了单纯为了判断是不是Number类型中的NaN值时，使用`Number.isNaN()`
+- 如果是为了验证某个数会不会转化为NaN值或就是NaN本身，则使用全局方法`isNaN()`
 
 ### isNaN
 

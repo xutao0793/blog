@@ -27,7 +27,8 @@
 
 ## 原始值之间的隐式转换
 
-上面讲包装对象时提到，JS对实现了三个原始值类型的构造函数`Boolean()` `Number()` `String()`，它们除了作用构造函数使用new调用生成包装对象的作用之外，另一作用就是被当作纯函数使用，将入参转换为相应的原始值。
+上面讲包装对象时提到，除null和nudefined类型外，其它类型都实现了对应的生成函数`Boolean() / String() / Number() / BigInt() / Symbol()`，它们的作用之一就是被当做纯函数使用时，将参转换为相应类型的原始值。
+> 其中`Boolean() / String() / Number()`还可以使用new运算符调用生成对应类型的包装对象。具体见[原始值与包装对象](/ES/type-8-primitive-wrapper.html#包装对象)
 
 ### Boolean() ：将传入参数转成布尔类型的原始值
 
@@ -35,14 +36,15 @@
 - 除此之外为真值(truthy)，返回true，（包括所有对象）
 
 ```js
-Boolean(null) // false
-Boolean(undefined) // false
-Boolean(0) // false
-Boolean(12) // true
-Boolean(12n) // true
-Boolean(Symbol()) // true
-Boolean({}) // true
-Boolean(new Boolean(false)) // true，并不是false, 因为new Boolean(false)生成的是一个包装对象，所以对布尔值不能用这种方式拆包装
+Boolean(null)                 // false
+Boolean(undefined)            // false
+Boolean(0)                    // false
+Boolean(0n)                   // false
+Boolean(12)                   // true
+Boolean(12n)                  // true
+Boolean(Symbol())             // true
+Boolean({})                   // true
+Boolean(new Boolean(false))   // true，并不是false, 因为new Boolean(false)生成的是一个包装对象，所以对布尔值不能用这种方式拆包装
 ```
 
 ### Number() 将传入的参数转成数值类型的原始值
@@ -55,14 +57,14 @@ Boolean(new Boolean(false)) // true，并不是false, 因为new Boolean(false)�
 - 对象会选调用`toPrimitive`方法转换成原始值（具体见下面对象类型的隐式转换），然后依上面规则转换数值。
 
 ```js
-Number(undefined) // NaN
-Number('123') // 123
-Number('1bc') // NaN
-Number(new Number(123)) // 123  包装对象转为原始值，再转数值类型
-Number('[object object]') // NaN
-Number('') // 0
-Number({}) // NaN  {}返回原始值'[object object]',再转为数值类型即为NaN
-Number([]) // 0   []返回原始值 ''，再转为数值类型即为 0
+Number(undefined)           // NaN
+Number('123')               // 123
+Number('1bc')               // NaN
+Number(new Number(123))     // 123  包装对象转为原始值，再转数值类型
+Number('[object object]')   // NaN
+Number('')                  // 0
+Number({})                  // NaN  {}返回原始值'[object object]',再转为数值类型即为NaN
+Number([])                  // 0   []返回原始值 ''，再转为数值类型即为 0
 
 // 重写对象的隐式转换调用的方法
 let obj = {
@@ -83,12 +85,12 @@ console.log(Number(obj)) // 123
 ### String() 将传入的参数都以字符串的表示的原始值
 
 ```js
-String(true) // 'true'
-String(false)  // 'false'
-String(123) // '123'
-String(null) // 'null'
-String(undefined) 'undefined'
-String({}) // '[object object]'
+String(true)        // 'true'
+String(false)       // 'false'
+String(123)         // '123'
+String(null)        // 'null'
+String(undefined)   // 'undefined'
+String({})          // '[object object]'
 
 /*
   同样对象类型会先调用`toPrimitive`方法转换成原始值（具体见下面对象类型的隐式转换），然后再依下面原始值规则转换。
@@ -105,9 +107,28 @@ let obj = {
 console.log(String(obj)) // abc
 ```
 
+### BigInt() 只接受可以转为Number类型的参数
+```js
+BigInt(false)          // 0n
+BigInt(true)          // 1n
+BigInt(12)            // 12n
+BigInt('123')         // 123n
+
+BigInt(null)          // TypeError: Cannot convert null to a BigInt
+BigInt(undefined)     // TypeError: Cannot convert undefined to a BigInt
+BigInt('12a')         // SyntaxError: Cannot convert 12a to a BigInt
+BigInt('abc')         // SyntaxError: Cannot convert abc to a BigInt
+```
+
+### Symbol() 接受的参数只作为类型值的描述
+
+> 关于Symbol类型的具体介绍请查阅[Symbol类型](/ES/type-4-symbol)
+
+
+
 ## 对象转原始值的隐式转换
 
-讲对象类型隐式转换，就需要知道所有对象都继承的三个重要的对象原型方法：`valueOf()` `toString()` `Symbol.toPrimitive()`
+讲对象类型隐式转换，就需要知道所有对象都继承的三个重要的原型对象方法：`valueOf()` `toString()` `Symbol.toPrimitive()`
 
 ### toString()
 
@@ -116,17 +137,18 @@ console.log(String(obj)) // abc
 
 `toString()`方法返回一个表示该对象原始值的字符串。默认情况下，`toString()` 方法被每个对象继承。如果此方法在自定义对象中未被覆盖，`toString()` 返回 "[object type]"，其中 type 是对象的类型。
 
+> 关于toString()在ES语言规范中的实现原理，可以查看[类型检测](/ES/type-7-checking.html#object-prototype-tostring-调用原理)。主要是internal slot 和 @@toStringTag 作用。
 ```js
-Object.prototype.toString.call(undefined)  // "[object Undefined]"
-Object.prototype.toString.call(null)  // "[object Null]"
-Object.prototype.toString.call(false) // "[object Boolean]"
-Object.prototype.toString.call(123) // "[object Number]"
-Object.prototype.toString.call('abc') // "[object String]"
-Object.prototype.toString.call({}) // "[object Object]"
-Object.prototype.toString.call([]) // "[object Array]"
-toString.call(new Date()); // [object Date]
-toString.call(new String()); // [object String]
-toString.call(Math); // [object Math]
+Object.prototype.toString.call(undefined)     // [object Undefined]
+Object.prototype.toString.call(null)          // [object Null]
+Object.prototype.toString.call(false)         // [object Boolean]
+Object.prototype.toString.call(123)           // [object Number]
+Object.prototype.toString.call('abc')         // [object String]
+Object.prototype.toString.call({})            // [object Object]
+Object.prototype.toString.call([])            // [object Array]
+toString.call(new Date());                    // [object Date]
+toString.call(new String());                  // [object String]
+toString.call(Math);                          // [object Math]
 ```
 > 从 JavaScript 1.8.5 开始，toString() 调用 null 返回[object Null]，undefined 返回 [object Undefined]。
 
@@ -138,11 +160,11 @@ let num = 123
 let arr = []
 let obj = {}
 let date = new Date()
-str.toString() // abc
-num.toString() // 123
-arr.toString() // ''
-obj.toString() // [object Object]
-date.toString() // Sun Dec 29 2019 19:36:09 GMT+0800 (中国标准时间)
+str.toString()          // abc
+num.toString()          // 123
+arr.toString()          // ''
+obj.toString()          // [object Object]
+date.toString()         // Sun Dec 29 2019 19:36:09 GMT+0800 (中国标准时间)
 ```
 可以看到对具体类型值直接调用toString()方法都返回了对应原始值的字符串形式。其中对基本类型数据调用toString()，从上面包装对象的知识可以知道实际上是在对应的包装对象上调用toString()方法。
 ```js
@@ -163,18 +185,20 @@ toString()方法总结：
 
 [MDN valueOf()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf)
 
-`valueOf()` 方法默认返回指定对象的本身。默认情况下，valueOf方法也是被每个对象继承。如果对象没有指向的原始值，即`[[PrimitiveValue]]`内部属性，则valueOf将返回对象本身。
+`valueOf()` 方法默认返回指定对象的本身。默认情况下，valueOf方法也是被每个对象继承。
+
+如果对象没有指向的原始值，即`[[PrimitiveValue]]`内部属性，则valueOf将返回对象本身。
 ```js
-Object.prototype.valueOf.call(undefined)  // 报错：Uncaught TypeError: Cannot convert undefined or null to object
-Object.prototype.valueOf.call(null)  // 报错：Uncaught TypeError: Cannot convert undefined or null to object
-Object.prototype.valueOf.call(false) // false的包装对象
-Object.prototype.valueOf.call(123) // 123的包装对象
-Object.prototype.valueOf.call('abc') // abc的包装对象
-Object.prototype.valueOf.call({}) // {}对象自身 
-Object.prototype.valueOf.call([]) // []对象自身
-valueOf.call(new Date()); // Sun Dec 29 2019 19:36:09 GMT+0800 (中国标准时间)
-valueOf.call(new String()); // ''
-valueOf.call(Math); // Math对象自身
+Object.prototype.valueOf.call(undefined)    // 报错：Uncaught TypeError: Cannot convert undefined or null to object
+Object.prototype.valueOf.call(null)         // 报错：Uncaught TypeError: Cannot convert undefined or null to object
+Object.prototype.valueOf.call(false)        // false的包装对象
+Object.prototype.valueOf.call(123)          // 123的包装对象
+Object.prototype.valueOf.call('abc')        // abc的包装对象
+Object.prototype.valueOf.call({})           // {}对象自身 
+Object.prototype.valueOf.call([])           // []对象自身
+valueOf.call(new Date());                   // Sun Dec 29 2019 19:36:09 GMT+0800 (中国标准时间)
+valueOf.call(new String());                 // ''
+valueOf.call(Math);                         // Math对象自身
 ```
 可以看到对基本类型，直接使用对象原型上的valueOf()方法调用，会返回对应的包装对象。如果是对象类型则直接返回自身。
 
@@ -186,11 +210,11 @@ let num = 123
 let arr = []
 let obj = {}
 let date = new Date()
-console.log(str.valueOf()) // 'abc'
-console.log(num.valueOf()) // 123
-console.log(arr.valueOf()) // []
-console.log(obj.valueOf()) // {}
-console.log(date.valueOf()) // 1577621476519
+console.log(str.valueOf())    // 'abc'
+console.log(num.valueOf())    // 123
+console.log(arr.valueOf())    // []
+console.log(obj.valueOf())    // {}
+console.log(date.valueOf())   // 1577621476519
 ```
 可以看到结果，在没有自定义方法覆盖构造函数原型上的valueOf时，都返回自身，除 `undefined null`。
 
@@ -228,14 +252,14 @@ Number([]) // 0
 
 ```js
 /**
-* @params  input 需要转换的对象
-* @params  preferredType 代表希望转换后的类型。是可选参数，如果省略，除日期外都会返回Number数值类型,日期返回String类型
+* @params { Object }  input 需要转换的对象
+* @params { String } preferredType 代表希望转换后的类型。是可选参数，如果省略，除日期外都会返回Number数值类型,日期返回String类型
 */
 ToPrimitive(input [, PreferredType])
 ```
 具体执行逻辑如下：
 1. 判断PreferredType参数是number还是string，默认导出number
-1. 判断input对象是否重写了Symbol.toPrimitive()方法，如果是就执行input`[Symbol.toPrimitive(PreferredType)]`
+1. 判断input对象是否重写了Symbol.toPrimitive()方法，如果是就执行`input[Symbol.toPrimitive(PreferredType)]`
 1. 如果没有重写，则根据PreferredType参数类型，决定优先调用`input.valueOf()`还是`input.toString()`
 
 具体见下图：
