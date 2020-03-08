@@ -215,7 +215,6 @@ module.exports = {
 					collapsable: false,
 					children: [
 						'BasicGrammar',
-						'DataType',
 						'ExprAndOperators',
 						'Statement',
 						'StrictMode',
@@ -241,16 +240,13 @@ module.exports = {
 					title: '面向对象',
 					collapsable: false,
 					children: [
-						'ObjectOriented',
-						'Object',
-						'ObjectCategory',
-					]
-				},
-				{
-					title: '类 Class',
-					collapsable: false,
-					children: [
-						'Class',
+						'oop-0-index',
+						'oop-1-object-create',
+						'oop-2-object-property',
+						'oop-3-prototype',
+						'oop-4-constructor',
+						'oop-5-class',
+						'oop-6-object-category'
 					]
 				},
 				{
