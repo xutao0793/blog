@@ -46,7 +46,9 @@ JS对象对比对象抽象的理论特征：
 - 对象有状态和行为： 在 JavaScript 中，将状态和行为统一抽象为“属性”。
 > 在JS中函数被设计成一种特殊的对象，可以像值一样进行传递和赋值，体现为函数是一等公民，具体查看函数章节。基于JAVA的流行和影响，日常中还是会将JS中函数属性称为方法。只是一种称呼无所谓，但我们还是要明白在JS中属性定义时，并没有区分函数，因为在JS体系中函数也像值一样对待。
 
-#### 对象的高度动态性
+JS基于原型设计的对象的两大特征：
+
+#### 1. 对象的高度动态性
 
 基于原型的对象最大的优势是具有高度的动态性，体现在程序运行时可以动态修改对象的状态和行为。这是跟绝大多数基于类的静态的对象设计完全不同地方，也是JavaScript语言突出的特点。
 
@@ -59,7 +61,7 @@ console.log(o.a, o.b); // 3 2
 
 JS中对象属性除了被设计成高度动态性后，还被设计成了比其它语言更复杂的形式，以便提高抽象能力。
 
-#### 对象属性描述符
+#### 2. 对象属性描述符
 
 js提供了数据属性和访问器属性，并为每种属性提供了对应的属性描述符特性，可以更精确地自定义属性。
 ```js
@@ -83,8 +85,22 @@ person.age        // 18
 person.age = 28   // 28
 
 // 获取属性的描述符
-Object.getOwnPropertyDescriptor(person, 'name')   // { value: 'John', writable: true, enumerable: true, configurable: true }
-Object.getOwnPropertyDescriptor(person, 'age')   // { get: [Function: get age], set: [Function: set age], enumerable: true, configurable: true }
+Object.getOwnPropertyDescriptor(person, 'name')   
+/* 
+{ value: 'John', 
+  writable: true, 
+  enumerable: true, 
+  configurable: true 
+}
+*/
+// 访问器属性描述符
+Object.getOwnPropertyDescriptor(person, 'age')   
+/* 
+{ get: [Function: get age], 
+  set: [Function: set age], 
+  enumerable: true, 
+  configurable: true 
+} */
 
 // 也可以通过描述符自定义属性行为
 Object.defineProperty(person, 'name', {
@@ -121,7 +137,7 @@ console.log(person.name);   // John
 ### 原型机制
 
 但是在理解JS基于原型的面向对象实现时，如果我们抛开 JavaScript 用于模拟 Java 类实现而增加的复杂语法设施（如 new、Function Object、函数的 prototype 属性等），原型系统可以说相当简单。 概况起来就两点：
-- 所有对象都有一个内部私有属性[[prototype]]，指向对象的原型；
+- 所有对象都有一个内部私有属性`[[prototype]]`，指向对象的原型；
 - 读一个属性，如果对象本身没有，则会继续访问对象的原型，直到原型为空或者找到为止。
 
 > 在具体实现原型系统时有两种实现思路：<br>1. 一种是并不真的去复制一个原型对象，而是使得新对象持有一个原型对象的引用 <br>2. 另一种是切实地复制对象，从此两个对象再无关联。<br>历史上的基于原型的语言，因此也产生了两个流派。JavaScript 显然选择了前一种方式。
@@ -188,10 +204,10 @@ console.log("xiaolong can yongchun: ", 'yongchun' in xiaolong)  // xiaolong can 
 在早期的 JavaScript 语法规范中，new + Function 是实现原型继承唯一的方式。
 
 这种方式有两个要点：
-1. 所有对象都有一个内部私有属性[[prototype]]，指向对象的原型。
+1. 所有对象都有一个内部私有属性`[[prototype]]`，指向对象的原型。
 1. 所有函数对象都有一个prototype属性，指向其new出来的实例对象的原型。
 
-> 注意这里的属性的区别，[[prototype]]是内部属性，语言实现内部使用，外部无法调用。而函数对象的prototype属性是常规属性。<br>鉴于对象的[[prototype]]内部属性无法调用，各浏览器厂商自己实现了__proto__属性，但它不是语言规范中定义的。在ES6中才实现了Objecdt.getPrototypeOf()方法，同__proto__功能一样。
+> 注意这里的属性的区别，`[[prototype]]`是内部属性，语言实现内部使用，外部无法调用。而函数对象的prototype属性是常规属性。<br>鉴于对象的`[[prototype]]`内部属性无法调用，各浏览器厂商自己实现了`__proto__`属性，但它不是语言规范中定义的。在ES6中才实现了`Objecdt.getPrototypeOf()`方法，同`__proto__`功能一样。
 
 ```js
 function Person(name) {
@@ -207,7 +223,7 @@ zidan.kungfu('ruodao')            // zidan can ruodao
 
 new 运算接受一个构造器和一组调用参数，new 这样的行为，试图让函数对象在语法上跟Java中创建对象变得相似。
 
-new提供了两种为对象添加属性的方式，一是在构造器中添加属性，二是在构造器的 prototype 属性上添加属性。
+new操作符的实现，间接提供了两种为对象添加属性的方式，一是在构造器中添加属性，二是在构造器的 prototype 属性上添加属性。
 
 new 操作内部主要实现了下面功能：
 - 以构造函数的 prototype 属性为原型，创建新对象；
@@ -218,7 +234,7 @@ new 操作内部主要实现了下面功能：
 
 ### 现代js中使用Class实现基于原型的面向对象
 
-在 ES6的规范中加入了新特性 class，使得JS的面向对象形式跟Java中基于类的面向对象形式在语法形式完全一样。但是在本质上并没有改变JS是基于原型的面向对象语言，Class的实现仍然是基于原型系统来模拟类的。
+在 ES6的规范中加入了新特性 `class`，使得JS的面向对象形式跟Java中基于类的面向对象形式在语法形式完全一样。但是在本质上并没有改变JS是基于原型的面向对象语言，`Class`的实现仍然是基于原型系统来模拟类的。
 
 使用新的关键字 `Class` 来定义类，而使得`Function`回归原本的函数语义。
 
@@ -237,7 +253,7 @@ let xioalong = new Person('xiaolong')
 xioalong.kungfu('jiequandao')             // xiaolong can jiequandao
 ```
 
-使用Class语法更方便实现继承。
+使用`Class`语法更方便实现继承。
 ```js
 class Shifu {
   constructor(name) {
@@ -256,7 +272,7 @@ let zidan = new Tudi('zidan')
 console.log(zidan.kungfu)
 ```
 
-至于Class实现继承比构造函数实现继承更优，以及Class更详细的语法，可以查看[Class](/ES/oop-5-class)
+至于`Class`实现继承比构造函数实现继承更优，以及`Class`更详细的语法，可以查看[Class](/ES/oop-5-class)
 
 ### 面向对象编程（OOP）核心概念
 
