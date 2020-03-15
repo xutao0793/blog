@@ -534,7 +534,9 @@ age: {
 */
 ```
 
-这些方法在实际中很少使用。比如在VUE中对确定不会改变的常量对象，可以使用`Object.freeze()`冻结属性添加到vue响应式系统中。
+这些方法在实际中很少使用，但还是有些场景适合。
+
+1. 比如在VUE中对确定不会改变的常量对象，可以使用`Object.freeze()`冻结属性，避免添加到vue响应式系统中增加性能负担。
 ```js
 const OBJ = {
 	status: 1,
@@ -543,15 +545,35 @@ const OBJ = {
 export default {
 	data() {
 		return {
-			frezzeObj: Object.freeze(obj)
+			frezzeObj: Object.freeze(OBJ)
 		}
 	}
 }
 ```
+2. 在`vue.prototype`上挂载全局方法，要避免被篡改，可以设计只读，或者只使用getter
+
+```js
+Object.defineProperty(Vue.prototype, '$http', {
+	value: http,
+	writable: false,
+	enumerable: true,
+	configurable: true
+});
+
+// 或者getter形式
+
+Object.defineProperty(Vue.prototype, '$http', {
+    get(){
+     return http;
+    }
+});
+```
+
 
 ## 参考链接
 
 - 《深入浅出JavaScript》 P195
 - [现代JavaScript教程 - 属性标志和属性描述符](https://zh.javascript.info/property-descriptors)
 - [现代JavaScript教程 - 属性的 getter 和 setter](https://zh.javascript.info/property-accessors)
+- [29个对象API实战，千万别错过！](https://mp.weixin.qq.com/s/zwLl826E1mSwVInnCAC4Yg)
 

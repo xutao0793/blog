@@ -246,7 +246,6 @@ module.exports = {
 						'oop-3-prototype',
 						'oop-4-constructor',
 						'oop-5-class',
-						'oop-6-object-category'
 					]
 				},
 				{
@@ -279,7 +278,6 @@ module.exports = {
 					children: [
 						'ProgranStandard',
 						'ESNextApi',
-						'DefineProperty'
 					]
 				}
 			],
