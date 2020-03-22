@@ -252,7 +252,11 @@ module.exports = {
 					title: '函数 Function',
 					collapsable: false,
 					children: [
-						'Function',
+						'fn-0-index',
+						'fn-1-intro',
+						'fn-2-base',
+						'fn-3-runtime',
+						'fn-4-senior',
 					]
 				},
 				{
