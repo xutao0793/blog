@@ -140,6 +140,17 @@ let fn = function myfun(arg) {
 fn(1)               // 输出函数体字符串形式
 console.log(myfun) // ReferenceError: myfun is not defined
 ```
+一道具名函数相关的面试题：
+```js
+var b = 10
+let fn = function b() {
+  b = 20
+  console.log(b) 
+}
+fn() // [Function: b]
+console.log(b) // 10
+```
+解释：函数fn是一个具名函数表达式，fn()执行时，函数内部会多出一个系统自动创建表示具名函数名称的变量b，它是只读的，所以即使主动对只读变量赋值`b=20`会被忽略。b仍表示具名函数本身。
 
 2. 具名函数表达式的作用
 
@@ -368,10 +379,100 @@ selectEntries({end:3, start:20, step:2}) // 不用严格顺序，只要形参中
 
 ### 参数默认值
 
+在ES6之前，要为参数设置默认值，经常利用以下一点来实现。
+- 当某个形参没有对应的实形时，值为 `undefined`
+```js
+// if 语句判断
+function fn(name, age) {
+  if (name === 'undefined') {
+    name = 'tom'
+  }
+  if (age === 'undefined') {
+    age = 18
+  }
+}
+// 或者使用？三元运算符
+function fn(name,age) {
+  name = name === 'undefined' ? 'tom' : name
+  age = age === 'undefined' ? 18 : age
+}
+// 利用逻辑或 || 的短路运算，但是这个无法实现参数本身就是false 或 0 的情况
+function fn(name,age) {
+  name = name || 'tom';
+  age = age || 18;
+}
+```
+在ES6提供的新语法中，可以直接在形参中定义参数默认值。
+
+#### 在列表参数中定义默认值
+```js
+function fn(name="tom", age=18) {
+  console.log(name,age)
+  // do something...
+}
+fn('jerry') // jerry 18
+fn(undefined, 20) // tom 20
+```
+#### 在具名参数中定义默认值
+
+利用对象解构赋值的规则，实现具名参数中定义默认值
+
+```js
+// 对象提供默认值的解构赋值
+let {a = 10, b = 5} = {a: 3}; // a=3,b=5
+
+// 用于函数参数默认值
+function fn({name="tom",age=18}) {
+  console.log(name,age)
+}
+fn({name:'jerry'}) // jerry 18
+fn({age:28}) // tom 28
+```
+### 参数缺失或者超出时处理
+
+ES函数的另一特点就是不限制参数数量。实际上，在函数定义和使用时可以参数的定义，向一个函数传入任意数量的实参。这就会出现以下两种情况：
+- 实参数量多于形参数数量
+  - 此时，多余参数会被忽略，但是能在函数隐含参数arguments中获取到所有实现实参。
+  - 在ES6中，也可以使用rest参数来收集所有多余的参数。
+- 实参数量小于形参
+  - 此时，缺失的形参都会被赋值 `undefined` 的值。
+
+```js
+function logArgs() {
+  for (let i = 0; i < arguments.length; i++) {
+    console.log(i + ':' + arguments[i])
+  }
+}
+logArgs('h', 'e', 'l', 'l', 'o')
+/* 
+  1: h
+  2: e
+  3: l
+  4: l
+  5: 0
+*/
+
+function fn(name,age) {
+  console.log(name, age)
+}
+fn('tom') // tom undefined
+
+function fn({name, age}) {
+  console.log(name,age)
+}
+fn({name:'tom'}) // tom undefined
+fn({age:18}) // undefined 18
+```
 
 ### 隐含参数： this
 
 
 ### 隐含参数： argument
+
+## 函数参数的注意点
+
+### 陷阱1：参数的引用传递
+
+### 陷阱2：函数入参的非预期的可选参数
 
 
