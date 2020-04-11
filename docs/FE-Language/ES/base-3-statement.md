@@ -20,8 +20,6 @@
 
 ### const
 
-
-
 ### function
 
 `function`用于声明一个变量，表示一个函数。
@@ -70,21 +68,21 @@ import example, {example1, example2} from './someModule.js'
 
 ## 条件语句
 
-### if语句
+### if
 
-### switch语句
+### switch
 
 ## 循环语句
 
-### while语句
+### while
 
-### do-while语句
+### do-while
 
-### for语句
+### for
 
-### for-of语句
+### for-of
 
-### for-in语句
+### for-in
 
 ## 中断语句
 
@@ -112,10 +110,11 @@ debugger;
 
 如果执行到此行，程序中断执行，并显示调试界面，如果执行不到，则不会发生任何事情。
 
-## 错误捕获语句 try-catch
+## 错误捕获语句 
+### try-catch
 
 详细内容见[错误处理Error](/ES/Error/)章节
 
 ## 模块导出导入语句
 
-模块导出导入语句，详细内容见[模块章节](/ES/ESModule/)
+基于模块规范不同，导入导出语句关键字也不同。详细内容见[模块章节](/ES/ESModule/)

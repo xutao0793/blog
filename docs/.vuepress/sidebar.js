@@ -28,18 +28,19 @@ module.exports = {
       title: '前言',
       collapsable: false,
       children: [
-        'Software',
-        'ES_history',
+        'intro-1-software',
+        'intro-2-es-history',
       ]
     },
     {
       title: '基本语法',
       collapsable: false,
       children: [
-        'BasicGrammar',
-        'ExprAndOperators',
-        'Statement',
-        'StrictMode',
+        'base-0-index',
+        'base-1-expression-operators',
+        'base-2-variant',
+        'base-3-statement',
+        'base-4-strict',
       ]
     },
     {
@@ -63,6 +64,7 @@ module.exports = {
       collapsable: false,
       children: [
         'oop-0-index',
+        'oop-0-object-history',
         'oop-1-object-create',
         'oop-2-object-property',
         'oop-3-prototype',
@@ -82,28 +84,44 @@ module.exports = {
       ]
     },
     {
-      title: '数据集合',
+      title: '内置对象',
       collapsable: false,
       children: [
-        'Array',
-        'Map',
-        'Set',
+        'built-in-index',
+        'built-in-GlobalThis',
+        'built-in-Boolean',
+        'built-in-Number',
+        'built-in-String',
+        'built-in-Array',
+        'built-in-Map',
+        'built-in-Set',
+        'built-in-WeakMap-WeakSet',
+        'built-in-Date',
+        'built-in-RegExp',
+        'built-in-Error',
       ]
     },
     {
       title: '异步编程',
       collapsable: false,
       children: [
-        'AsyncProgram',
-        'ESModule',
+        'async-0-history',
+        'async-1-promise',
       ]
     },
     {
       title: '其它',
       collapsable: false,
       children: [
-        'ProgranStandard',
-        'ESNextApi',
+        'misc-1-error',
+        'misc-2-module',
+      ]
+    },
+    {
+      title: 'ES Next',
+      collapsable: false,
+      children: [
+        'es-next-index',
       ]
     }
   ],
