@@ -114,3 +114,4 @@ let myFalse_2 = Boolean(false) // myFalse_2是一个假值
 ```
 
 [关于boolean类型在内存中的二进制序列表示的讨论](https://www.jianshu.com/p/2f663dc820d0)
+[Boolean 在V8源码中的实现](https://zhuanlan.zhihu.com/p/115392447)

@@ -1,16 +1,12 @@
 # 浏览器
 
-#### 浏览器概述
-- 浏览器界面
+**浏览器知识概述**
+
 - 浏览器历史
-- 浏览器的架构
-    - 进程与线程
-    - 浏览器架构演化（Chrome）
-- 页面渲染流程
-    - DOM -> Sytle -> Layout -> Layer -> Paint -> tiles -> raster -> draw quad
-    - HTML -> DOM
-    - CSS -> CSSOM
-    - V8 Engine
-    - JS runtime
-    - Event Loop
-- 浏览器安全 (CORS / XSS / CSRF)
+- 浏览器架构的演化
+- reder 渲染机制
+- V8 执行机制
+- v8 内存管理机制
+- JS 运行机制
+- web 缓存机制
+- web 安全机制 (CORS / XSS / CSRF)

@@ -1,4 +1,4 @@
-# Web Cache 缓存
+# Web Cache 资源缓存机制 
 
 [[toc]]
 

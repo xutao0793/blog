@@ -54,9 +54,9 @@ module.exports = {
         'type-1-null-undefined-boolean',
         'type-2-number',
         'type-3-string',
+        'type-6-object',
         'type-4-symbol',
         'type-5-bigInt',
-        'type-6-object',
       ]
     },
     {
@@ -172,11 +172,11 @@ module.exports = {
       children: [
         'intro',
         'structure',
-        'cache',
         'render',
         'v8',
         'js_execute',
         'stack_heap_GC',
+        'cache',
       ]
     }
   ],

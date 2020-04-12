@@ -1,5 +1,15 @@
 # EcmaScript
 
+**从V8执行过程串起ES的主要知识脉路**
+
+![v8-run](./images/v8-run.jpg)
+![v8-run思维导图](./images/v8-knowledge-map.png)
+
+主要分三大部分：
+1. ES中各种数据类型在内存堆栈中存储结构  ----> 对应[数据类型](/ES/type-0-index)中的内容
+1. 执行上下文中概念 -----> 对应[函数运行时的概念](/ES/fn-3-runtime)
+1. 事件循环和消息队列  ----> 对应[异步编程](/ES/async-0-history)
+
 **目录**
 
 - 前言
@@ -203,11 +213,13 @@
   - 模块规范
 - ES Next 新特性目录
 
-
 **参考资料**
 
-- 《JavaScript程序设计》、《JavaScript高级程序设计》、《深入理解JavaScript》
--  ECMAScript 6 入门：[http://es6.ruanyifeng.com/](http://es6.ruanyifeng.com/)
+《JavaScript程序设计》、《JavaScript高级程序设计》、《深入理解JavaScript》<br>
+ECMAScript 6 入门：[http://es6.ruanyifeng.com/](http://es6.ruanyifeng.com/)<br>
+[ECMAScript5.1中文版](http://yanhaijing.com/es5/)<br>
+[ECMAScript 5（w3c 中文版）](https://www.w3.org/html/ig/zh/wiki/ES5)<br>
+[李战：悟透JavaScript](https://yq.aliyun.com/articles/251558?spm=5176.11065265.1996646101.searchclickresult.5eac4d56CDJMaH)<br>
 
 
 
