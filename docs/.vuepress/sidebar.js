@@ -107,14 +107,21 @@ module.exports = {
       children: [
         'async-0-history',
         'async-1-promise',
+        'async-2-generator-iterator',
+        'async-3-async-await',
       ]
     },
     {
-      title: '其它',
+      title: '模块化编程',
       collapsable: false,
       children: [
-        'misc-1-error',
-        'misc-2-module',
+        'module-0-history',
+        'module-1-commonjs-node',
+        'module-2-commonjs-browserify',
+        'module-3-amd-requirejs',
+        'module-4-cmd-seajs',
+        'module-5-umd',
+        'module-6-es-module',
       ]
     },
     {

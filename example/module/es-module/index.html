@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES Module </title>
+</head>
+<body>
+  
+</body>
+<script type="module" crossorigin src="./greeting.mjs"></script>
+<!-- <script type="module">
+const helloInLang = {
+    en: 'Hello world!',
+    es: '¡Hola mundo!',
+    ru: 'Привет мир!'
+};
+
+export const getHello = (lang) => (
+    helloInLang[lang]
+);
+
+export const sayHello = (lang) => {
+    console.log(getHello(lang));
+};
+</script> -->
+<script>
+  import { sayHello } from './greeting.mjs';
+  sayHello('ru');
+</script>
+</html>
