@@ -102,6 +102,7 @@
 - JS 变量、常量、函数、类
 - VUE 组件规范、页面路由
 - HTTP 接口命名规范
+[前端最佳实践之可维护性](https://mp.weixin.qq.com/s/C0rO3YflCgR_TJhb0k8h_w)
 
 2. 编码规范
 - 规范标准
@@ -176,14 +177,24 @@
   - Bash 脚本
   - Docker 容器
 
+## 安全、监控、性能
+5. 安全
+
 6. 监控
 
-7. 运维
-
-8. 性能优化
+7. 性能优化
   - 性能指标
   - 性能检测工具
   - 性能优化方向和手段
+
+系统文章：
+[2020前端性能优化清单之一](https://mp.weixin.qq.com/s/iIbm1pVPYsOvpAeAjVziiQ)
+[2020前端性能优化清单之二](https://mp.weixin.qq.com/s/Y2osbl9CZggA0poci9rv3w)
+[2020前端性能优化清单之三](https://mp.weixin.qq.com/s/ohCDUyo8xqtKhYfbSs5wuQ)
+[2020前端性能优化清单之四](https://mp.weixin.qq.com/s/i5fNnTnmfAx7CufC00oaKQ)
+[2020前端性能优化清单之五](https://mp.weixin.qq.com/s/VDARTCShm0KivV_ouYvVGA)
+[2020前端性能优化清单之六](https://mp.weixin.qq.com/s/GHUMw2RFK-sXklJTPqoMdg)
+
 
 ## 项目实践
 
