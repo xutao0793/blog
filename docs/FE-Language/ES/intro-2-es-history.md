@@ -1,6 +1,22 @@
-# EcamScript历史
+# EcmaScript历史
 
 EcmaScript（ES）是一种语言规范，定义了语言的基本语法规则和实现规则。由Netscape网景公司（Mozilla的前身）将应用在Netscape浏览器上的脚本语言Javascript推荐到ECMA，并确定为标准，ECMA将其改名为ECMAScript。
+
+> 2020-05-28 补充: 关于 JavaScript 和 EcmaScript 更为详细的演化历史，摘自公众号《前端早读课》
+
+**JavaScript 20 年记念的系列文章（中文版）**[github链接](https://github.com/doodlewind/js-20-years-cn)
+
+这个故事相当漫长而复杂。全文分为四个部分，每部分都对应 JavaScript 演化历程中的一个主要阶段。各部分之间还有一段简短的插曲，介绍彼时的开发者们是如何看待与使用 JavaScript 的。
+
+这四个部分依次如下：
+
+1. [语言诞生（The Origins of JavaScript）](https://mp.weixin.qq.com/s/eRne5EIQGDbE0-JclAzNAA)，介绍了 JavaScript 的创建与早期发展，包括语言的诞生背景、命名方式、原始功能及其设计理念等。这一节还追溯了它在 Netscape 与其他公司最初的演化，例如微软的 JScript。
+2. [合纵连横（Creating a Standard）](https://mp.weixin.qq.com/s/qMtm6VlryP44REArCkR6yA)，介绍了从 JavaScript 到 ECMAScript 标准的历程。这主要涵盖 JavaScript 标准化工作的启动、规范的创建、相关贡献者以及决策方式等。
+3. [改革遗恨（Failed Reformations）](https://mp.weixin.qq.com/s/h3uvL-L1SKuSx17QG7M0cg)，介绍了在 Eich 离开后，缺乏「仁慈独裁者」的 ECMAScript 委员会修改语言的失败尝试。这主要涉及委员会的分裂、对 ES4 的两轮投入，以及 Flash 与 ActionScript 在其中的渊源等。
+4. [继往开来（Modernizing JavaScript）]()，介绍了 2009 年 ES5 与 2015 年 ES6 这两个成功标准背后的故事，主要包括对 ES5 与 ES6 的目标、重大基础更改以及重要新功能的介绍与回顾。
+
+
+**目录**
 
 [[toc]]
 
@@ -30,7 +46,7 @@ JavaScript的第一版本代码是Mocha（Marc Andressen起的这个名字）。
 
 在JavaScript推出之后不久，网景当时最主要的竞争对手微软在IE3.0版本（1996年8月）推出了一个不同名的类似语言JScript。部分出于遏制微软的考量，网景公司决定规范JavaScript，向标准化组织 Ecma International推荐将JS作为脚本语言标准。
 
-1996年11月，Ecma实施了一个叫ECMA-262规范。因为SUN公司注册了Java的商标，网景是得到了授权，但ECMA组织却不能使用，所以ECMA将JavaScript 与 Ecma 组合成 EcamScript。但这个名字一般只是用来指语言规范，大家仍然称呼为JavaScript。
+1996年11月，Ecma实施了一个叫ECMA-262规范。因为SUN公司注册了Java的商标，网景是得到了授权，但ECMA组织却不能使用，所以ECMA将JavaScript 与 Ecma 组合成 EcmaScript。但这个名字一般只是用来指语言规范，大家仍然称呼为JavaScript。
 
 ECMA-262规范，即EcmaScript规范，由ECMA的第39个技术委员会（TC39）来管理与发展，其成员公司包括微软、Mozilla、Google等公司雇员，也包括Brendan Eich。
 
@@ -47,7 +63,7 @@ Brendan Eich在设计JavaScript语言时，也受到一些其它编程语言的�
 
 <img src="./images/es_history.png" width="400">
 
-### 部分组织：
+## 组织介绍
 - ECMA 全称 European Computer Manufacturers Association（欧洲计算机制造商协会），是一个制定计算机各种标准的非营利性国际组织，维护各种计算机相关的标准。
 - ECMA-262是ECMA各种标准中的第262号标准，这个标准就是ECMAScript语法标准。
 - TC39是ECMA下属的第39个技术委员会，由各个主流浏览器厂商的代表构成，负责制定ECMAScript标准，并推动浏览器实现。
@@ -55,9 +71,6 @@ Brendan Eich在设计JavaScript语言时，也受到一些其它编程语言的�
 - Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAScript语言在浏览器端的实现，通过浏览器提供的DOM/BOM等web API实现网页交互。
 
 [TC39,ECMA-262,ECMAScript,Javascript,它们之间是什么关系?](https://www.zhihu.com/question/63085873)
-
-
-
 
 ## ES版本时间轴
 
@@ -89,7 +102,7 @@ Brendan Eich在设计JavaScript语言时，也受到一些其它编程语言的�
 1. 它是开源的：基于开源的JS引擎解释和编译
 1. 它是开放的：最广泛的宿主环境是Web浏览器，它是一个开放的网络平台。
 
-### ES优雅的特性
+## ES优雅的语法
 
 > Brendan Eich 表达过最喜欢的部分语法
 

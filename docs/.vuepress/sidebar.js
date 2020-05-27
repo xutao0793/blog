@@ -1,6 +1,5 @@
 module.exports = {
   '/FE-Language/HTML/HTML/': [
-    '',
     {
       title: '',
       collapsable: false,
@@ -23,7 +22,6 @@ module.exports = {
     },
   ],
   '/FE-Language/ES/': [
-    '',
     {
       title: '前言',
       collapsable: false,
@@ -133,7 +131,6 @@ module.exports = {
     }
   ],
   'FE-Language/TS/': [
-    '',
     {
       title: '基础',
       collapsable: false,
@@ -157,7 +154,6 @@ module.exports = {
     }
   ],
   '/Browser/DOM/': [
-    '',
     {
       title: '',
       collapsable: false,
@@ -172,7 +168,6 @@ module.exports = {
     }
   ],
   '/Browser/Render/': [
-    '',
     {
       title: '',
       collapsable: false,
@@ -188,7 +183,6 @@ module.exports = {
     }
   ],
   '/Browser/MISC/': [
-    '',
     {
       title: '',
       collapsable: false,
@@ -198,7 +192,6 @@ module.exports = {
     }
   ],
   '/FE-Framework/Vue/': [
-    '',
     {
       title: 'Vue 基础',
       collapsable: false,
@@ -275,7 +268,6 @@ module.exports = {
     },
   ],
   '/FE-Framework/React/': [
-    '',
     {
       title: 'React 基础',
       collapsable: false,
@@ -318,7 +310,6 @@ module.exports = {
     }
   ],
   '/FE-Engineering/Webpack/': [
-    '',
     {
       title: '基础入门',
       collapsable: false,
@@ -341,7 +332,6 @@ module.exports = {
     }
   ],
   '/FE-Engineering/Git/': [
-    '',
     {
       title: '',
       collapsable: false,
@@ -349,7 +339,6 @@ module.exports = {
     }
   ],
   '/FE-Engineering/Doc/':[
-    '',
     {
       title: '',
       collapsable: false,
@@ -357,7 +346,6 @@ module.exports = {
     }
   ],
   '/FE-Engineering/Api/':[
-    '',
     {
       title: '',
       collapsable: false,
@@ -365,7 +353,6 @@ module.exports = {
     }
   ],
   '/FE-Engineering/Lint/':[
-    '',
     {
       title: '',
       collapsable: false,
@@ -373,7 +360,6 @@ module.exports = {
     }
   ],
   '/Network/HTTP/': [
-    '',
     {
       title: '',
       collapsable: false,
@@ -381,7 +367,6 @@ module.exports = {
     }
   ],
   '/BE-Framework/Node/': [
-    '',
     {
       title: '认识Node',
       collapsable: false,
@@ -424,11 +409,17 @@ module.exports = {
     // },
   ],
   '/Misc/': [
-    '',
     {
       title: '',
       collapsable: false,
       children: ['InitDevEnv', 'tree-node-cli']
+    }
+  ],
+  '/Books/': [
+    {
+      title: 'JavaScript',
+      collapsable: false,
+      children: ['js_qishilv', 'js_yuyanjingcui', 'js_bianchengjingcui', 'js_zhuangjiabiancheng']
     }
   ],
 }

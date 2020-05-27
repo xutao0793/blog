@@ -159,5 +159,6 @@ module.exports = [
       { text: 'Powershell', link: '/Tools/Powershell/' }
     ]
   },
-  { text: 'Misc', link: '/Misc/' }
+  { text: 'Books', link: '/Books/' },
+  { text: 'Misc', link: '/Misc/' },
 ]
