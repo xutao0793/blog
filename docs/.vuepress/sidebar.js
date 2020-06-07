@@ -68,6 +68,7 @@ module.exports = {
         'oop-3-prototype',
         'oop-4-constructor',
         'oop-5-class',
+        'oop-6-inherit',
       ]
     },
     {
@@ -419,7 +420,15 @@ module.exports = {
     {
       title: 'JavaScript',
       collapsable: false,
-      children: ['js_qishilv', 'js_yuyanjingcui', 'js_bianchengjingcui', 'js_zhuangjiabiancheng']
+      children: [
+        'js_qishilv',
+        'js_yuyanjingcui',
+        'js_bianchengjingcui',
+        'js_zhuangjiabiancheng',
+        'js_object_oriented',
+        'js_ninja_secret',
+        'js_xuexizhinan',
+      ]
     }
   ],
 }

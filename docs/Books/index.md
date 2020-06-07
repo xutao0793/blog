@@ -8,6 +8,7 @@
   1. 《JavaScript 高级程序设计》 第三版 -- 高程
   1. 《JavaScript 编程精解》 第二版
   1. 《JavaScript 权威指南》 -- 犀牛书
+  1. 《JavaScript 学习南》
 
 这类书籍基本从JS的基础语法开始，涉及浏览器、DOM等WEB Api，以及 Node的相关介绍。适合入门，建立对Js基本的知识目录。
 
