@@ -381,6 +381,12 @@ npm i -D commitizen cz-conventional-changelog
 }
 ```
 
+## 与 VS Code 集成
+
+1. 安装`Git-commit-plugin For Vscode`插件包。
+2. 使用 `ctrl + shift + p` 调出命令窗口，输入 `show git commit template`
+3. 根据选择项提交信息
+
 ## 参考链接
 
 - [约定式提交规范（Conventional Commits）](https://www.conventionalcommits.org/zh-hans/v1.0.0-beta.4/)
