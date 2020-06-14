@@ -1,4 +1,4 @@
-# Git 日常操作命令
+# Git 常用操作命令
 
 Git 的操作指令非常多，此处仅选一些简单的日常操作。
 
@@ -8,8 +8,8 @@ Git 的操作指令非常多，此处仅选一些简单的日常操作。
 
 一般两种方式：
 
--   本地初始化仓库，然后再关联到远程仓库
--   直接克隆远程仓库
+- 本地初始化仓库，然后再关联到远程仓库
+- 直接克隆远程仓库
 
 先讲简单的：
 
@@ -55,15 +55,14 @@ git remote show 仓库名
 git pull <远程主机名> <远程分支名>:<本地分支名>
 ```
 
-
 ## `git branch` 分支管理
 
 ### 分支创建
 
 有两种方式：
 
--   基于本地分支新建
--   基于远程分支新建
+- 基于本地分支新建
+- 基于远程分支新建
 
 **基于本地分支创建新分支**
 
@@ -227,9 +226,10 @@ git remote set-url <仓库名> <new_url>
 # 查看远程仓库的url
 git remote get-url <仓库名>
 ```
+
 ### 实践案例
 
-**实践1：删除远程仓库的文件或目录，几个步骤:**
+**实践 1：删除远程仓库的文件或目录，几个步骤:**
 
 ```bash
 # 1、先执行拉取最新代码
@@ -246,16 +246,18 @@ git commit -m 'delete name'
 git push
 ```
 
-**实践2：远程仓库的 url 变更，需要重新绑定**
+**实践 2：远程仓库的 url 变更，需要重新绑定**
 
 有两种方法：
+
 ```
 1. 直接修改 url 命令： git remote set-url origin new_url 此时分支的远程跟踪关系会自动更新追踪关系
 
-2. 先直接删除跟踪的远程仓库，再重新绑定一个新 url： 
-    git remote rm origin git remote add origin new_url 此时引用分支的关系需要重新绑定跟踪关系 
+2. 先直接删除跟踪的远程仓库，再重新绑定一个新 url：
+    git remote rm origin git remote add origin new_url 此时引用分支的关系需要重新绑定跟踪关系
     git branch --set-upstream-to=origin/origin_branch_name
 ```
+
 **实践 3：将远程仓库 old_origin 的分支单独拆出来，到一个新的远程仓库 new_origin**
 
 1. 远程新建一个仓库，并初始化 master 分支
@@ -266,5 +268,3 @@ git push
 1. git fetch origin master
 1. git merge --allow-unrelated-histories origin/master 此时 merge 因为旧仓库的 commit 记录与新仓库的 commit 来源不同，所以需要带上--allow-unrelated-histories 参数允许合并两者的提交记录。
 1. git push -u origin master 首次提交到远程仓库。如果 merge 步骤有冲突需要手动解决冲突后推送。此步骤也可以分为两步：先绑定分支跟踪关系：git branch --set-upstream-to=origin/master 然后 git push
-
-
