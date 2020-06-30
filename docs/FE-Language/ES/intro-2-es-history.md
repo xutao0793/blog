@@ -115,10 +115,10 @@ Brendan Eich在设计JavaScript语言时，也受到一些其它编程语言的�
 
 ## 参考书籍
 
-- [JavaScript 20 年中文版 - 语言诞生](https://mp.weixin.qq.com/s/eRne5EIQGDbE0-JclAzNAA)<br>
-- [JavaScript 20 年中文版 - 合纵连横](https://mp.weixin.qq.com/s/qMtm6VlryP44REArCkR6yA)
-- [JavaScript 20 年中文版 - 维新遗恨]()
-- [JavaScript 20 年中文版 - 继往开来]()
+- [JavaScript 20 年中文版 - 语言诞生](https://github.com/doodlewind/js-20-years-cn/blob/master/part-1.md)
+- [JavaScript 20 年中文版 - 合纵连横](https://github.com/doodlewind/js-20-years-cn/blob/master/part-2.md)
+- [JavaScript 20 年中文版 - 维新遗恨](https://github.com/doodlewind/js-20-years-cn/blob/master/part-3.md)
+- [JavaScript 20 年中文版 - 继往开来](https://github.com/doodlewind/js-20-years-cn/blob/master/part-4.md)
 -《深入理解JavaScript》第二部分第2章到第6章 P35-P46<br>
 
 
