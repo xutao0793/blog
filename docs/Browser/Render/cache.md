@@ -125,16 +125,187 @@ http缓存根据缓存策略，又可以划分为：强缓存 和 协商缓存
 - 减少请求次数，即对部分资源进行强缓存 ---> 完全使用缓存副本文件，而不发起网络请求
 - 减少响应数据量，即对部分资源进行协商缓存，也叫对比缓存 ---> 发起了网络请求，由服务器进行处理后只返回了可以使用本地缓存文件的状态码，而不返回响应资源数据。
 
+[理解http浏览器的协商缓存和强制缓存](https://www.jqhtml.com/50359.html)
 
 **强缓存策略**
 
 依据http版本的发展，强制缓存策略先后使用过的http头字段：`Pragma` `Expires` `Cache-Control`
 
+Cache-Control 是http1.1的规范，值可以设置：
+- max-age：代表该资源的有效期，单位秒。
+- no-cache: 需要进行协商缓存，发送请求到服务器确认是否使用缓存。
+- no-store：禁止使用缓存，每一次都要重新请求数据。
+- public：可以被所有的用户缓存，包括终端用户和 CDN 等中间代理服务器。
+- private：只能被终端用户的浏览器缓存，不允许 CDN 等中继缓存服务器对其缓存。
+
+```js
+import path from 'path';
+import Koa from 'koa';
+ 
+//静态资源中间件
+import resource from 'koa-static';
+const app = new Koa();
+const host = 'localhost';
+const port = 7878;
+ 
+app.use(async (ctx, next) => {
+ // 设置响应头Cache-Control 设置资源有效期为300秒
+  ctx.set({
+    'Cache-Control': 'max-age=300' 
+  });
+  await next();
+});
+ 
+app.use(resource(path.join(__dirname, './static')));
+ 
+app.listen(port, () => {
+  console.log(`server is listen in ${host}:${port}`);
+});
+```
+
 **协商缓存策略**
+
+客户端向服务器端发出请求，服务端会检测是否有对应的标识，如果没有对应的标识，服务器端会返回一个对应的标识给客户端，客户端下次再次请求的时候，把该标识带过去，然后服务器端会验证该标识，如果验证通过了，则会响应304，告诉浏览器读取缓存。如果标识没有通过，则返回请求的资源。
 
 协商缓存策略使用两组http头信息：  `Last-Modified/If-Modified-Since` `Etag/If-None-Match`
 
+- Last-Modified/if-Modify-Since
+    - 浏览器第一次发出请求一个资源的时候，服务器会返回一个last-Modify到hearer中. Last-Modify 含义是最后的修改时间。
+    - 当浏览器再次请求的时候，request的请求头会加上 if-Modify-Since，该值为缓存之前返回的 Last-Modify. 
+    - 服务器收到if-Modify-Since后，根据资源的最后修改时间(last-Modify)和该值(if-Modify-Since)进行比较，如果相等的话，则命中缓存，返回304，否则, 如果 Last-Modify > if-Modify-Since, 则会给出200响应，并且更新Last-Modify为新的值。
+```js
+import Koa from 'koa';
+import path from 'path';
+ 
+//静态资源中间件
+import resource from 'koa-static';
+const app = new Koa();
+const host = 'localhost';
+const port = 7788;
+ 
+const url = require('url');
+const fs = require('fs');
+const mime = require('mime');
+ 
+app.use(async(ctx, next) => {
+  // 获取文件名
+  const { pathname } = url.parse(ctx.url, true);
+  // 获取文件路径
+  const filepath = path.join(__dirname, pathname);
+  const req = ctx.req;
+  const res = ctx.res;
+  // 判断文件是否存在
+  fs.stat(filepath, (err, stat) => {
+    if (err) {
+      res.end('not found');
+    } else {
+      // 获取 if-modified-since 这个请求头
+      const ifModifiedSince = req.headers['if-modified-since'];
+      // 获取最后修改的时间
+      const lastModified = stat.ctime.toGMTString();
+      // 判断两者是否相等，如果相等返回304读取浏览器缓存。否则的话，重新发请求
+      if (ifModifiedSince === lastModified) {
+        res.writeHead(304);
+        res.end();
+      } else {
+        res.setHeader('Content-Type', mime.getType(filepath));
+        res.setHeader('Last-Modified', stat.ctime.toGMTString());
+        // fs.createReadStream(filepath).pipe(res);
+      }
+    }
+  });
+  await next();
+});
+ 
+app.use(resource(path.join(__dirname, './static')));
+ 
+app.listen(port, () => {
+  console.log(`server is listen in ${host}:${port}`);
+});
+```
+- ETag/if-None-Match
 
+Tag的原理和上面的last-modified是类似的。ETag则是对当前请求的资源做一个唯一的标识。该标识可以是一个字符串，文件的size,hash等。只要能够合理标识资源的唯一性并能验证是否修改过就可以了。
+
+ETag在服务器响应请求的时候，返回当前资源的唯一标识(它是由服务器生成的)。但是只要资源有变化，ETag会重新生成的。浏览器再下一次加载的时候会向服务器发送请求，会将上一次返回的ETag值放到request header 里的 if-None-Match里面去，服务器端只要比较客户端传来的if-None-Match值是否和自己服务器上的ETag是否一致，如果一致说明资源未修改过，因此返回304，如果不一致，说明修改过，因此返回200。并且把新的Etag赋值给if-None-Match来更新该值。
+
+```js
+import path from 'path';
+import Koa from 'koa';
+ 
+//静态资源中间件
+import resource from 'koa-static';
+const app = new Koa();
+const host = 'localhost';
+const port = 7878;
+ 
+const url = require('url');
+const fs = require('fs');
+const mime = require('mime');
+const crypto = require('crypto');
+app.use(async(ctx, next) => {
+  // 获取文件名
+  const { pathname } = url.parse(ctx.url, true);
+  // 获取文件路径
+  const filepath = path.join(__dirname, pathname);
+  const req = ctx.req;
+  const res = ctx.res;
+  // 判断文件是否存在
+  fs.stat(filepath, (err, stat) => {
+    if (err) {
+      res.end('not found');
+    } else {
+      console.log(111);
+      // 获取 if-none-match 这个请求头
+      const ifNoneMatch = req.headers['if-none-match'];
+      const readStream = fs.createReadStream(filepath);
+      const md5 = crypto.createHash('md5');
+      // 通过流的方式读取文件并且通过md5进行加密
+      readStream.on('data', (d) => {
+        console.log(333);
+        console.log(d);
+        md5.update(d);
+      });
+      readStream.on('end', () => {
+        const eTag = md5.digest('hex');
+        // 验证Etag 是否相同
+        if (ifNoneMatch === eTag) {
+          res.writeHead(304);
+          res.end();
+        } else {
+          res.setHeader('Content-Type', mime.getType(filepath));
+          // 第一次服务器返回的时候，会把文件的内容算出来一个标识，发给客户端
+          fs.readFile(filepath, (err, content) => {
+            // 客户端看到etag之后，也会把此标识保存在客户端，下次再访问服务器的时候，发给服务器
+            res.setHeader('Etag', etag);
+            // fs.createReadStream(filepath).pipe(res);
+          });
+        }
+      });
+    }
+  });
+  await next();
+});
+// 我们这边直接使用 现成的插件来简单的演示下。如果要比较的话，可以看上面的代码原理即可
+import conditional from 'koa-conditional-get';
+import etag from 'koa-etag';
+app.use(conditional());
+app.use(etag());
+ 
+app.use(resource(path.join(__dirname, './static')));
+ 
+app.listen(port, () => {
+  console.log(`server is listen in ${host}:${port}`);
+});
+```
+
+- last-modified 和 ETag之间对比
+    1. 在精度上，ETag要优先于 last-modified。
+    2. 在性能上，Etag要逊于Last-Modified，Last-Modified需要记录时间，而Etag需要服务器通过算法来计算出一个hash值。
+    3. 在优先级上，服务器校验优先考虑Etag。
+
+
+**新角度理解缓存策略**
 根据现代浏览器对缓存机制的定义，主要利用`Cache-Control`来控制缓存，所以从一个新角度来理解http缓存，划分为：
 
 - 缓存存储策略：

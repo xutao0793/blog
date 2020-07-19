@@ -152,6 +152,7 @@ module.exports = [
     items: [
       { text: "Vscode", link: "/Tools/Vscode/" },
       { text: "Powershell", link: "/Tools/Powershell/" },
+      { text: "Vim", link: "/Tools/Vim/" },
     ],
   },
   { text: "Books", link: "/Books/" },

@@ -97,3 +97,5 @@
 [所有你需要知道的关于完全理解 Node.js 事件循环及其度量](https://juejin.im/post/5984816a518825265674c8f6#heading-0)<br>
 [一道面试题引发的 node 事件循环深入思考](https://juejin.im/post/5cf25a19f265da1bba58ec43#heading-2)<br>
 [libuv 中文教程](http://luohaha.github.io/Chinese-uvbook/index.html)<br>
+[你应该知道的 NPM 知识都在这！](https://mp.weixin.qq.com/s/CrbNmNnu0EiA7RcDgJbPJA)
+[package.json 知多少？](https://mp.weixin.qq.com/s/jMWoXzrw6WDi5VG9Y8Mn0Q)

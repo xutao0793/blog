@@ -373,7 +373,7 @@ module.exports = {
       ],
     },
   ],
-  "/BE-Framework/Node/": [
+  "/Back-End/Node/": [
     {
       title: "认识Node",
       collapsable: false,
@@ -435,6 +435,13 @@ module.exports = {
         "js_ninja_secret",
         "js_xuexizhinan",
       ],
+    },
+  ],
+  "/Tools/Vim/": [
+    {
+      title: "",
+      collapsable: false,
+      children: ["install", "concept", "shortcuts"],
     },
   ],
 };
