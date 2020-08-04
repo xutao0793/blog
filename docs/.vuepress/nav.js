@@ -153,6 +153,7 @@ module.exports = [
       { text: "Vscode", link: "/Tools/Vscode/" },
       { text: "Powershell", link: "/Tools/Powershell/" },
       { text: "Vim", link: "/Tools/Vim/" },
+      { text: "Window Terminal", link: "/Tools/Terminal/" },
     ],
   },
   { text: "Books", link: "/Books/" },
