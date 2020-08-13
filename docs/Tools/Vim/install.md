@@ -5,10 +5,10 @@
 ## 下载
 
 在 github 的 vim 官方仓库地址下载对应的版本安装 [https://github.com/vim/vim-win32-installer/releases](https://github.com/vim/vim-win32-installer/releases)
-![github_vim.webp](./imgs/github_vim.webp)
+![github_vim.webp](../../image/github_vim.png)
 
 也可以选择 .exe 文件下载，直接一路安装，安装完成后，打开 gVim，默认界面如下图:
-![Gvim_ui](./imgs/gvim_ui.png)
+![Gvim_ui](../../image/gvim_ui.png)
 
 初始默认界面非常粗糙，我们要在此基础上进行一系列配置，达到两个目的：
 - 优化界面UI效果

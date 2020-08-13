@@ -9,16 +9,13 @@ module.exports = [
       {
         text: "HTML",
         items: [
-          { text: "HTML", link: "/FE-Language/HTML/HTML/" },
-          { text: "HTML5", link: "/FE-Language/HTML/HTML5/" },
+          { text: "HTML", link: "/FE-Language/HTML/" },
         ],
       },
       {
         text: "CSS",
         items: [
-          { text: "CSS", link: "/FE-Language/CSS/CSS/" },
-          { text: "LESS", link: "/FE-Language/CSS/LESS/" },
-          { text: "Postcss", link: "/FE-Language/CSS/Postcss/" },
+          { text: "CSS", link: "/FE-Language/CSS/" },
         ],
       },
       {
@@ -108,6 +105,7 @@ module.exports = [
       {
         text: "自动化",
         items: [
+          { text: "PostCSS", link: "/FE-Engineering/PostCSS/" },
           { text: "Gulp", link: "/FE-Engineering/Gulp/" },
           { text: "Webpack", link: "/FE-Engineering/Webpack/" },
           { text: "Jest", link: "/FE-Engineering/Jest/" },

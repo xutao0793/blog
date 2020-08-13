@@ -253,6 +253,7 @@ module.exports = {
       title: "其它",
       collapsable: false,
       children: [
+        "compare-vue2-vue3",
         "HTML5_template",
         "outerHTML-innerTHML-outerText-innerText-textContent",
         "JS-callback-Promise-Generator-Async",

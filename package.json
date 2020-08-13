@@ -12,6 +12,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "highlight.js": "^10.1.2",
         "vuepress": "^1.0.3"
     }
 }

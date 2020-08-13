@@ -268,3 +268,12 @@ git push
 1. git fetch origin master
 1. git merge --allow-unrelated-histories origin/master 此时 merge 因为旧仓库的 commit 记录与新仓库的 commit 来源不同，所以需要带上--allow-unrelated-histories 参数允许合并两者的提交记录。
 1. git push -u origin master 首次提交到远程仓库。如果 merge 步骤有冲突需要手动解决冲突后推送。此步骤也可以分为两步：先绑定分支跟踪关系：git branch --set-upstream-to=origin/master 然后 git push
+
+## git log
+
+[git log 的使用](https://www.jianshu.com/p/0805b5d5d893)
+
+## git stash
+
+[git切换到别的分支,要暂时保存当前分支的修改(不想进行add 和commit)的方法 git stash](https://blog.csdn.net/anhenzhufeng/article/details/78052418)
+[Git（2）-暂存区的作用（idea版本解决暂存区存在文件时pull和merge问题](https://www.jianshu.com/p/a4603dcffbad)
