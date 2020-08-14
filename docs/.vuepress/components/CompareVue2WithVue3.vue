@@ -958,7 +958,6 @@ const MyComponent = defineComponent({
       hljs: {
         inserted: function(el) {
           let blocks = el.querySelectorAll('pre code');
-          console.log('blocks', blocks);
           blocks.forEach((block)=>{
               hljs.highlightBlock(block)
           })
