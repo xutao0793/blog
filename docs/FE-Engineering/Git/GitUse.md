@@ -269,9 +269,24 @@ git push
 1. git merge --allow-unrelated-histories origin/master 此时 merge 因为旧仓库的 commit 记录与新仓库的 commit 来源不同，所以需要带上--allow-unrelated-histories 参数允许合并两者的提交记录。
 1. git push -u origin master 首次提交到远程仓库。如果 merge 步骤有冲突需要手动解决冲突后推送。此步骤也可以分为两步：先绑定分支跟踪关系：git branch --set-upstream-to=origin/master 然后 git push
 
+**实践 4：修剪远程分支**
+
+在多个协作过程中，如果成员 A 删除了远程分支 branch_A, 在人员 B 中查看时`git branch -a`，branch_A 分支会仍然显示，要不显示，需要修剪在本地的远程分支数据。
+
+1. `git branch -a` 或 `git branch -r` 时，往往显示的分支比实际远程代码库的分支更多，这是因为本地存在远程已经删除的废弃分支
+1. `git remote show origin` 可以显示本地远程仓库的所有信息，包括所有分支，其中废弃分支会标识为**stale**，表明该分支在远程仓库已经不存在。
+1. `git remote prune origin` 可以删除掉标识为**stale**的分支，使本地仓库分支与远程仓库分支一致。
+
 ## git log
 
 [git log 的使用](https://www.jianshu.com/p/0805b5d5d893)
+
+```bash
+git log --pretty=oneline
+git log --pretty=short
+git log --pretty=full
+git log --pretty=fuller
+```
 
 ## git stash
 

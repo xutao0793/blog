@@ -40,15 +40,33 @@ Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进
 1. 路由`Vue-Router`
 1. 状态管理`Vuex`
 1. 网络请求`Axios`
-1. 项目构建`Webpack`
+1. 项目构建`Webpack / vite + rollup`
 1. 测试`Jest`
 1. 同构`Vue-SSR`
 1. 强类型`Typescript + vue-property-decorator`
 
 **Vue 原理深入**
 
--   vue2 响应式数据绑定的原理`Object.defineProperty`
--   Vnode 虚拟 DOM 和 DOMdiff 算法
+1. Vue 响应式原理 reactivity
+    1. 侦测数据变化 detection chnage
+    1. 收集依赖：（对象 / 数组) collect dependency
+    1. 派发更新: (对象 / 数组) dispatch update
+1. 初始化：Vue 构造函数及 Vue.prototype 原型对象
+1. 实例化：new Vue => _init()
+1. 挂载 $mount(selector)
+    1. template 模板编译成 virtual DOM: compiler (parse => optimize => codegen)
+    1. virtual DOM 生成真实 DOM 并挂载视图: render (create => diff => patch)
+1. 组件 component
+    1. 创建组件 createComponent
+    1. 挂载组件 mountComponent
+    1. 更新组件 updateComponent
+    1. 内置组件实现 keepAlive / transition / transitionGroup / component
+1. 指令实现：v-model / v-on / v-bind / v-if / v-show / v-slot
+1. 事件系统: $on / $once / $off / $emit
+1. 生命周期
+1. Vue 全局 API：( Vue 和 Vue.prototype)
+1. vm 实例 API
+1. vue3 响应式原理
 
 **延伸扩展**
 

@@ -49,10 +49,10 @@
         <!-- 全局属性 -->
         <p>全局属性</p>
         <a href="#defineComponent">Vue.extend</a>
-        <a href="#defineComponent">Vue.component</a>
+        <a href="#globalApi">Vue.component</a>
         <a href="#directive">Vue.directive</a>
-        <a href="#">Vue.mixin</a>
-        <a href="#">Vue.use</a>
+        <a href="#globalApi">Vue.mixin</a>
+        <a href="#globalApi">Vue.use</a>
         <a href="#nextTick">Vue.nextTick</a>
         <a href="#">Vue.compile</a>
         <a href="#">Vue.version</a>
@@ -751,6 +751,41 @@ export default {
     onUnmounted() {...},
   }
 }</code>
+          </pre>
+        </section>
+        <section v-hljs>
+          <h2 id="globalApi">
+            <a href="#globalApi">#</a>
+            全局API
+          </h2>
+          <p>在 Vue 2.x 中，全局API使用全局Vue对象来提供配置，在Vue3 中使用 createApp() 创建的实例对象来配置</p>
+          <pre class="language-js language-xml">
+<code>import Vue from 'vue'
+import App from './App.vue'
+
+Vue.config.ignoredElements = [/^app-/]
+Vue.use(/* ... */)
+Vue.mixin(/* ... */)
+Vue.component(/* ... */)
+Vue.directive(/* ... */)
+
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
+</code>
+<code>import { createApp } from 'vue'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.config.ignoredElements = [/^app-/]
+app.use(/* ... */)
+app.mixin(/* ... */)
+app.component(/* ... */)
+app.directive(/* ... */)
+
+app.mount('#app')
+</code>
           </pre>
         </section>
         <section v-hljs>

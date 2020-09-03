@@ -1,5 +1,5 @@
 module.exports = {
-  "/FE-Language/HTML/HTML/": [
+  "/FE-Language/HTML/": [
     {
       title: "",
       collapsable: false,
@@ -126,7 +126,7 @@ module.exports = {
       children: ["es-next-index"],
     },
   ],
-  "FE-Language/TS/": [
+  "/FE-Language/TS/": [
     {
       title: "基础",
       collapsable: false,
@@ -146,7 +146,11 @@ module.exports = {
     {
       title: "实践",
       collapsable: false,
-      children: ["EnumPractice", "TsNodeEnvConf", "TsVueEnvConf"],
+      children: [
+        "EnumPractice",
+        "TsNodeEnvConf",
+        "TsVueEnvConf"
+      ],
     },
   ],
   "/Browser/DOM/": [
@@ -247,7 +251,13 @@ module.exports = {
     {
       title: "Vue 原理深入",
       collapsable: false,
-      children: ["reactive-vue2"],
+      children: [
+        "vue-source-code-1-reactivity-1-detection-chnage",
+        "vue-source-code-1-reactivity-2-collect-dependency",
+        "vue-source-code-1-reactivity-3-dispatch-update",
+        "vue-source-code-1-reactivity-4-summary",
+        "vue-source-code-2-new-vue"
+      ],
     },
     {
       title: "其它",
