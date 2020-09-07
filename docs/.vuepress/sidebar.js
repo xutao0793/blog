@@ -256,7 +256,13 @@ module.exports = {
         "vue-source-code-1-reactivity-2-collect-dependency",
         "vue-source-code-1-reactivity-3-dispatch-update",
         "vue-source-code-1-reactivity-4-summary",
-        "vue-source-code-2-new-vue"
+        "vue-source-code-2-compile-0.md",
+        "vue-source-code-2-compile-1-parse.md",
+        "vue-source-code-2-compile-2-optimize.md",
+        "vue-source-code-2-compile-3-generate.md",
+        "vue-source-code-3-virtual-dom-1-create-vnode",
+        "vue-source-code-3-virtual-dom-2-patch",
+        "vue-source-code-4-component-1",
       ],
     },
     {

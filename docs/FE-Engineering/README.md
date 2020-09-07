@@ -16,7 +16,8 @@
 - 目标（道）：软件工程化关注的是性能、稳定性、可用性、可维护性、团队效率等内容。
 - 实践（术）：模块化、组件化、规范化、自动化
 
-> [谁能介绍下web前端工程化？](https://www.zhihu.com/question/24558375)
+> [谁能介绍下web前端工程化？](https://www.zhihu.com/question/24558375)<br>[「前端工程化」该怎么理解？](https://mp.weixin.qq.com/s/XwK9J1OD5SfjbBwKYA-cpA)
+
 
 ## 学习路线
 
