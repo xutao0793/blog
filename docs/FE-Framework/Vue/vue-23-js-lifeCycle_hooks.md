@@ -11,5 +11,5 @@
 
 #### 下面列出每个阶段的初始逻辑
 
-![vue_leftcycle](./image/vue_leftcycle.jpg)
+![vue_lifecycle](./image/vue_lifecycle.jpg)
 

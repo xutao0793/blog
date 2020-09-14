@@ -13,6 +13,7 @@
 1. 生命周期 lifecycle
 1. 事件 events
 1. nextTick
+1. mergeOptions
 1. 指令系统 directives
 1. 样式 style
 

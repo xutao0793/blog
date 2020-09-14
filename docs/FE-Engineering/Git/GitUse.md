@@ -292,3 +292,26 @@ git log --pretty=fuller
 
 [git切换到别的分支,要暂时保存当前分支的修改(不想进行add 和commit)的方法 git stash](https://blog.csdn.net/anhenzhufeng/article/details/78052418)
 [Git（2）-暂存区的作用（idea版本解决暂存区存在文件时pull和merge问题](https://www.jianshu.com/p/a4603dcffbad)
+
+## Git配置credential helper
+
+[Git配置credential helper](https://blog.csdn.net/wzy901213/article/details/84334163)
+
+当修改 gitlab 用户名或密码后再使用会报错：
+
+```js
+
+```
+此时，可以有两种方式解决：
+
+1. 第一种，windows 搜索 凭据，打开凭据管理查找到 gitlab 凭证进行修改
+1. 第二种：先清除凭证，再存储凭证：
+```bash
+# 重置用户名+密码
+git config --system --unset credential.helper
+
+# 存储用户名+密码，会在 $HOME 目录生成 .git-credential 文件明文存储 gitlab 含有用户名和密码的地址
+git config --global credential.helper store
+
+# 之后，手动输入一次，后面就不需要再输入。
+```
