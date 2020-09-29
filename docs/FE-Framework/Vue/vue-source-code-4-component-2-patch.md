@@ -23,6 +23,10 @@ function createElm (
   index
 ) {
   // 省略代码...
+
+  // createElm 无论怎样都尝试当成组件创建，观察是否成功。
+  // 如果当前节点 vnode 不能作为组件创建返回 false，即往下继承执行
+  // 如果当前节点是组件 vnode 则执行组件实例化，并返回 true，当前函数退出
   if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
     return
   }
@@ -31,16 +35,19 @@ function createElm (
 ```
 
 ```js
-// 该方法定义在 createPatchFunction 函数中，区别于 _render 中 crateComponent。
 function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
-  // data 是在 _createElement(context,tag,data,...) 中就传入的
-  // 并且在 _render 函数中的 createComponent 中执行安装组件钩子函数 installComponentHooks(data);
+  // 这里拿到的 vnode.data 是在 vm._render 函数中 createComponent 函数中创建返回的 vnode
+  // 其中  installComponentHooks(data) 执行即安装了组件创建的钩子函数 vnode.data.hook
   var i = vnode.data;
-
   if (isDef(i)) {
     var isReactivated = isDef(vnode.componentInstance) && i.keepAlive;
+    // dsDef(i=i.hook)在执行的同时将 i 变为了 hook 对象，同样 isDef(i=i.init)便得最终 i= vnode.data.hook.init 函数
     if (isDef(i = i.hook) && isDef(i = i.init)) {
-      i(vnode, false /* hydrating */); // 即 init(vnode, false)
+      // init 函数执行处理了主要处理两件：
+      // 1. new vnode.componentOptions.Ctor(options) 
+      // 2. child.$mount(hydrating ? vnode.elm : undefined, hydrating); => mountComponent
+      // 这样即使得在 createComponent 函数内即触发了组件 wathcer 的生成和组件编译和渲染 vm._update(vm._render())
+      i(vnode, false /* hydrating */);
     }
     // after calling the init hook, if the vnode is a child component
     // it should've created a child instance and mounted it. the child
@@ -57,7 +64,21 @@ function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
   }
 }
 ```
+
 ```js
+function installComponentHooks (data) {
+  // data.hook = {}
+  var hooks = data.hook || (data.hook = {});
+  for (var i = 0; i < hooksToMerge.length; i++) {
+    var key = hooksToMerge[i];
+    var existing = hooks[key];
+    var toMerge = componentVNodeHooks[key];
+    if (existing !== toMerge && !(existing && existing._merged)) {
+      hooks[key] = existing ? mergeHook$1(toMerge, existing) : toMerge;
+    }
+  }
+}
+
 var componentVNodeHooks = {
   init: function init (vnode, hydrating) {
     if (

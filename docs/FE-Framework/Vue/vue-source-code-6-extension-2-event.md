@@ -510,7 +510,9 @@ var keyNames = {
 
 ## 渲染1：_render
 
-vm. _render 函数的主要作用是生成虚拟DOM，即调用 _createElement 生成嵌套的 vnode。
+vm._render 函数的主要作用是生成虚拟DOM，执行 options.render函数中调用 _createElement 生成嵌套的 vnode。
+
+`vnode = render.call(vm._renderProxy, vm.$createElement);`
 
 此时在 _createElement 函数中，如果解析到不是正常标签，则会调用创建组件的函数 createComponent
 
@@ -713,7 +715,7 @@ init 函数调用的是 createComponentInstanceForVnode 函数
 ```
 在 createComponentInstanceForVnode 函数内实例了组件的实例化 `new vnode.componentOptions.Ctor(options)`
 
-注意这里 `_parentVnode: vnode`，那么关于原生事件的处理函数就变成了存储在 _parentVnode.data.on 中，自定义事件都在 _parentVnode.componentOptions.listeners。
+注意这里 `_parentVnode: vnode`，那么关于原生事件的处理函数就变成了存储在 `_parentVnode.data.on` 中，自定义事件都在 `_parentVnode.componentOptions.listeners`。
 
 因为 Ctor 继承于 Vue，所以 new Ctor 实际执行的就是 Vue.prototype._init 函数。
 ```js

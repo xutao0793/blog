@@ -54,7 +54,7 @@ const store = new Vuex.Store({
 // 4. 将store 全局注入到vue实例
 const app = new Vue({
     el: "#app",
-    // 把 store 对象提供给 “store” 选项，这样就可以把 store 的实例注入所有的子组件
+    // 把 store 对象提供给 “store” 选项，这样在所有组件中都可以通过 this.$store 获取到 store 引用。
     store,
     // 其它代码...
 })
@@ -68,7 +68,6 @@ const Counter = {
     }
   }
 }
-
 ```
 总结下约定的规则，简单的说就是：**commit mutation，dispatch action**
 ![vuex](./image/vuex.png)

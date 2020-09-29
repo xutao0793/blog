@@ -80,7 +80,7 @@ function _createElement (
         undefined, undefined, context
       );
     } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
-      // component 如果 data 未赋值，且在 components 属性上有定义键为tag的构建函数，则直接创建组件，
+      // 如果 data 未赋值，且在 components 属性上有定义键为tag的构建函数，则直接创建组件，
       vnode = createComponent(Ctor, data, context, children, tag);
     } else {
       // unknown or unlisted namespaced elements
@@ -119,6 +119,7 @@ function createComponent (
   var baseCtor = context.$options._base; // Vue.options._base = Vue，所以 baseCtor 就是 Vue 构造函数
 
   // plain options object: turn it into a constructor
+  // 创建组件的构造函数
   // 如果传入的 Ctor 是一个对象，则直接使用 Vue.extend(Ctor) 构建组件。单文件组件 export default 导出的就是一个对象
   /**
    * mport HelloWorld from './components/HelloWorld'
@@ -134,14 +135,91 @@ function createComponent (
     Ctor = baseCtor.extend(Ctor);
   }
 
-  // 省略代码：解析其它数据 data / propsData / listeners / slot 等逻辑，以及安装组件钩子函数
+  // if at this stage it's not a constructor or an async component factory,
+  // reject.
+  if (typeof Ctor !== 'function') {
+    {
+      warn(("Invalid Component definition: " + (String(Ctor))), context);
+    }
+    return
+  }
 
-  // return a placeholder vnode 生成 VNode 返回
+  // async component
+  var asyncFactory;
+  if (isUndef(Ctor.cid)) {
+    asyncFactory = Ctor;
+    Ctor = resolveAsyncComponent(asyncFactory, baseCtor);
+    if (Ctor === undefined) {
+      // return a placeholder node for async component, which is rendered
+      // as a comment node but preserves all the raw information for the node.
+      // the information will be used for async server-rendering and hydration.
+      return createAsyncPlaceholder(
+        asyncFactory,
+        data,
+        context,
+        children,
+        tag
+      )
+    }
+  }
+
+  // 组件标签上的所有属性、事件、指令等在编译阶段 genData 函数中处理 data 中。
+  // 包括 key / ref / staticClass / classBinding / attrs / dynamicAttrs / domProps / slot / on / nativeOn / directives 等
+  data = data || {};
+
+  // resolve constructor options in case global mixins are applied after
+  // component constructor creation
+  // 解析组件构造函数的 options，主要递归获取 Ctor.super ，即 Vue 的 options 进行合并
+  // 比如会把 Vue 全局注册的组件及内部组件全并到 Ctor.optons.components 上。这样就可以获取全局上的属性
+  resolveConstructorOptions(Ctor);
+
+  // transform component v-model data into props & events
+  // 如果在组件上有绑定 v-model 则根据组件 Ctor.options.model 或默认值拆解成 data.on[event] 和 data.attrs[prop]
+  if (isDef(data.model)) {
+    transformModel(Ctor.options, data);
+  }
+
+  // extract props
+  var propsData = extractPropsFromVNodeData(data, Ctor, tag);
+
+  // functional component 函数式组件处理
+  if (isTrue(Ctor.options.functional)) {
+    return createFunctionalComponent(Ctor, propsData, data, context, children)
+  }
+  // 组件事件的关键步骤：对于组件，会将 data.on 数据即 ASTElement.events 数据即组件自定义事件存入 listeners，在生成组件 vnode 时存入 vnode.componentOptions 中
+  // 而将 data.nativeOn 数据即 ASTElement.nativeEvents 即添加了.native 修饰符的事件存入 data.on
+  // extract listeners, since these needs to be treated as
+  // child component listeners instead of DOM listeners
+  var listeners = data.on;
+  // replace with listeners with .native modifier
+  // so it gets processed during parent component patch.
+  data.on = data.nativeOn;
+
+  if (isTrue(Ctor.options.abstract)) {
+    // abstract components do not keep anything
+    // other than props & listeners & slot
+
+    // work around flow
+    var slot = data.slot;
+    data = {};
+    if (slot) {
+      data.slot = slot;
+    }
+  }
+
+  // install component management hooks onto the placeholder node
+  // 安装组件钩子函数，包括 init / prePatch / insert / destory，
+  // 特别是其中 init 函数会执行组件实例的初始化和挂载：
+  // 1. new vnode.componentOptions.Ctor(options) 
+  // 2. child.$mount(hydrating ? vnode.elm : undefined, hydrating);
+  installComponentHooks(data);
+
+  // return a placeholder vnode
   var name = Ctor.options.name || tag;
   var vnode = new VNode(
     ("vue-component-" + (Ctor.cid) + (name ? ("-" + name) : '')),
-    data, undefined, undefined, undefined, context,
-    { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children },
+    data, undefined, undefined, undefined, context, // .native 修饰符的原生事件存入 vnode.data.on
+    { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children }, // 组件自定义的事件存储 vnode.componentOptions.listeners
     asyncFactory
   );
 

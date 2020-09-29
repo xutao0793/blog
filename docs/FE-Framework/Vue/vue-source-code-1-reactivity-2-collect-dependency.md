@@ -73,7 +73,7 @@ message 变化，就要执行 `render()` 来更新视图。换句话说，render
 
 在实际代码中，一个属性的依赖会有很多，也说是在业务逻辑中可以有多处代码的调用依赖于某个属性值的变化，比如下面代码：
 
-message 的依赖就有三个，或者说有三处地方依赖于message值：
+message 的依赖就有三个，或者说有三处地方依赖于 message 值：
 1. 视图中 div 的内容
 1. 计算属性 messageToUppercase 方法返回值
 1. watch 中定义的回调函数
@@ -227,22 +227,37 @@ get: function reactiveGetter () {
 1. 我们在 Observer 中知道依赖收集是通过 getter 方法实现的，但想想第一次触发 getter 方法在哪里？
 1. getter 中触发依赖收集时收集的是 Dep.target 的值，如何保证收集依赖的时候，Dep.target 的值刚好是预期的 watcher？
 
-在 Vue 中的策略就是，在 new Watcher 时候，触发依赖收集，此时就可以保证当前时刻 watcher 的唯一。并且每个 watcher 也需要知道自己被哪些依赖管理器dep所持有，以便当自己不再作为依赖时，能从所有持有该 watcher 的 dep 中删掉。
+在 Vue 中的策略就是: 建立一个依赖堆栈，当前激活的依赖在栈顶，且赋值给 Dep.target。
+```js
+Dep.target = null;
+var targetStack = [];
+
+function pushTarget (target) {
+  targetStack.push(target);
+  Dep.target = target;
+}
+
+function popTarget () {
+  targetStack.pop();
+  Dep.target = targetStack[targetStack.length - 1];
+}
+```
+在 new Watcher 时候，触发依赖收集前调用 pushTarget(this)，此时就可以保证当前时刻 watcher 的唯一，完成后 popTarget()。
+
+并且每个 watcher 也需要知道自己被哪些依赖管理器 dep 所持有，以便当自己不再作为依赖时，能从所有持有该 watcher 的 dep 中删掉。
 
 ```js
 // // 源码实现 vue 版本 2.6.12
 /**
  * Class Watcher: 有三种：render-watcher / user-watcher / computed-watcher
  * 
- * watcher.user  - 用户在option.watch 自定义的 watcher，即 user-watcher
- * watcher.lazy  - 用于标记 computed 中实例watcher, 即 computed-watcher
+ * watcher.user  - 用户在 option.watch 自定义的 watcher，即 user-watcher
+ * watcher.lazy  - 用于标记 computed 中实例 watcher, 即 computed-watcher
  * watcher.dirty - 标记 computed-watcher 是否需要重新计算值，还是使用缓存的值 watcher.value
- * isRenderWatcher=true 时，watcher 实例存入在vm._watcher，其中存入在vm._watchers，此时为渲染 render-watcher
+ * isRenderWatcher=true 时，watcher 实例存入 vm._watcher，其中存入在vm._watchers，此时为渲染 render-watcher
  */
 
-
 var uid$2 = 0;
-
 /**
   * A watcher parses an expression, collects dependencies,
   * and fires callback when the expression value changes.
@@ -281,9 +296,9 @@ var Watcher = function Watcher (
   this.expression = expOrFn.toString();
   // parse expression for getter
   if (typeof expOrFn === 'function') {
-    this.getter = expOrFn;
+    this.getter = expOrFn; // comppute wathcer or render wathcer
   } else {
-    this.getter = parsePath(expOrFn);
+    this.getter = parsePath(expOrFn); // user wathcer
     if (!this.getter) {
       this.getter = noop;
       warn(
@@ -296,7 +311,7 @@ var Watcher = function Watcher (
   }
   this.value = this.lazy 
     ? undefined // 如果是 computed-watcher，初始化不执行依赖收集。computed-watcher 只在视图解析读取 computed 值才会执行
-    : this.get(); // 创建依赖的同时，即触发依赖收集
+    : this.get(); // 其它 user-watcher 和 render-watcher 创建依赖的同时，即触发依赖收集
 };
 
 
@@ -400,7 +415,7 @@ var Watcher = function Watcher (
   this.value = this.get(); // 这里会读取被观察对象的属性值，从而触发getter，进行依赖收集
 };
 
-// 2. get()中设置Dep.target值，并且执行 this.getter()，触发属性取值的 getter
+// 2. get() 中设置 Dep.target 值，并且执行 this.getter()，触发属性取值的 getter
 Watcher.prototype.get = function get () {
   // 以下三步在 get 函数内执行，可以确保当前 Dep.target 上保存着当前实例化的 watcher
   pushTarget(this); // Dep.target = this
@@ -664,6 +679,19 @@ Watcher.prototype.cleanupDeps = function cleanupDeps () {
   this.newDeps.length = 0;
 };
 ```
+
+## 总结
+
+1. 在 Vue 中什么是依赖：所谓依赖就是一个 Watcher 实例，dep 收集起来存入 subs 数组中的就是 watcher
+2. 在 Vue 中 watcher 有三种：
+   1. 组件渲染的 render-watcher，new Watcher 时会传入 isRenderWatcher = true
+   2. 声明 computed 的每一个属性是 computed-watcher，标识符是 watcher.lazy = true
+   3. 自定义 watch 的每一个属性是 user-watcher，标识符是 watcher.user = true
+
+3. 要关注它们的区别：
+   1. render-watcher 作为组件依赖，触发 dep.depend 去收集的时机是在每一个 data / computed / props / inject 的 getter
+   2. computed-watcher 作为计算属性依赖，触发 dep.depend 去收集的时机是 vm._render　函数调用过程中执行 _createElement 函数调用各类辅助函数 _c / _s / _v 等，即模板渲染时
+   3. user-watcher 作为用户自定义依赖，触发 dep.depend 去收集的时机是它自身被创建时。只有 user-watcher 是创建依赖即完成依赖收集。
 
 
 
