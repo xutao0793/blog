@@ -358,7 +358,7 @@ module.exports = {
       collapsable: false,
       children: [
         "EditorConfig",
-        "ESLint",
+        "Eslint",
         "Prettier",
         "Stylelint",
         "Husky",
