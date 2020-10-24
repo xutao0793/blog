@@ -98,7 +98,7 @@ module.exports = [
         items: [
           { text: "Lint", link: "/FE-Engineering/Lint/" },
           { text: "Git", link: "/FE-Engineering/Git/" },
-          { text: "Api", link: "/FE-Engineering/Api/" }, // restfull GraphQL
+          { text: "Api", link: "/FE-Engineering/Api/" },
           { text: "Document", link: "/FE-Engineering/Doc/" },
         ],
       },
