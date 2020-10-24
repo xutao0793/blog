@@ -16,6 +16,8 @@ features:
   details: 网络相关知识，包括 Ajax / Fetch / Axios / HTTP 等。
 - title: Backend
   details: 服务端相关知识，包括 Node / Express / Koa2 / Nest / Nginx / Docker 等。
+- title: Book
+  details: 一些看过书籍的读后总结。
 footer: MIT Licensed | Copyright © 2018-present fer123
 ---
 

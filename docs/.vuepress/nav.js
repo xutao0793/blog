@@ -138,11 +138,11 @@ module.exports = [
     ],
   },
   {
-    text: "Back-End",
+    text: "Backend",
     items: [
-      { text: "Node", link: "/Back-End/Node/" },
-      { text: "Express", link: "/Back-End/Express/" },
-      { text: "Koa", link: "/Back-End/Koa/" },
+      { text: "Node", link: "/Backend/Node/" },
+      { text: "Express", link: "/Backend/Express/" },
+      { text: "Koa", link: "/Backend/Koa/" },
     ],
   },
   {

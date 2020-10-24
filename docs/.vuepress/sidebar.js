@@ -402,7 +402,7 @@ module.exports = {
       ],
     },
   ],
-  "/Back-End/Node/": [
+  "/Backend/Node/": [
     {
       title: "认识Node",
       collapsable: false,
