@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /image/vue.svg
+heroImage: null
 heroText: 前端壹贰叁
 tagline: 个人技术栈学习总结
 actionText: 快速上手 →

@@ -54,7 +54,10 @@ vm.$mount('#app')
 
 ## 父组件的源码解析
 
-这里以 `<template v-slot:title="slotProp">{{ slotProp.title }}</template>` 这段包含插槽性质较全的代码，看下解析的源码是如下处理的
+这里以这段包含插槽性质较全的代码，看下解析的源码是如下处理的
+```vue
+<template v-slot:title="slotProp">{{ slotProp.title }}</template>
+```
 
 从前端几个章节我们了解解析函数的路径是这样的：
 
@@ -87,7 +90,10 @@ ASTElement = {
 
 生成 ASTElement 之后调用 closeElement => processElement => processSlotContent
 
-> vue 早期版本 命名用 `<template slot="xxx">`, `<div slot-scope="xxx">`，vue 2.6 之后增加 v-slot 语法：`<template v-slot:title="slotProp">{{ slotProp.title }}</template>`
+vue 早期版本 命名用 `<template slot="xxx">`, `<div slot-scope="xxx">`，vue 2.6 之后增加 v-slot 语法：
+```html
+<template v-slot:title="slotProp">{{ slotProp.title }}</template>
+```
 
 这里我们关注 v-slot 指令的解析
 
@@ -325,7 +331,7 @@ function genScopedSlot ( el,  state) {
 ```
 此时在父组件完成模板编译 generate 函数生成的代码字符串：
 ```js
-`with (this) { 
+with (this) { 
   return _c('custom-section', { 
     scopedSlots: _u([
       { key: "title", fn: function (slotProp) { return [_v(_s(slotProp.title))] } },
@@ -334,7 +340,7 @@ function genScopedSlot ( el,  state) {
   }, 
   [_v(" "), [_v("这是段落正文部分，内容很长，这里就省略了......")]],
   2)
-}`
+}
 ```
 可以看到，每个插槽使用实际都会转换成一个函数调用。作用域插槽向上传递的参数会作为实参传入。
 
@@ -387,8 +393,9 @@ function createComponent(Ctor,  data,  context,  children,  tag) {
   );
   return vnode
 }
-
+```
 调用 createComponent 函数生成组件的 vnode
+
 ```js
 component_vnode = {
   tag: 'vue-component-1-custom-section',
