@@ -377,7 +377,7 @@ module.exports = {
     {
       title: "",
       collapsable: false,
-      children: ["Vuepress", "Markdown"],
+      children: ["Vuepress"],
     },
   ],
   // "/FE-Engineering/Api/": [
