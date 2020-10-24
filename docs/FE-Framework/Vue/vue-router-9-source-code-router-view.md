@@ -1,4 +1,4 @@
-# VueRouter-4: 视图组件 router-view
+# VueRouter源码6: router-view 视图组件
 
 当 `transitionTo => confirmTransition => updateRoute => cb(route) => app._route = route` 触发 setter 中 `dep.notify()` 执行 render-watcher 的回调 `vm._update(vm._render())`。在 vm._render 函数中解析到 `<router-view />` 执行其中的 render 函数。
 

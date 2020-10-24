@@ -1,4 +1,4 @@
-# VueRouter-1: install 安装
+# VueRouter源码1: install 安装
 
 [[toc]]
 

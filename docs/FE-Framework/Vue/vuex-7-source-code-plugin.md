@@ -1,4 +1,4 @@
-# vuex-05：插件
+# vuex源码5：plugin 插件实现
 
 [[toc]]
 

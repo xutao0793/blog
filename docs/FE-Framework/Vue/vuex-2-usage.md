@@ -1,9 +1,6 @@
-# 41 vuex 第二篇
+# vuex 基本使用
 
-- Vuex对象
-- option选项
-- store实例对象的属性
-- store实例对象的方法
+[[toc]]
 
 ```js
 import Vuex from 'vuex'
@@ -73,7 +70,7 @@ store.dispatch('actionA').then(() => {
 })
 ```
 
-**注册和卸载plugin的方法**
+## 注册和卸载plugin的方法
 ```js
 // 订阅mutation的变化。handler 会在每个 mutation 完成后调用。 如果取消订阅，调用返回函数unsubscribe()
 const unsubscribe = store.subscribe(handler(mutation,state){})
@@ -98,7 +95,7 @@ const store = new Vuex.Store({
 })
 ```
 
-**注册和卸载模块module的方法**
+## 动态注册和卸载模块module的方法
 ```js
 // 注册模块
 // Array<string> 注册嵌套模块 `nested/myModule`: ['nested', 'myModule']

@@ -191,22 +191,37 @@ module.exports = {
   ],
   "/FE-Framework/Vue/": [
     {
-      title: "Vue 基础",
+      title: 'Vue简介',
       collapsable: false,
       children: [
         "vue-1-whyusevue-vue-jquery",
+      ]
+    },
+    {
+      title: 'Vue基础之HTML',
+      collapsable: false,
+      children: [
         "vue-2-template-directive",
         "vue-3-template-插值-v-html",
         "vue-4-template-v-if-and-v-show",
         "vue-5-template-v-for",
         "vue-6-template-v-bind",
-        "vue-7-template-v-bind-with-class-and-style",
         "vue-8-template-v-on-and-modifier",
         "vue-9-template-v-model",
-        "vue-10-template-ref",
-        "vue-11-vue-scope",
-        "vue-12-js-nextTick",
         "vue-13-template-render-JSX",
+      ]
+    },
+    {
+      title: 'Vue基础之CSS',
+      collapsable: false,
+      children: [
+        "vue-7-template-v-bind-with-class-and-style",
+      ]
+    },
+    {
+      title: 'Vue基础之JS',
+      collapsable: false,
+      children: [
         "vue-14-js-vue-options",
         "vue-15-js-data",
         "vue-16-js-computed",
@@ -217,10 +232,13 @@ module.exports = {
         "vue-21-js-mixins",
         "vue-22-js-directive",
         "vue-23-js-lifeCycle_hooks",
-      ],
+        "vue-10-template-ref",
+        "vue-11-vue-scope",
+        "vue-12-js-nextTick",
+      ]
     },
     {
-      title: "Vue 组件",
+      title: "Vue组件",
       collapsable: false,
       children: [
         "vue-24-component",
@@ -238,18 +256,7 @@ module.exports = {
       ],
     },
     {
-      title: "Vue 技术栈",
-      collapsable: false,
-      children: [
-        "vue-37-router-index",
-        "vue-38-router-前端路由历史",
-        "vue-39-router-基本使用",
-        "vue-40-vuex",
-        "vue-41-vuex-state-getter-mutation-action",
-      ],
-    },
-    {
-      title: "Vue 原理深入",
+      title: "Vue源码解析",
       collapsable: false,
       children: [
         "vue-source-code-1-reactivity-1-detection-chnage",
@@ -278,7 +285,56 @@ module.exports = {
       ],
     },
     {
-      title: "其它",
+      title: "Vue技术栈之VueRouter",
+      collapsable: false,
+      children: [
+        "vue-router-1-index",
+        "vue-router-2-evolution",
+        "vue-router-3-usage",
+        "vue-router-4-source-code-install",
+        "vue-router-5-source-code-init",
+        "vue-router-6-source-code-matcher",
+        "vue-router-7-source-code-history",
+        "vue-router-8-source-code-router-link",
+        "vue-router-9-source-code-router-view",
+      ],
+    },
+    {
+      title: "Vue技术栈之Vuex",
+      collapsable: false,
+      children: [
+        "vuex-1-index",
+        "vuex-2-usage",
+        "vuex-3-source-code-install",
+        "vuex-4-source-code-instance",
+        "vuex-5-source-code-api",
+        "vuex-6-source-code-register",
+        "vuex-7-source-code-plugin",
+      ],
+    },
+    {
+      title: "Vue技术栈之Axios",
+      collapsable: false,
+      children: [
+        'axios-index',
+      ],
+    },
+    {
+      title: "Vue技术栈之VueCli",
+      collapsable: false,
+      children: [
+        'vue-cli-1-index'
+      ],
+    },
+    {
+      title: "Vue工程实践",
+      collapsable: false,
+      children: [
+        
+      ],
+    },
+    {
+      title: "其它杂项",
       collapsable: false,
       children: [
         "compare-vue2-vue3",

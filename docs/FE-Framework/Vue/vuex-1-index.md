@@ -1,4 +1,4 @@
-# 40 vuex 第一篇
+# vuex 状态管理器
 
 目录
 
@@ -71,4 +71,5 @@ const Counter = {
 ```
 总结下约定的规则，简单的说就是：**commit mutation，dispatch action**
 ![vuex](./image/vuex.png)
+
 

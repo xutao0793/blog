@@ -1,4 +1,4 @@
-# VueRouter-2: new VueRouter 生成路由实例 history
+# VueRouter源码4: history 路由实例
 
 [[toc]]
 

@@ -1,4 +1,4 @@
-# VueRouter-3：router.init 初始化
+# VueRouter源码2：router.init 初始化
 
 [[toc]]
 

@@ -1,5 +1,5 @@
 
-# vuex-2：store 实例化
+# vuex源码2：instance 实例化
 
 [[toc]]
 

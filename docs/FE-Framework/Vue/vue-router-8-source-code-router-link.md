@@ -1,4 +1,4 @@
-# VueRouter-5: 导航组件 router-link
+# VueRouter源码5: router-link 导航组件 
 
 router-link 组件主要是在导航元素上注册 click 事件，事件回调函数中调用 `this.$router.push(url)` 
 

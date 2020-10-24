@@ -1,4 +1,4 @@
-# vuex-3: 相关 API
+# vuex源码3:  API 实现
 
 [[toc]]
 
