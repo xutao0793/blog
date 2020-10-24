@@ -46,7 +46,7 @@
 下面我们用VUE框架来处理上面的需求
 ``` html
     <ul class="js-items">
-        <li v-if="!items.length">sorry, thert are no data</li>
+        <li v-if="!items.length">sorry, there are no data</li>
         <template v-else>
             <li v-for="item in items">{{ item }} </li>
         </template>

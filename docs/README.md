@@ -1,98 +1,47 @@
-<!-- <img src="./image/html5.png" style="width:25px;height:32px" />
-<img src="./image/css3.png" style="width:25px;height:32px" />
-<img src="./image/es6.png" style="width:32px;height:32px" />
-<img src="./image/javascript.svg" style="width:32px;height:32px" />
-<img src="./image/typescript.svg" style="width:32px;height:32px" />
-<img src="./image/jQuery.svg" style="width:32px;height:32px" />
-<img src="./image/vue.svg" style="width:32px;height:32px" />
-<img src="./image/vuepress.png" style="width:32px;height:32px" />
-<img src="./image/react.svg" style="width:32px;height:32px" />
-<img src="./image/redux.svg" style="width:32px;height:32px" />
-<img src="./image/react-router.svg" style="width:32px;height:32px" />
-<img src="./image/node.svg" style="width:32px;height:32px" />
-<img src="./image/graphQL.svg" style="width:32px;height:32px" />
-<img src="./image/lodash.svg" style="width:32px;height:32px" />
-<img src="./image/less.svg" style="width:32px;height:32px" />
-<img src="./image/stylelint.svg" style="width:32px;height:32px" />
-<img src="./image/eslint.svg" style="width:32px;height:32px" />
-<img src="./image/standardjs.svg" style="width:32px;height:32px" />
-<img src="./image/gulp.svg" style="width:32px;height:32px" />
-<img src="./image/webpack.svg" style="width:32px;height:32px" /> -->
+---
+home: true
+heroImage: /image/vue.svg
+heroText: 前端壹贰叁
+tagline: 个人技术栈学习总结
+actionText: 快速上手 →
+actionLink: /FE-Framework/Vue/
+features:
+- title: Design
+  details: 产品设计和UI设计的基本工具 AXURE、PS 等。
+- title: Frontend
+  details: 前端通用技术，分为前端语言、前端框架类库、前端工程化( FE-Language / FE-Framework / FE-Engineering )等。
+- title: Browser
+  details: 浏览器相关知识，主要集中在 WEB API 学习：BOM / DOM / 渲染 / 缓存 / V8 等。
+- title: Network
+  details: 网络相关知识，包括 Ajax / Fetch / Axios / HTTP 等。
+- title: Backend
+  details: 服务端相关知识，包括 Node / Express / Koa2 / Nest / Nginx / Docker 等。
+footer: MIT Licensed | Copyright © 2018-present fer123
+---
 
-## WWW 万维网的发明
-
-1989年， 当时在 CERN 工作的 Tim Berners-Lee （蒂姆·伯纳斯-李）博士写了一份关于建立一个通过网络传输超文本系统的报告，报告中阐述的这个系统包括四个部分：
-
-- 一个用来表示超文本文档的文本格式，超文本标记语言（HTML）。
-- 一个用来交换超文本文档的简单协议，超文本传输协议（HTTP）。
-- 一个显示（以及编辑）超文本文档的客户端，即网络浏览器（Browser）。
-- 一个用于提供可访问的文档的服务器（Server），即 httpd 的前身。
-
-这四个部分完成于1990年底，1991年8月16日，Tim Berners-Lee 在公开的超文本新闻组上发表的文章被视为是万维网公共项目的开始。
-
-> 这个系统在最初立项时被命名为 Mesh，但在随后的1990年项目实施期间被更名为万维网（World Wide Web）。
-
-> httpd 一个独立运行的后台进程，它会建立一个处理请求的子进程或线程池。最早作为 Apache 服务器的主程序。
-
-## W3C
-
-W3C 也就是万维网联盟（World Wide Web Consortium），又称 W3C 理事会，是万维网的主要国际标准组织，是一个半自治非政府组织（quasi-autonomous non-governmental organisation）。
-
-- 创立：由 蒂姆·伯纳斯-李（Tim Berners-Lee）于 1994年10月 于麻省理工学院 MIT 计算机科学与人工智能实验室（MIT／LCS）创立。
-- 职责：W3C 制定了一系列标准并督促网络应用开发者（如浏览器厂商）和内容提供者（开发者）遵循这些标准。标准的内容包括使用语言的规范、开发中使用的规则和解释引擎的行为等等。W3C制定了包括 HTML、DOM、SVG、XML和 CSS 等的众多影响深远的标准规范。
-
-## WHATWG
-
-WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Application Technology Working Group）。
-
-- 创立：由Web 浏览器生产厂商（主要是Opera、Mozilla基金会和苹果，后期Google也加入）和一些相关团体形成的一个的协作组织。
-- 职责：WHATWG 的标志性规范是 HTML5规范的制定。
-- 缘由：W3C对HTML的发展方向出现调整，大力推动XHMTL的发展，与浏览器厂商的方向不同，所以另起炉灶形成了WHATWG组织，推出HTML5规范。最终W3C回过来承认HTML5作为HTML的最新规范，W3C将与WHATWG一起合作制定最新HTML和DOM规范。
-
-[W3C将与WHATWG合作制定最新HTML和DOM规范 ](http://www.sohu.com/a/317425124_394375)<br>
-[HTML5的政治斗争：还要闹十年？](http://news.mydrivers.com/1/239/239149.htm)
-
-## ECMA ECMA-262 TC39 ECMAScript Javascript
-
-- ECMA 全称 European Computer Manufacturers Association（欧洲计算机制造商协会），是一个制定计算机各种标准的非营利性国际组织，维护各种计算机相关的标准。
-
-- ECMA-262是ECMA各种标准中的第262号标准，这个标准就是ECMAScript语法标准。
-
-- TC39是ECMA下属的一个第39个技术委员会，也是由各个主流浏览器厂商的代表构成，负责制定ECMAScript标准，标准生成的流程，并推动浏览器实现。
-
-- ECMAScript：由Netscape网景公司（Mozilla的前身）将应用在Netscape浏览器上的脚本语言Javascript推荐到ECMA，并确定为标准，ECMA将其改名为ECMAScript。
-
-- Javascript：早期就是指Netscape开发的脚本语言，现在主要指ECMAScript语言在浏览器端的实现，通过浏览器提供的DOM/BOM等web API实现网页交互。
-
-[TC39,ECMA-262,ECMAScript,Javascript,它们之间是什么关系?](https://www.zhihu.com/question/63085873)
-
-
-**知识脉路**
+## 知识脉路
 
 [2018前端工程师成长路线图](https://www.cnblogs.com/fundebug/p/2018-frontend-roadmap.html)
 
-# HTML
+### HTML
 
 - HTML
 - HTML5
-- H5
 - HTML规范
 - 模板引擎：
     - handlebars
     - art-template
-- html in js
-    - JSX
 
-# CSS
+### CSS
 
 - CSS
 - CSS3
 - CSS 预处理器: scss / less / stylus / postcss
 - CSS 框架：bootstrap
 - CSS 规范：BEM / OOCSS / SMACSS
-- Css in Js：css modules / styled components
+- Css in Js：css-modules / styled-components
 
-# EcmaScript
+### EcmaScript
 
 - ES
 - ES next: 6/7/8/9
@@ -104,7 +53,7 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 [前端模块化简史：浅谈 JavaScript 模块化](https://www.cnblogs.com/Leo_wl/p/4869090.html)<br>
 [ES modules 基本用法、模块继承、跨模块常量、import()](https://www.cnblogs.com/ChenChunChang/p/8296373.html)
 
-# TypeScript
+### TypeScript
 
 -   `Typescript`是什么以及为什么用它:heavy_check_mark:
 -   安装 `Typescript`:heavy_check_mark:
@@ -117,7 +66,7 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 -   声明文件 Declaration:heavy_check_mark:
 -   配置文件 tsconfig.json:heavy_check_mark:
 
-# Web Browser 浏览器
+### Web Browser 浏览器
 
 - 认识浏览器
     - 浏览器界面
@@ -163,7 +112,7 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 [关键渲染路径-刘博文](https://github.com/berwin/Blog/issues/29)<br>
 [浏览器性能优化】优化关键渲染路径——各种对象模型（DOM，CSSOM 等）---重点是 devtools 面板使用](https://www.jianshu.com/p/dcc416bfa9c9)
 
-# FE-Framework 前端框架
+### FE-Framework 前端框架
 - web端： jQuery  Vue:heavy_check_mark:  React:heavy_check_mark:
 - 移动端：H5 React-Native Hybird混合开发
 - 桌面端：PWA Electron
@@ -172,7 +121,7 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 
 [Vue 接口管理](https://www.jianshu.com/p/89ca6428a4b5)
 
-# Build 前端工程构建
+### FE-Engineering 前端工程化
 
 #### 构建工具
 - Gulp
@@ -197,11 +146,10 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 - Eslint
 
 #### 文档工具
-- JsDoc / EsDoc
-- TsDoc
+- JsDoc / EsDoc / TsDoc / TypeDoc
 - apiDoc 用于node服务端
 
-# network 网络服务
+### network 网络服务
 
 - 网络协议：IP UDP TCP HTTP、web Socket:heavy_check_mark:
 - HTTP:heavy_check_mark:
@@ -213,7 +161,7 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 [HTTP 访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)<br>
 
 
-# Node Server 服务器
+### Node Server 服务器
 
 - Node:heavy_check_mark:
 - 框架：express -> koa -> egg
@@ -222,8 +170,13 @@ WHATWG 全称 网页超文字应用技术工作小组（Web Hypertext Applicatio
 [正向代理和反向代理](https://uule.iteye.com/blog/2436289)<br>
 [一个形象的比喻：谈谈正向代理与反向代理](https://cloud.tencent.com/developer/news/198489)
 
-# 前端分支方向
+### 前端分支方向
 
 - 图形可视化：img -> SVG -> canvas -> webGL
 - Web RTC
 - Web VR
+
+### 前端技术方向
+
+- 微前端
+- serverless

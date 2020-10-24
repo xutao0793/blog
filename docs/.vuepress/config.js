@@ -4,8 +4,8 @@ module.exports = {
 	markdown:{
 		toc:{ includeLevel: [2, 3] }
 	},
-	title: "xutao's blog",
-	description: '个人知识框架整理，便于查缺漏。前端 HTML CSS ES JS Webpack Test Git Vue React Node Express Koa',
+	title: "前端壹贰叁",
+	description: '个人知识框架整理，便于查缺漏。前端 HTML CSS ES TS Vue React Node Express Koa',
 	locales: {
 		'/': {
 			lang: 'zh-CN'
