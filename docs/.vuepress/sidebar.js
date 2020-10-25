@@ -443,6 +443,32 @@ module.exports = {
   //     children: ["Restful"],
   //   },
   // ],
+  "/Network/Ajax/": [
+    {
+      title: "",
+      collapsable: false,
+      children: [
+        "XMLHttpRequest",
+        "Fetch",
+        "WebSocket",
+        "EventSource",
+      ],
+    },
+  ],
+  "/Network/Axios/": [
+    {
+      title: "源码解析",
+      collapsable: false,
+      children: [
+        "source-code-1-instance",
+        "source-code-2-request-promise",
+        "source-code-3-adapter",
+        "source-code-4-interceptor",
+        "source-code-5-cancel-token",
+        "source-code-6-transform-data",
+      ],
+    },
+  ],
   "/Network/HTTP/": [
     {
       title: "",

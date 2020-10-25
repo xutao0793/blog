@@ -132,7 +132,6 @@ module.exports = [
       { text: "HTTP", link: "/Network/HTTP/" },
       { text: "Ajax", link: "/Network/Ajax/" },
       { text: "Axios", link: "/Network/Axios/" },
-      { text: "Fetch", link: "/Network/Fetch/" },
       { text: "RESTful API", link: "/FE-Engineering/Api/Restful/" },
       { text: "GraphQL", link: "/FE-Engineering/Api/GraphQL/" },
     ],
