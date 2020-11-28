@@ -21,6 +21,8 @@ features:
 footer: MIT Licensed | Copyright © 2018-present fer123
 ---
 
+![前端发展年代史]('./image/前端发展史.jpg')
+
 ## 知识脉路
 
 [2018前端工程师成长路线图](https://www.cnblogs.com/fundebug/p/2018-frontend-roadmap.html)

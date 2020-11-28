@@ -280,8 +280,10 @@ CD，Continuous Deployment，持续部署。持续部署是持续交付的更高
 2. 规范
   
 3. 工具
+  - postcss
   - babel
   - webpack
+  - gulp
 
 4. 实践
   - webpack 实践
