@@ -22,6 +22,9 @@ footer: MIT Licensed | Copyright © 2018-present fer123
 ---
 
 ![前端发展年代史]('./image/前端发展史.jpg')
+- [前端工程师简史](https://mp.weixin.qq.com/s/iBtyS_0q4nHGhUTJ0saFZw)
+- [前端开发 20 年变迁史](https://www.sohu.com/a/318137316_115128)
+
 
 ## 知识脉路
 
@@ -123,7 +126,7 @@ footer: MIT Licensed | Copyright © 2018-present fer123
 - 程序端附加应用： 小程序
 - 跨端应用：uni-app  Taro  Flutter
 
-[Vue 接口管理](https://www.jianshu.com/p/89ca6428a4b5)
+> 前端第一代 MVC 框架：Backbone.js，强依赖于 jQuery.js <br />前端第一代 MVVM 框架：苹果的 Ember.js / 微软的 Knockout.js / 谷歌 Angular.js（区别现在的 Angular）<br /> 前端第二代 MVVM 框架：谷歌 Angular / facebook 的 React / 尤雨溪 的 Vue <br /> 新生框架：Svelte.js
 
 ### FE-Engineering 前端工程化
 
