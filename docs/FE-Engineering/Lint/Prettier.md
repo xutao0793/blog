@@ -328,31 +328,41 @@ Linter 工具具体的功能和意义见[ESLint](/FE-Engineering/Lint/ESLint.htm
 
 1. 在 linter 中禁用所有可能与 Prettier 格式化代码的方式冲突的规则，让 Prettier 接管这些职责。
 
-这个覆盖配置有很多现成的 eslint-Config 包，比如 `eslint-config-prettier` 包是禁用 ESLint 中与 Prettier 冲突的规则的配置，安装后让 ESLint 的配置继承这个 Config 就可以了。
+这个覆盖配置有很多现成的 `Config-prettier` 包，比如 `eslint-config-prettier` 包是禁用 ESLint 中与 Prettier 冲突的规则的配置; `stylelint-config-prettier`包是禁用与 stylelint 中与 Prettier 冲突的规则配置。
 
 ```js
 // 安装 eslint-config-prettier 禁用掉 Linter 格式式部分的规则
-yarn add --dev eslint-config-prettier
+yarn add --dev eslint-config-prettier // eslint
+yarn add --dev stylelint-config-prettier // stylelint
 
-// 在 .eslintrc增加配置项
+// 在 .eslintrc 或 .stylelintrc 增加配置项
 {
-  "extends": ["prettier"] // 确保 Prettier 是 extends 配置项的最后一个
+  "extends": ["prettier"] // 确保 Prettier 是 extends 配置项的最后一个， prettier 是 eslint-config-prettier 或 stylelint-config-prettier 简写形式
 }
 ```
 
-2. 让 Linters 执行时首先能够调用 Prettier 执行格式化 code-formatting 类规则，然后再使用 ESLint 检查 Code-quality 类规则。
+2. 让 Linters 执行时首先能够调用 Prettier 执行格式化 code-formatting 代码风格类规则，然后再使用 ESLint / stylelint 检查 Code-quality 代码质量类规则。
 
 这是由 Linters 的 Plugin 实现，比如 `eslint-plugin-prettier`是一个插件，它运行了使用 Prettier 格式化内容的规则。
 
 ```js
-// 安装插件
+// .eslintrc 增加配置项
 yarn add --dev eslint-plugin-prettier
 
-// 在 .eslintrc 增加配置项
 {
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error"
+  }
+}
+
+// .stylelintrc 配置项
+yarn add --dev stylelint-prettier
+
+{
+  "plugins": ["stylelint-prettier"],
+  "rules": {
+    "prettier/prettier": true
   }
 }
 ```
@@ -360,13 +370,20 @@ yarn add --dev eslint-plugin-prettier
 3. 或者省略上面两步，直接使用 Prettier 提供的推荐配置一步到位：
 
 ```js
-// 还是要安装上面两个包：
+// 在 eslint 上使用要安装下面两个包：
 yarn add --dev eslint-config-prettier eslint-plugin-prettier
-
 // 在 .eslintrc 配置中一步到位
 {
   "extends": ["plugin:prettier/recommended"]
 }
+
+// 在 stylelint 上使用要安装下面两个包
+yarn add --dev stylelint-config-prettier stylelint-prettier
+// 在 .stylelintrc 配置中一步到位
+{
+  "extends": ["stylelint-prettier/recommended"]
+}
+
 ```
 
 > 关于 Prettier 与 linter 的区别，参考：[搞懂 ESLint 和 Prettier](https://zhuanlan.zhihu.com/p/80574300) ---讲解了两个工具不同的关注点：ESLint 主要解决的是代码质量问题、Prettier 规范代码风格问题。

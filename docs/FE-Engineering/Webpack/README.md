@@ -31,15 +31,21 @@ catalog 目录
     1. 编写 plugin
 
 ```
+/****** modle / chunk / bundle 区别 ****/
+modle / chunk / bundle 是同一份逻辑代码在不同场景下的称呼。
+我们直接写出来的是 module; webpack 处理时是 chunk; 最后生成浏览器可以直接运行的 bundle。
+
 /****** output *******/
 path: 表示打包文件输出到的**绝对路径**，即bundle.js放在哪里
-publicPath: 表示打包生成的index.html中引用静态资源的前缀，即放置的文件夹。
+publicPath: 表示打包生成的 index.html 中引用静态资源的前缀，即放置的文件夹，如 static。
 
 /****** devServer ****/
-contentBase: 表示启动本地服务器devServer时访问内容index.html的路径。不设置的话，默认是当前执行的目录，一般是项目根目录 '/'。会在项目根目录查找index.html文件。
-publicPath: 表示启动本地服务器devServer时，引用静态文件资源的路径，如果没有默认output中设置的publicPath目录。
+devServer 开启时会内存中实时编译打包运行，相当于当前内存中常驻了一个开发服务器。
+contentBase: 表示启动本地服务器 devServer 时访问内容 index.html 的路径。不设置的话，默认是当前执行的目录，一般是项目根目录 '/'。会在项目根目录查找 index.html 文件。
+publicPath: 表示启动本地服务器 devServer 时，引用静态文件资源的路径，如果没有默认 output 中设置的 publicPath 目录。
 ```
 
 参考书籍：
 
 -  [webpack 中 output 的`path` `publicPath` devServer 的 `contentBase` `publicPath`区别](https://juejin.im/post/5bb085dd6fb9a05cd24da5cf)
+- [webpack 易混淆知识点](https://www.cnblogs.com/skychx/tag/Webpack/)

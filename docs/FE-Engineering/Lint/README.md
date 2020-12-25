@@ -519,4 +519,5 @@ glob 是一种文件匹配模式，全称 global，它起源于 Unix 的 bash sh
 - [使用 husky 和 lint-staged 来构建你的前端工作流](https://www.jianshu.com/p/1d0951a7ee2c)
 - [前端代码规范最佳实践](https://mp.weixin.qq.com/s/p97k6hjKvU0uC8ocYLhQvA)
 - [eslint+husky+prettier+lint-staged 提升前端应用质量](https://juejin.im/post/5c67fcaae51d457fcb4078c9)
-- [前端工程化之——代码规范五部曲](https://blog.csdn.net/dudufine/article/details/106323543)
+- [前端工程化之——代码规范五部曲](https://blog.csdn.net/dudufine/arhttps://efe.baidu.com/tags/Lint/ticle/details/106323543)
+- [前端代码风格检查套件 FECS](https://efe.baidu.com/tags/Lint/)--比较了 HTML / css / js 各种 lint 工具
