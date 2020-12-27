@@ -137,6 +137,11 @@ npx commitlint --help
 
 常用的提供一个配置文件，设置 commitlint 如何校验。
 
+```sh
+# 需求先安装相关依赖
+npm i -D @commitlint/config-conventional @commitlint/format conventional-changelog-atom
+```
+
 ```js
 // commitlint.config.js
 module.exports = {
@@ -188,37 +193,40 @@ module.exports = {
         "test",
       ],
     ],
-    "type-case": [2, "always", "lowerCase"], // value: lower-case  upper-case camel-case pascal-case kebab-case snake-case start-case sentence-case
-    "type-empty": [2, "never"], // 是否可以为空
-    "type-max-length": [],
+    "type-case": [2, "always", "lowerCase"], // 小写 value: lower-case  upper-case camel-case pascal-case kebab-case snake-case start-case sentence-case
+    "type-empty": [2, "never"], // 不能可以为空
+    "type-max-length": [0],
     "type-min-length": [2, "always", 0],
 
-    "scope-enum": [],
+    "scope-enum": [0],
     "scope-case": [2, "always", "lowerCase"],
-    "scope-empty": [],
-    "scope-max-length": [],
-    "scope-min-length": [],
+    "scope-empty": [0],
+    "scope-max-length": [0],
+    "scope-min-length": [0],
 
     "subject-case": [2, "never"],
     "subject-empty": [2, "never"],
     "subject-full-stop": [2, "never"], // 结尾是否需要以 . 结尾
-    "subject-max-length": [],
-    "subject-min-length": [],
+    "subject-max-length": [2, "never", 50],
+    "subject-min-length": [0],
 
-    "header-case": [],
-    "header-full-stop": [],
+    "header-case": [0],
+    "header-full-stop": [0],
     "header-max-length": [2, "always", 100],
-    "header-min-length": [],
-
+    "header-min-length": [0],
+    
+    "body-case": [0],
+    "body-empty": [0],
     "body-leading-blank": [2, "always"], // body 是否以空行开始
     "body-max-length": [2, "always", 120], // body 字符串长度
     "body-max-line-length": [2, "always"],
     "body-min-length": [2, "always", 0],
 
+    "footer-empty": [0],
     "footer-leading-blank": [2, "always"],
-    "footer-max-length": [],
-    "footer-max-line-length": [],
-    "footer-min-length": [],
+    "footer-max-length": [0],
+    "footer-max-line-length": [0],
+    "footer-min-length": [0],
 
     "references-empty": [0, "never"],
     "signed-off-by": [2, "always", "'Signed-off-by:'"], // 输出的消息签名
@@ -245,48 +253,6 @@ npm install --save-dev husky
 
 这样，每次 git commit 时就会使用 `commitlint.config.js` 规则校验。
 
-## 自动生成 Change Log
-
-如果你的所有 Commit 都符合**约定式提交规范（Conventional Commits）**的格式，那么发布新版本时， 要生成 Change log 就可以用脚本自动生成。
-
-生成的文档包括以下三个部分：
-
-- New features
-- Bug fixes
-- Breaking changes
-
-每个部分都会罗列相关的 commit ，并且有指向这些 commit 的链接。当然，生成的文档允许手动修改，所以发布前，你还可以添加其他内容。
-
-`conventional-changelog-cli` 插件就是生成 Change log 的工具，运行下面的命令即可。
-
-```sh
-# 安装
-npm install -g conventional-changelog-cli
-
-# 进入项目
-cd my-project
-
-# 运行命令
-conventional-changelog -p angular -i CHANGELOG.md -w
-```
-
-如果这是你第一次用这个工具生成 CHANGELOG ，并且覆盖之前的，可以使用：
-
-```sh
-conventional-changelog -p angular -i CHANGELOG.md -s -r 0
-```
-
-也可以把这个命令写成 package.json 的 script 命令中：
-
-```js
-// package.json
-{
-  "script": {
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
-  }
-}
-```
-
 ## Commitizen: 替代你的 git commit
 
 > [优雅的提交你的 Git Commit Message](https://zhuanlan.zhihu.com/p/34223150) ---关注 Commitizen 部分
@@ -300,8 +266,15 @@ git commit -m 'fix(*): fixed some bug'
 这样也是很累。可以使用 `Commitizen` 工具，它按照你提供的适配器模式，将上面 git commit 信息提交转为步骤式的书写。
 
 - commitizen/cz-cli: 我们需要借助它提供的 git cz 命令替代我们的 git commit 命令, 帮助我们生成符合规范的 commit message.
-- cz-conventional-changelog: 需要为 commitizen 指定一个 Adapter(适配器)， 比如: cz-conventional-changelog (一个符合 Angular 团队规范的 preset). 使得 commitizen 按照我们指定的规范帮助我们生成 commit message.
 
+另外，需要为 commitizen 指定一个 Adapter(适配器)，使得 commitizen 能按照适配器指定的规范生成 commit message.
+
+> 这里提供了多个适配器选择[https://github.com/commitizen/cz-cli#adapters](https://github.com/commitizen/cz-cli#adapters)
+- cz-conventional-changelog: 一个符合 Angular 团队规范的 preset，type 固定.
+- cz-customizable：一个可以自定义规则的适配器，通过 .cz-config.js 自定义配置。
+- cz-emoji: 一个可以使用 emojis 表情进行格式化 commit message 的适配器，并支持自定义选项和描述。
+
+下面以 `commitizen` 搭配 `cz-conventional-changelog` 作示例。
 ### 全局安装
 
 全局模式下, 需要 ~/.czrc 配置文件, 为 commitizen 指定 Adapter.
@@ -312,6 +285,8 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
 ### 项目内局部安装
+
+推荐进行项目本地安装
 
 ```sh
 npm i -D commitizen cz-conventional-changelog
@@ -335,13 +310,92 @@ package.json 中配置:
 
 ![git-cz.jpg](./imgs/git-cz.jpg)
 
+## 自动生成 Change Log
+
+如果你的所有 Commit 都符合**约定式提交规范（Conventional Commits）**的格式，那么发布新版本时， 要生成 Change log 就可以用脚本自动生成。
+
+生成的文档包括以下三个部分：
+
+- New features
+- Bug fixes
+- Breaking changes
+
+每个部分都会罗列相关的 commit ，并且有指向这些 commit 的链接。当然，生成的文档允许手动修改，所以发布前，你还可以添加其他内容。
+
+`conventional-changelog-cli` 插件就是生成 Change log 的工具，运行下面的命令即可。
+
+```sh
+# 安装
+npm install -g conventional-changelog-cli
+
+# 进入项目
+cd my-project
+
+# 运行命令
+conventional-changelog -p angular -i CHANGELOG.md -s
+```
+
+如果这是你第一次用这个工具生成 CHANGELOG ，并且覆盖之前的，可以使用：
+
+```sh
+conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+```
+
+也可以把这个命令写成 package.json 的 script 命令中：
+
+```js
+// package.json
+{
+  "script": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  }
+}
+```
+
+`conventional-changelog-cli` 插件的配置项，使用 `npx conventional-changelog-cli --help` 查看：
+```md
+// options
+-i, --infile              Read the CHANGELOG from this file 指定 CHANGELOG 
+                          输入文件，用于合并上次的 CHANGELOG 记录
+-o, --outfile             Write the CHANGELOG to this file, If unspecified, it prints to stdout
+                          指定 CHANGELOG 输出文件，如果未指定输出到命令窗口
+-s, --same-file           Outputting to the infile so you don not't need to specify the same file as outfile 
+                          输出到与 infile 相同的文件中，所以如果输出文件与输入文件相同时，不需要指定 outfile
+-p, --preset              Name of the preset you want to use. Must be one of the following:
+                          angular, atom, codemirror, ember, eslint, express, jquery, jscs or jshint
+                          CHANGELOG 输出格式的预设，只能是指定的几种。
+-k, --pkg                 A filepath of where your package.json is located,Default is the closest package.json from cwd
+                          指定package.json 文件所在路径，默认查找当前目录最近的 package.json
+-a, --append              Should the newer release be appended to the older release,Default: false
+                          新版本是否应该附加上旧版本上，默认值 false
+-r, --release-count       How many releases to be generated from the latest, Default: 1
+                          If 0, the whole changelog will be regenerated and the outfile will be overwritten
+                          从最新版本生成多少个版本，默认值:1。如果为0，则将重新生成整个变更日志，并覆盖 outfile
+--skip-unstable           If given, unstable tags will be skipped, e.g., x.x.x-alpha.1, x.x.x-rc.2
+                          是否需要跳过不稳定的标签，例如，x.x.x-alpha。1, x.x.x-rc.2
+-u, --output-unreleased   Output unreleased changelog
+                          输出未发布的变更日志
+-v, --verbose             Verbose output. Use this for debugging, Default: false
+                          详细的输出。用于调试，默认值:false
+-n, --config              A filepath of your config script 指定配置脚本的文件路径
+                          Example of a config script: https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-cli/test/fixtures/config.js
+-c, --context             A filepath of a json that is used to define template variables
+                          指定用于定义模板变量的json文件路径
+-l, --lerna-package       Generate a changelog for a specific lerna package (:pkg-name@1.0.0)
+                          为特定的lerna包生成一个变更日志(:pkg-name@1.0.0)
+-t, --tag-prefix          Tag prefix to consider when reading the tags
+                          读取 tag 标签时考虑定义的标签前缀 tag-prefix
+--commit-path             Generate a changelog scoped to a specific directory
+                          生成一个作用于特定目录的变更日志
+```
 ## 总结
 
 ```sh
+# 第一部分： commit message 格式校验
 # 1. 安装 commitlint 及扩展
 npm i -D @commitlint/cli @commitlint/config-conventional
 
-# 2. 建议配置文件 commitlint.config.js
+# 2. 创建配置文件 commitlint.config.js
 echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 
 # 3. 集成 husky
@@ -356,20 +410,11 @@ npm install --save-dev husky
   }
 }
 
-# 5. 生成 CHANGELOG
-npm i -D conventional-changelog-cli
-
-# 6. 在package.json 的 script 中增加命令
-{
-  "script": {
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
-  }
-}
-
-# 7. 用 Commitizen: 替代你的 git commit
+# 第二部分：完善 git commit 提交方式，避免手写约定格式
+# 5. 用 Commitizen: 替代你的 git commit
 npm i -D commitizen cz-conventional-changelog
 
-# 8. 更改 package.json 文件配置
+# 6. 更改 package.json 文件配置
 "script": {
     ...,
     "commit": "git-cz",
@@ -379,6 +424,17 @@ npm i -D commitizen cz-conventional-changelog
     "path": "node_modules/cz-conventional-changelog"
   }
 }
+
+#第三部分：自动生成 chnagelog
+# 7. 生成 CHANGELOG
+npm i -D conventional-changelog-cli
+
+# 8. 在package.json 的 script 中增加命令
+{
+  "script": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  }
+}
 ```
 
 ## 与 VS Code 集成
@@ -386,6 +442,138 @@ npm i -D commitizen cz-conventional-changelog
 1. 安装`Git-commit-plugin For Vscode`插件包。
 2. 使用 `ctrl + shift + p` 调出命令窗口，输入 `show git commit template`
 3. 根据选择项提交信息
+
+这个插件有三个配置项：
+```js
+// vscode 配置文件 setting.json
+"GitCommitPlugin.MaxSubjectWords": 50, // Subject 简短描述行的字符长度
+"GitCommitPlugin.ShowEmoji": false, // 是否启用 emoji 表情字符，因为如果开启也，那 commitlint 校验 type 要更改匹配的
+"GitCommitPlugin.CustomCommitType": [ // 增加自定义的提交类型，可以直接 ['ui', 'merge']，或者像下面详细配置 label detail
+  {
+    "label": "ui",
+    "detail": "修复了显示效果，如 css 修改等"
+  },
+  {
+    "label": "merge",
+    "detail": "代码分支合"
+  },
+]
+```
+## 实践案例
+
+该实践主要想实现以下目的：
+- 增加 `merge / ui`两种提交类型
+- 提交交互提示信息转译成中文
+- 统一命令行和IDE插件工具对 commit 的使用
+
+所以 `commitizen` 的适配器选择了可自定义配置的 `cz-customizable`
+
+```sh
+# 第一部分： commit message 格式校验
+# 1. 安装 commitlint 及扩展
+npm i -D @commitlint/cli @commitlint/config-conventional husky
+
+# 2. 创建配置文件 commitlint.config.js
+touch commitlint.config.js
+
+# 3. 修改配置文件，增加 merge / ui 提交类型
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    "type-enum": [2, "always", [
+      "feat",
+      "fix",
+      "style",
+      "ui", 
+      "merge",
+      "refactor",
+      "perf",
+      "chore",
+      "docs",
+      "test",
+      "revert",
+    ]],
+  },
+}
+
+# 4. 创建配置文件 husky.config.js
+module.exports = {
+  "hooks": {
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  }
+}
+
+# 第二部分：完善 git commit 提交方式，避免手写约定格式
+# 5. 用 cz-customizable 作为 commitizen 的适配器
+npm i -D commitizen cz-customizable
+
+# 6. 修改 package.json 配置
+"script": {
+    "commit": "git-cz",
+},
+"config": {
+  "commitizen": {
+    "path": "cz-customizable"
+  }
+}
+
+# 7. 创建 cz-customizable 的配置文件 .cz-config.js。完成自定义提交类型，并汉化提示信息
+module.exports = {
+  types: [
+    { value: 'feat',      name: 'feat:      添加新功能' },
+    { value: 'fix',       name: 'fix:       修复 BUG' },
+    { value: 'style',     name: 'style:     修改了没有影响逻辑的代码, 如空格、缩进、逗号等' },
+    { value: 'ui',        name: 'ui:        修复了显示效果，如 css 修改等' },
+    { value: 'merge',     name: 'merge:     代码分支合并' },
+    { value: 'refactor',  name: 'refactor:  代码重构，没有增加新功能或者修复BUG' },
+    { value: 'perf',      name: 'perf:      优化相关，如提升性能、体验等' },
+    { value: 'chore',     name: 'chore:     改变构建流程，或者增删依赖包、工具等' },
+    { value: 'docs',      name: 'docs:      修改了文档' },
+    { value: 'test',      name: 'test:      测试用例相关修改' },
+    { value: 'revert',    name: 'revert:    回滚到上一个版本' },
+  ],
+  messages: {
+    type: "选择要提交的更改类型:\n",
+    scope: '指示此更改涉及的范围(可选):\n',
+    customScope: '指示此次更改涉及的文件，多个文件用“*”(可选):',
+    subject: '以动词开头简短地描述变化(≤50):\n',
+    body: '提供更详细的变更描述，使用“|”换行(可选):\n',
+    breaking: '列出任何破坏性的更改(可选):\n',
+    footer: '列出这次更改关闭的问题 ISSUES CLOSED，如: #31, #34。(可选):\n',
+    confirmCommit: '您确定要继续执行上面的提交吗?',
+  },
+  allowCustomScopes: true,
+  allowBreakingChanges: ['feat', 'fix'],
+  subjectLimit: 50,
+  skipQuestions: ['breaking'],
+}
+
+#第三部分：自动生成 chnagelog
+# 8. 生成 CHANGELOG
+npm i -D conventional-changelog-cli
+
+# 9. 在package.json 的 script 中增加命令
+{
+  "script": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  }
+}
+
+# 第四部：vscode 安装 Git-commit-plugin For Vscode 插件包
+# 10. vscode 配置文件 setting.json 增加插件配置
+"GitCommitPlugin.MaxSubjectWords": 50,
+"GitCommitPlugin.ShowEmoji": false,
+"GitCommitPlugin.CustomCommitType": [
+  {
+    "label": "ui",
+    "detail": "修复了显示效果，如 css 修改等"
+  },
+  {
+    "label": "merge",
+    "detail": "代码分支合"
+  },
+]
+```
 
 ## 参考链接
 

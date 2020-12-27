@@ -199,6 +199,7 @@ npm install --save-dev stylelint-prettier
 ```
 
 ## `stylelint-order`推荐排序规则
+常用排序规则：1. Positioning  2. Box Model   3.Visual  4. Typography    5. Animation  6. Misc
 ```js
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-prettier/recommended'],
@@ -215,6 +216,7 @@ module.exports = {
     'order/order': ['dollar-variables', 'custom-properties', 'at-rules', 'declarations', 'rules'],
     'order/properties-order': [
       'content',
+      // Positioning 位置布局
       'position',
       'top',
       'right',
@@ -267,7 +269,7 @@ module.exports = {
       'overflow-scrolling',
       'clip',
 
-      //
+      // Box Model 盒子模型
       'box-sizing',
       'width',
       'min-width',
@@ -328,7 +330,7 @@ module.exports = {
       'border-bottom-right-image',
       'border-bottom-left-image',
 
-      //
+      // Visual 视觉效果
       'background',
       'background-color',
       'background-image',
@@ -356,7 +358,7 @@ module.exports = {
       'list-style-type',
       'list-style-image',
 
-      //
+      // Typography 字体排版
       'font',
       'font-weight',
       'font-style',
@@ -435,7 +437,7 @@ module.exports = {
       'fill',
       'stroke',
 
-      //
+      // Animation 过渡/动画
       'transition',
       'transition-delay',
       'transition-timing-function',
