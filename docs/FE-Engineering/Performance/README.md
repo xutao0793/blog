@@ -8,10 +8,10 @@
 - 交付优化
 - 性能监控
 
-![web性能优化地图](./images/web性能优化地图.jpg)
+![web性能优化地图](./images/web-perf-optimization-maps.jpg)
 
 ## 度量标准（性能指标）
-![web性能优化指标](./images/web性能指标.jpg)
+![web性能优化指标](./images/web-perf-kpi.jpg)
 
 ## 参考链接
 - [嗨，送你一张Web性能优化地图](https://zhuanlan.zhihu.com/p/40197752)
